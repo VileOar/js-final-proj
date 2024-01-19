@@ -5,4 +5,5 @@
 extends Node
 
 
-
+## signal for when a player action is pressed, sent by the InputManager
+signal input_player_action(player, input_event)
