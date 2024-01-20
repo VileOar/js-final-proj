@@ -20,6 +20,7 @@ func enter():
 	# this state is used to generate a new prompt, so this is done on enter
 	var new_dir = randi_range(0, 3) # generate a new dir as per those defined in Directions
 	dyad_game.set_direction_prompt(new_dir)
+	dyad_game.show_prompt_ui()
 
 
 func exit():
@@ -29,7 +30,7 @@ func exit():
 
 ## callback to an input signal from the input manager[br]
 func _on_player_input(player, input_event : InputEvent):
-	if dyad_game.check_player_dyad(player): # if this input event belongs to this dyad
+	if dyad_game.check_player_dyad(player) and !dyad_game.player_has_answer(player): # if this input event belongs to this dyad
 		# add the new action to the game
 		dyad_game.add_player_choice(_get_player_action(player, input_event))
 		
@@ -40,6 +41,7 @@ func _on_player_input(player, input_event : InputEvent):
 				replace_state("RightState")
 			else:
 				replace_state("WrongState")
+		answers += 1
 
 
 ## process answers from players[br]
@@ -85,6 +87,8 @@ func _get_player_action(player : int, event : InputEvent) -> PlayerAction:
 	elif event.is_action_pressed("defect_down"):
 		direction = Global.Directions.DOWN
 		coop = false
+	
+	print_debug("(%s, %s, %s)" % [player, direction, coop])
 	
 	if direction == -1:
 		return null

@@ -13,6 +13,7 @@ func enter():
 	dyad_game.start_timer(Global.WRONG_DELAY)
 	
 	dyad_game.show_choices_ui()
+	dyad_game.show_message(false)
 
 
 func exit():

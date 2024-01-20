@@ -13,6 +13,7 @@ func enter():
 	dyad_game.start_timer(Global.CORRECT_DELAY)
 	
 	# TODO: trigger correct effects and set points according to coop from player actions
+	dyad_game.show_message(true)
 
 
 func exit():

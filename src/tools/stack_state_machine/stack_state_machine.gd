@@ -52,6 +52,8 @@ func pop_state(pop_until : Array[String] = []):
 ## replace state function (which also performs the same pop function) should never emit the signal
 ## (because, if it is replacing, it won't be empty after the operation)
 func _pop_state(pop_until : Array[String] = []):
+	if state_stack.size() == 0:
+		return
 	var last_head = state_stack.back()
 	if !state_stack.is_empty():
 		if pop_until == []:

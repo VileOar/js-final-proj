@@ -24,3 +24,8 @@ func set_prompt(direction) -> void:
 			_prompt.text = "DOWN"
 		Global.Directions.NONE:
 			_prompt.text = ""
+
+# TODO: change these two functions
+## display wrong message
+func show_message(correct : bool = true):
+	_prompt.text = "c o r r e c t" if correct else "w r o n g"

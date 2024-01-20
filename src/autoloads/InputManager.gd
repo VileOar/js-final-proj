@@ -8,7 +8,8 @@ extends Node
 var _listening = false
 
 ## map of players and input devices: -1 for KBM, 0-7 for gamepads; array indices are the player indices
-var _player_devices = []
+var _player_devices = [-1, 0]
+# TODO: remove default values
 
 
 ## enable or disable input listening
@@ -29,7 +30,7 @@ func add_player_device(player : int, device : int):
 
 
 func _unhandled_input(event):
-	if _listening and event.is_action_type():
+	if _listening and event.is_action_type() and event.is_pressed():
 		var device = -2
 		if event is InputEventJoypadButton: # if it came from a connected gamepad, it has a device
 			device = (event as InputEventJoypadButton).device

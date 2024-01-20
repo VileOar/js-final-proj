@@ -28,6 +28,12 @@ var game_points : int = 0
 var _prompted_direction := Global.Directions.NONE
 
 
+func _ready():
+	# TODO: remove this
+	$StateMachine.replace_state("PromptState")
+	set_player_dyad(0, 1)
+
+
 # -----------------------------
 # || --- PLAYER SETTINGS --- ||
 # -----------------------------
@@ -40,8 +46,8 @@ func check_player_dyad(player) -> bool:
 ## set both players of the dyad
 func set_player_dyad(player1 : int, player2 : int) -> void:
 	_players.clear()
-	_players[player1] = null
-	_players[player2] = null
+	_players[player1] = PlayerAction.new(player1, Global.Directions.NONE, false)
+	_players[player2] = PlayerAction.new(player1, Global.Directions.NONE, false)
 
 
 # --------------------------
@@ -57,7 +63,6 @@ func get_direction_prompt() -> int:
 func set_direction_prompt(direction : int) -> void:
 	if direction >= 0: # failsafe
 		_prompted_direction = direction
-	_ui_controller.set_prompt(direction)
 
 
 ## add a new player choice to the existing ones
@@ -65,6 +70,13 @@ func add_player_choice(p_action : PlayerAction) -> void:
 	var player = p_action.player_id()
 	if check_player_dyad(player):
 		_players[player] = p_action
+
+
+## check if the selected player already has a valid answer
+func player_has_answer(player) -> bool:
+	if check_player_dyad(player):
+		return _players[player].direction() != Global.Directions.NONE
+	return false
 
 
 ## return the array of registered player actions
@@ -77,8 +89,8 @@ func get_player_actions() -> Array:
 
 ## clear players' choices
 func _clear_player_choices() -> void:
-	for player in _players.keys:
-		_players[player] = Global.Directions.NONE
+	for player in _players.keys():
+		_players[player] = PlayerAction.new(player, Global.Directions.NONE, false)
 
 
 # -------------------
@@ -109,9 +121,19 @@ func disconnect_timer(callback : Callable) -> void:
 # || --- UI STUFF --- ||
 # ----------------------
 
+## show or hide the prompt UI
+func show_prompt_ui(show : bool = true) -> void:
+	_ui_controller.set_prompt(_prompted_direction if show else Global.Directions.NONE)
+
+
 ## show or hide player choices in UI
 func show_choices_ui(show : bool = true) -> void:
 	pass # TODO: complete this
+
+
+# TODO: change this
+func show_message(correct : bool):
+	_ui_controller.show_message(correct)
 
 
 ## shortcut to stop everything
@@ -120,6 +142,7 @@ func stop_everything() -> void:
 	
 	stop_timer() # stop the timer completely
 	set_direction_prompt(Global.Directions.NONE) # hide the direction prompt
+	show_prompt_ui(false)
 	_clear_player_choices() # clear all player's choices
 	show_choices_ui(false)
 	
