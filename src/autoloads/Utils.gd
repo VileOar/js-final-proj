@@ -15,6 +15,13 @@ func _ready():
 			_named_layers[layer_name] = 1 << (i - 1) # set the value the corresponding layer value
 
 
+## just a failsafe for nullchecks[br]
+## should be completely unnecessary, since is_instance_valid almost surely checks nulls, but, just in 
+## case
+func nullcheck(ref : Variant) -> bool:
+	return is_instance_valid(ref) and ref != null
+
+
 ## get a collision bitmask by passing an array of registered layer names
 func get_collision_bitmask(layer_names : Array) -> int:
 	var mask = 0

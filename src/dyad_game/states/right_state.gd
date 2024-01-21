@@ -1,23 +1,24 @@
 ## state for when all players in the dyad answered correctly
 ##
 ## responsible for handling adding points and displaying correct feedback before restarting
-extends BaseDyadGameState
+extends StackState
 class_name RightState
 
 
 func enter():
-	dyad_game.stop_timer()
+	var fsm = _fsm as DyadStateMachine
+	fsm.start_stop_timer(false)
 	InputManager.enable(false)
-	dyad_game.connect_timer(_timeout)
+	fsm.connect_disconnect_timer(true, _timeout)
 	
-	dyad_game.start_timer(Global.CORRECT_DELAY)
+	fsm.start_stop_timer(true, Global.CORRECT_DELAY)
 	
 	# TODO: trigger correct effects and set points according to coop from player actions
-	dyad_game.show_message(true)
+	print_debug("Right")
 
 
 func exit():
-	dyad_game.disconnect_timer(_timeout)
+	_fsm.connect_disconnect_timer(false, _timeout)
 
 
 ## callback to timer to advance to prompt state
