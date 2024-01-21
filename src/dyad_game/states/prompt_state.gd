@@ -26,7 +26,7 @@ func enter():
 		_player_answers[player] = null
 	
 	# this state is used to generate a new prompt, so this is done on enter
-	_prompt = randi_range(0, 3) # generate a new dir as per those defined in Directions
+	_prompt = randi_range(0, 3) as Global.Directions # generate a new dir as per those defined in Directions
 	fsm.show_prompt_ui(true, _prompt)
 
 

@@ -10,7 +10,10 @@ class_name DyadGame
 @onready var _fsm = $StateMachine as DyadStateMachine
 
 ## reference to the Prompt Controller
-@onready var _ui_controller = %UIController as UIController
+@onready var _prompt_ui = %PromptUI as PromptUI
+
+## reference to the list of PlayerUIs
+@onready var _player_ui_list = %PlayerUIs.get_children()
 
 # --- GAME DATA ---
 
@@ -51,9 +54,13 @@ func get_dyad_players() -> Array:
 
 ## show or hide the prompt UI
 func show_prompt_ui(show_hide : bool, direction : int) -> void:
-	_ui_controller.set_prompt(direction if show else Global.Directions.NONE)
+	_prompt_ui.set_prompt(direction if show else Global.Directions.NONE)
 
 
 ## show or hide player choices in UI
 func show_answers_ui(show_hide : bool, answers : Array) -> void:
-	pass # TODO: complete this
+	for ix in _player_ui_list.size():
+		if show_hide:
+			_player_ui_list[ix].show_answer(answers[ix])
+		else:
+			_player_ui_list[ix].hide_answer()

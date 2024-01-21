@@ -1,11 +1,11 @@
-## the node that controls all UI behaviour (to declutter DyadGame script)
+## this node controls the prompt UI
 ##
-## has methods for starting animations and UI stuffs
-extends PanelContainer
-class_name UIController
+## responsible for showing, possibly scrambling the requested prompt
+extends MarginContainer
+class_name PromptUI
 
 ## reference to the prompt UI node
-@onready var _prompt = %PromptUI as Label
+@onready var _prompt = %PromptLabel as Label
 
 
 ## function to set the prompt to display a new prompt
@@ -24,8 +24,3 @@ func set_prompt(direction) -> void:
 			_prompt.text = "DOWN"
 		Global.Directions.NONE:
 			_prompt.text = ""
-
-# TODO: change these two functions
-## display wrong message
-func show_message(correct : bool = true):
-	_prompt.text = "c o r r e c t" if correct else "w r o n g"
