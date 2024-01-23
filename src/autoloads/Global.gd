@@ -13,6 +13,20 @@ enum Directions {
 	DOWN = 3,
 }
 
+## enum defining the two possible actions, so as to not use the literals
+enum Actions {
+	COOP = 0,
+	DEFECT = 1,
+}
+
+## enum defining the possible outcomes
+enum Outcomes {
+	CC = 0,
+	CD = 1,
+	DC = 2,
+	DD = 3,
+}
+
 ## max time for the second player to answer in a dyad
 const SECOND_ANSWER_TIMER = 2.0 # in sec
 ## short delay when both answers right before showing next prompt

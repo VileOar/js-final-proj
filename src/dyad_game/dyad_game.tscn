@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://csk7v3jwntq18"]
+[gd_scene load_steps=10 format=3 uid="uid://csk7v3jwntq18"]
 
 [ext_resource type="Script" path="res://src/dyad_game/dyad_game.gd" id="1_rj5ni"]
 [ext_resource type="Script" path="res://src/dyad_game/states/dyad_state_machine.gd" id="2_hq41h"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://src/dyad_game/states/wrong_state.gd" id="6_t7b25"]
 [ext_resource type="PackedScene" uid="uid://da7wxe2reu70r" path="res://src/dyad_game/ui/prompt_ui.tscn" id="7_bxmv3"]
 [ext_resource type="PackedScene" uid="uid://7c4smtyjcn3m" path="res://src/dyad_game/ui/player_ui.tscn" id="8_6rlia"]
+[ext_resource type="PackedScene" uid="uid://bvafdm68j240m" path="res://src/dyad_game/ui/dyad_score_ui.tscn" id="8_oaqla"]
 
 [node name="DyadGame" type="Control"]
 layout_mode = 3
@@ -50,7 +51,10 @@ layout_mode = 2
 [node name="PromptUI" parent="UI/VBoxContainer" instance=ExtResource("7_bxmv3")]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_vertical = 3
+
+[node name="DyadScoreUI" parent="UI/VBoxContainer" instance=ExtResource("8_oaqla")]
+unique_name_in_owner = true
+layout_mode = 2
 
 [node name="PlayerUIs" type="HBoxContainer" parent="UI/VBoxContainer"]
 unique_name_in_owner = true

@@ -46,6 +46,11 @@ func reset_answers_cache() -> void:
 	_answers_cache.clear()
 
 
+## adds a new dyad point based on the answers, sorted by player index
+func add_dyad_point(point : int) -> void:
+	_dyad_game.add_point(point)
+
+
 # -------------------
 # || --- TIMER --- ||
 # -------------------

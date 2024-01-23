@@ -3,6 +3,8 @@
 [ext_resource type="Script" path="res://src/dyad_game/ui/prompt_ui.gd" id="1_emb48"]
 
 [node name="PromptUI" type="MarginContainer"]
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource("1_emb48")
 
 [node name="PromptLabel" type="Label" parent="."]
