@@ -48,7 +48,7 @@ func is_human_device(device : int) -> bool:
 
 ## check if this device is already registered to a player (if it is within range of valid devices)
 func device_free(device : int) -> bool:
-	if _get_player_by_device(device) == -1:
+	if !is_human_device(device) or _get_player_by_device(device) == -1: # free if actually free or if AI
 		return true
 	else:
 		return false

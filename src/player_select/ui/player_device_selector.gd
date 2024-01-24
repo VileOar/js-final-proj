@@ -29,8 +29,8 @@ func set_player_id(player : int):
 
 ## set the device for this player
 func set_device(device : int):
+	InputManager.add_player_device(_player_id, device)
 	if InputManager.is_human_device(device):
-		InputManager.add_player_device(_player_id, device)
 		
 		# TODO: change this to icons
 		match device:
