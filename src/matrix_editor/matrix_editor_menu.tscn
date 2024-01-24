@@ -1,0 +1,134 @@
+[gd_scene load_steps=3 format=3 uid="uid://b2bsmha0cajgq"]
+
+[ext_resource type="PackedScene" uid="uid://k8ukx08uuj1h" path="res://src/matrix_editor/payoff_outcome_widget.tscn" id="1_52vhs"]
+[ext_resource type="Script" path="res://src/matrix_editor/matrix_editor_menu.gd" id="1_i60a6"]
+
+[node name="MatrixEditorMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_i60a6")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+offset_right = 1280.0
+offset_bottom = 720.0
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="GridContainer2" type="GridContainer" parent="VBoxContainer/MarginContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="Span" type="MarginContainer" parent="VBoxContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+
+[node name="P2Info" type="VBoxContainer" parent="VBoxContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/MarginContainer/GridContainer2/P2Info"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/GridContainer2/P2Info/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Player 2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer/GridContainer2/P2Info"]
+layout_mode = 2
+
+[node name="Coop" type="PanelContainer" parent="VBoxContainer/MarginContainer/GridContainer2/P2Info/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/GridContainer2/P2Info/HBoxContainer/Coop"]
+layout_mode = 2
+text = "Cooperate"
+horizontal_alignment = 1
+
+[node name="Defect" type="PanelContainer" parent="VBoxContainer/MarginContainer/GridContainer2/P2Info/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/GridContainer2/P2Info/HBoxContainer/Defect"]
+layout_mode = 2
+text = "Defect"
+horizontal_alignment = 1
+
+[node name="P1Info" type="HBoxContainer" parent="VBoxContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/MarginContainer/GridContainer2/P1Info"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/GridContainer2/P1Info/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Player 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer/GridContainer2/P1Info"]
+layout_mode = 2
+
+[node name="Coop" type="PanelContainer" parent="VBoxContainer/MarginContainer/GridContainer2/P1Info/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/GridContainer2/P1Info/HBoxContainer/Coop"]
+layout_mode = 2
+text = "Cooperate"
+horizontal_alignment = 1
+
+[node name="Defect" type="PanelContainer" parent="VBoxContainer/MarginContainer/GridContainer2/P1Info/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/GridContainer2/P1Info/HBoxContainer/Defect"]
+layout_mode = 2
+text = "Defect"
+horizontal_alignment = 1
+
+[node name="OutcomeWidgets" type="GridContainer" parent="VBoxContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 2
+
+[node name="CC" parent="VBoxContainer/MarginContainer/GridContainer2/OutcomeWidgets" instance=ExtResource("1_52vhs")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="DC" parent="VBoxContainer/MarginContainer/GridContainer2/OutcomeWidgets" instance=ExtResource("1_52vhs")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="CD" parent="VBoxContainer/MarginContainer/GridContainer2/OutcomeWidgets" instance=ExtResource("1_52vhs")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="DD" parent="VBoxContainer/MarginContainer/GridContainer2/OutcomeWidgets" instance=ExtResource("1_52vhs")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Reset Matrix"
+
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]

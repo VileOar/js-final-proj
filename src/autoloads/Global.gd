@@ -34,6 +34,9 @@ const CORRECT_DELAY = 0.5
 ## longer delay when answers are wrong
 const WRONG_DELAY = 2.0
 
+## total time for a round
+const ROUNT_TIME = 30.0
+
 ## a global scope RNG
 var rng := RandomNumberGenerator.new()
 

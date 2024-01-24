@@ -6,6 +6,11 @@ class_name PayoffMatrix
 
 var _outcomes = []
 
+
+func _init():
+	reset()
+
+
 ## set the matrix to its default value
 func reset() -> void:
 	_outcomes = [

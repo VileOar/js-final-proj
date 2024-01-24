@@ -15,6 +15,10 @@ var _payoff_matrix
 var _4player = true
 
 
+func _ready():
+	_payoff_matrix = PayoffMatrix.new()
+
+
 ## set the player mode
 func set_player_mode(four_or_two_player : bool) -> void:
 	_4player = four_or_two_player
