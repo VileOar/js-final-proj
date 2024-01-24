@@ -1,0 +1,40 @@
+[gd_scene load_steps=2 format=3 uid="uid://d1kkkom2ktphs"]
+
+[ext_resource type="Script" path="res://src/player_select/ui/player_device_selector.gd" id="1_aw8pw"]
+
+[node name="DeviceSelector" type="PanelContainer"]
+offset_right = 320.0
+offset_bottom = 85.0
+size_flags_horizontal = 3
+script = ExtResource("1_aw8pw")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="PlayerId" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="Device" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="ListenButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+text = "Choose Device"
+
+[node name="AIButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "CPU"
+
+[connection signal="toggled" from="VBoxContainer/HBoxContainer/ListenButton" to="." method="_on_device_button_toggled"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/AIButton" to="." method="_on_ai_button_pressed"]

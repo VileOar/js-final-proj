@@ -8,7 +8,7 @@ extends Node
 var _listening = false
 
 ## map of players and input devices: -1 for KBM, 0-7 for gamepads; array indices are the player indices
-var _player_devices = [-1, 0]
+var _player_devices = [-2, -2, -2, -2]
 # TODO: remove default values
 
 
@@ -24,9 +24,34 @@ func is_listening() -> bool:
 
 ## map a player to a device
 func add_player_device(player : int, device : int):
-	while player >= _player_devices.size():
-		_player_devices.append(-2) # add null player device if the previous ones had not yet been filled
-	_player_devices[player] = device
+	if validate_player(player) and device_free(device):
+		_player_devices[player] = device
+	else:
+		push_error("Tried adding invalid player index or device is already in use")
+		get_tree().quit()
+
+
+## get the device for a player
+func get_player_device(player : int):
+	return _player_devices[player]
+
+
+## check if player is a valid index:
+func validate_player(player : int) -> bool:
+	return player >= 0 and player < _player_devices.size()
+
+
+## check if device is human controlled or not
+func is_human_device(device : int) -> bool:
+	return device >= -1 and device < 8 # any other value is to be taken as AI
+
+
+## check if this device is already registered to a player (if it is within range of valid devices)
+func device_free(device : int) -> bool:
+	if _get_player_by_device(device) == -1:
+		return true
+	else:
+		return false
 
 
 func _unhandled_input(event):
@@ -35,6 +60,7 @@ func _unhandled_input(event):
 		if event is InputEventJoypadButton: # if it came from a connected gamepad, it has a device
 			device = (event as InputEventJoypadButton).device
 		else: # otherwise, it's interpreted as the KBM
+			event.device = -1 # cheating a little
 			device = -1
 		Signals.input_player_action.emit(_get_player_by_device(device), event)
 

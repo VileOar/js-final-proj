@@ -18,6 +18,11 @@ class_name DyadGame
 
 # --- GAME DATA ---
 
+## player 1 index of this dyad
+@export var _player1_index := -1
+## player 2 index of this dyad
+@export var _player2_index := -1
+
 ## the stack of points accumulated by the dyad[br]
 ## each point is represented by a 2-bit number, identifying the binary choice of each player (coop
 ## or defect)
@@ -25,8 +30,7 @@ var _game_points : Array = []
 
 
 func _ready():
-	# TODO: remove this
-	start_dyad()
+	_fsm.replace_state("StoppedState")
 
 
 ## start the state machine
@@ -38,14 +42,11 @@ func start_dyad() -> void:
 # || --- PLAYER SETTINGS --- ||
 # -----------------------------
 
-## set both players of the dyad
-func set_dyad_players(player1 : int, player2 : int) -> void:
-	pass # TODO:
-
-
 ## return the players in this dyad
 func get_dyad_players() -> Array:
-	return [0,1] # TODO: change
+	var players = [_player1_index, _player2_index]
+	players.sort()
+	return players
 
 
 # -----------------------
@@ -79,7 +80,7 @@ func reset_dyad_points() -> void:
 
 ## show or hide the prompt UI
 func show_prompt_ui(show_hide : bool, direction : int) -> void:
-	_prompt_ui.set_prompt(direction if show else Global.Directions.NONE)
+	_prompt_ui.set_prompt(direction if show_hide else Global.Directions.NONE)
 
 
 ## show or hide player choices in UI

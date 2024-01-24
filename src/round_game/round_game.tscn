@@ -1,0 +1,51 @@
+[gd_scene load_steps=3 format=3 uid="uid://db78w4tl40jdb"]
+
+[ext_resource type="Script" path="res://src/round_game/round_game.gd" id="1_awtu6"]
+[ext_resource type="PackedScene" uid="uid://csk7v3jwntq18" path="res://src/dyad_game/dyad_game.tscn" id="1_co0oy"]
+
+[node name="RoundGame" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_awtu6")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="TimerContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TimerLabel" type="Label" parent="MarginContainer/VBoxContainer/TimerContainer"]
+layout_mode = 2
+
+[node name="DyadContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 32
+
+[node name="Dyad0" parent="MarginContainer/VBoxContainer/DyadContainer" instance=ExtResource("1_co0oy")]
+unique_name_in_owner = true
+layout_mode = 2
+_player1_index = 0
+_player2_index = 1
+
+[node name="Dyad1" parent="MarginContainer/VBoxContainer/DyadContainer" instance=ExtResource("1_co0oy")]
+unique_name_in_owner = true
+layout_mode = 2
+_player1_index = 2
+_player2_index = 3

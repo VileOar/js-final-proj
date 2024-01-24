@@ -11,6 +11,19 @@ var _player_data : Dictionary
 ## the payoff matrix values
 var _payoff_matrix
 
+## 2 or 4 player mode (true for 4, false for 2)
+var _4player = true
+
+
+## set the player mode
+func set_player_mode(four_or_two_player : bool) -> void:
+	_4player = four_or_two_player
+
+
+## get the player mode
+func is_4player_mode() -> bool:
+	return _4player
+
 
 ## reset the player data to its initial values
 func reset_player_data() -> void:
@@ -21,3 +34,8 @@ func reset_player_data() -> void:
 				"coop": 0, # number of times cooperated
 				"defect": 0, # number of times defected
 		}
+
+
+## get the matrix
+func get_payoff_matrix() -> PayoffMatrix:
+	return _payoff_matrix
