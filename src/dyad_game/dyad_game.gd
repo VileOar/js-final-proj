@@ -6,6 +6,9 @@
 extends Control
 class_name DyadGame
 
+## signal reporting dyad is ready
+signal stable
+
 ## reference to the state machine
 @onready var _fsm = $StateMachine as DyadStateMachine
 
@@ -33,9 +36,22 @@ func _ready():
 	_fsm.replace_state("StoppedState")
 
 
+## start-up sequence, does not actually start the dyad
+func ready_dyad() -> void:
+	# TODO: add some start animation
+	stable.emit()
+	_player_ui_list[0].set_player(_player1_index)
+	_player_ui_list[1].set_player(_player2_index)
+
+
 ## start the state machine
 func start_dyad() -> void:
 	_fsm.replace_state("PromptState")
+
+
+## stop the state machine
+func stop_dyad() -> void:
+	_fsm.replace_state("StoppedState")
 
 
 # -----------------------------

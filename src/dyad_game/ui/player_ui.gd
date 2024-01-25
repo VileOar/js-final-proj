@@ -12,7 +12,7 @@ class_name PlayerUI
 
 ## set the player identification
 func set_player(player : int):
-	_player_label.text = "Player %s" % [player]
+	_player_label.text = "Player %s" % [player + 1]
 
 
 ## reveal or hide the answer

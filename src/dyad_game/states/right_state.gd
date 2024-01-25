@@ -47,9 +47,8 @@ func _parse_point() -> int:
 		p2 = 0
 	elif answers[0].player_id() == answers[1].player_id():
 		# sanity check
-		push_error("Fatal Error: two answers cannot belong to the same player. This bug should never happen")
-		get_tree().quit()
-	var lsb = 0 if answers[p1].cooperated() else 1 # least significant bit
-	var msb = 0 if answers[p2].cooperated() else 2 # most significant bit
+		assert(false, "Fatal Error: two answers cannot belong to the same player. This bug should never happen")
+	var msb = 0 if answers[p1].cooperated() else 2 # most significant bit
+	var lsb = 0 if answers[p2].cooperated() else 1 # least significant bit
 	
 	return lsb | msb

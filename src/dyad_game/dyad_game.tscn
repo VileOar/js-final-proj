@@ -24,6 +24,8 @@ script = ExtResource("1_rj5ni")
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
 
+[node name="AI" type="Node" parent="."]
+
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("_timer")]
 script = ExtResource("2_hq41h")
 _timer = NodePath("../Timer")

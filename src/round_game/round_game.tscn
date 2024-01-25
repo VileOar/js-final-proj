@@ -1,8 +1,61 @@
-[gd_scene load_steps=4 format=3 uid="uid://db78w4tl40jdb"]
+[gd_scene load_steps=8 format=3 uid="uid://db78w4tl40jdb"]
 
 [ext_resource type="Script" path="res://src/round_game/round_game.gd" id="1_awtu6"]
 [ext_resource type="PackedScene" uid="uid://csk7v3jwntq18" path="res://src/dyad_game/dyad_game.tscn" id="1_co0oy"]
 [ext_resource type="PackedScene" uid="uid://bbe7i8g4nyqp1" path="res://src/round_game/round_results/round_results_screen.tscn" id="3_oia04"]
+
+[sub_resource type="Animation" id="Animation_hanqr"]
+resource_name = "fade_in"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FadeScreen:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_voywd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FadeScreen:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_5d1nd"]
+resource_name = "fade_out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FadeScreen:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f6bpb"]
+_data = {
+"RESET": SubResource("Animation_voywd"),
+"fade_in": SubResource("Animation_hanqr"),
+"fade_out": SubResource("Animation_5d1nd")
+}
 
 [node name="RoundGame" type="Control"]
 layout_mode = 3
@@ -58,10 +111,30 @@ _player2_index = 3
 
 [node name="RoundResultsSreen" parent="." instance=ExtResource("3_oia04")]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 theme_override_constants/margin_left = 32
 theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
 
+[node name="FadeScreen" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_f6bpb")
+}
+
 [connection signal="timeout" from="SecondsTimer" to="." method="_on_seconds_timer_timeout"]
+[connection signal="stable" from="MarginContainer/VBoxContainer/DyadContainer/Dyad0" to="." method="_on_dyad_stable"]
+[connection signal="stable" from="MarginContainer/VBoxContainer/DyadContainer/Dyad1" to="." method="_on_dyad_stable"]
+[connection signal="next_round" from="RoundResultsSreen" to="." method="_on_round_results_sreen_next_round"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

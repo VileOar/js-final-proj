@@ -35,7 +35,10 @@ const CORRECT_DELAY = 0.5
 const WRONG_DELAY = 2.0
 
 ## total time for a round
-const ROUNT_TIME = 10.0
+const ROUND_TIME = 30.0
+
+## number of rounds in a game
+const NUM_ROUNDS = 5
 
 ## a global scope RNG
 var rng := RandomNumberGenerator.new()
