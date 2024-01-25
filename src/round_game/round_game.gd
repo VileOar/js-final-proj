@@ -13,6 +13,9 @@ class_name RoundGame
 ## ref to the second dyad
 @onready var _dyad1 = %Dyad1 as DyadGame
 
+## ref to the end results screen
+@onready var _round_results_screen = %RoundResultsSreen as RoundResultsScreen
+
 ## ref to the timer label
 @onready var _timer_label = %TimerLabel
 
@@ -39,14 +42,14 @@ func start_round() -> void:
 		_dyad1.start_dyad()
 	
 	_timer.start(1)
+	_round_results_screen.hide()
 
 
 func _on_seconds_timer_timeout():
 	_time_counter -= 1
 	_timer_label.text = str(_time_counter)
-	if _time_counter <= 0:
-		print("Dyad 0: %s" % [str(_dyad0.get_dyad_point_stack().size())])
-		print("Dyad 1: %s" % [str(_dyad1.get_dyad_point_stack().size())])
-		get_tree().quit()
-	else:
+	if _time_counter <= 0: # if time reached end
+		_round_results_screen.show()
+		_round_results_screen.start_point_solving(_dyad0.get_dyad_point_stack(), _dyad1.get_dyad_point_stack())
+	else: # else, keep going
 		_timer.start(1)

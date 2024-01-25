@@ -17,6 +17,7 @@ var _4player = true
 
 func _ready():
 	_payoff_matrix = PayoffMatrix.new()
+	reset_player_data()
 
 
 ## set the player mode
@@ -43,3 +44,30 @@ func reset_player_data() -> void:
 ## get the matrix
 func get_payoff_matrix() -> PayoffMatrix:
 	return _payoff_matrix
+
+
+## manually set player total score
+func set_player_score(player_id : int, score : int) -> void:
+	# TODO: change player data to objects
+	if _player_data.has(player_id):
+		_player_data[player_id]["score"] = score
+	else:
+		assert(false, "Fatal: invalid player_id given")
+
+
+## add to a player's score
+func add_player_score(player_id : int, score : int) -> void:
+	# TODO: change player data to objects
+	if _player_data.has(player_id):
+		_player_data[player_id]["score"] += score
+	else:
+		assert(false, "Fatal: invalid player_id given")
+
+
+## get a player's score
+func get_player_score(player_id : int) -> int:
+	if _player_data.has(player_id):
+		return _player_data[player_id]["score"]
+	else:
+		assert(false, "Fatal: invalid player_id given")
+		return INF

@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=3 uid="uid://doly0aqjw7m6l"]
+
+[ext_resource type="Script" path="res://src/round_game/round_results/dyad_results_panel.gd" id="1_06j8w"]
+[ext_resource type="PackedScene" uid="uid://c8cadvctsyqpa" path="res://src/round_game/round_results/matrix_display/point_outcome_grid.tscn" id="2_snf3t"]
+[ext_resource type="PackedScene" uid="uid://oqgqq4mpijmn" path="res://src/round_game/round_results/player_score_panel.tscn" id="3_42x6v"]
+
+[node name="DyadResultsPanel" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+script = ExtResource("1_06j8w")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="PointOutcomeGrid" parent="VBoxContainer" instance=ExtResource("2_snf3t")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="PointsDisplay" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PlayerDiplay" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PlayerDiplay"]
+layout_mode = 2
+
+[node name="P1Panel" parent="VBoxContainer/PlayerDiplay/HBoxContainer" instance=ExtResource("3_42x6v")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="P2Panel" parent="VBoxContainer/PlayerDiplay/HBoxContainer" instance=ExtResource("3_42x6v")]
+unique_name_in_owner = true
+layout_mode = 2
