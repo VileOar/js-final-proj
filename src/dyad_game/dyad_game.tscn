@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://src/dyad_game/states/prompt_state.gd" id="4_23ul0"]
 [ext_resource type="Script" path="res://src/dyad_game/states/right_state.gd" id="5_u1kn3"]
 [ext_resource type="Script" path="res://src/dyad_game/states/wrong_state.gd" id="6_t7b25"]
-[ext_resource type="PackedScene" uid="uid://da7wxe2reu70r" path="res://src/dyad_game/ui/prompt_ui.tscn" id="7_bxmv3"]
+[ext_resource type="PackedScene" uid="uid://da7wxe2reu70r" path="res://src/dyad_game/ui/prompt/prompt_ui.tscn" id="7_bxmv3"]
 [ext_resource type="PackedScene" uid="uid://7c4smtyjcn3m" path="res://src/dyad_game/ui/player_ui.tscn" id="8_6rlia"]
 [ext_resource type="PackedScene" uid="uid://bvafdm68j240m" path="res://src/dyad_game/ui/dyad_score_ui.tscn" id="8_oaqla"]
 

@@ -35,6 +35,7 @@ func exit():
 	_fsm.start_stop_timer(false)
 	_fsm.connect_disconnect_timer(false, _timeout)
 	_fsm.write_answers(_player_answers.values())
+	_fsm.show_prompt_ui(false, Global.Directions.NONE)
 
 
 ## callback to an input signal from the input manager[br]

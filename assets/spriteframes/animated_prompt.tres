@@ -1,0 +1,37 @@
+[gd_resource type="SpriteFrames" load_steps=5 format=3 uid="uid://cqm0mrkkjr6x4"]
+
+[ext_resource type="Texture2D" uid="uid://dfxml8qs653c5" path="res://assets/dyad_game/direction_prompt.png" id="1_vk0ar"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ie1ja"]
+atlas = ExtResource("1_vk0ar")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vdtv3"]
+atlas = ExtResource("1_vk0ar")
+region = Rect2(0, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fb7io"]
+atlas = ExtResource("1_vk0ar")
+region = Rect2(0, 0, 64, 64)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ie1ja")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vdtv3")
+}],
+"loop": true,
+"name": &"flashing",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fb7io")
+}],
+"loop": true,
+"name": &"normal",
+"speed": 5.0
+}]
