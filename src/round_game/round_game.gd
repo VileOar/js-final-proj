@@ -112,10 +112,12 @@ func _on_seconds_timer_timeout():
 		_solve_points(_dyad0)
 		_solve_points(_dyad1)
 		
+		_round_results_screen.set_point_stacks(_dyad0.get_dyad_point_stack(), _dyad1.get_dyad_point_stack())
+		
 		await get_tree().create_timer(ROUND_END_DELAY).timeout
 		
 		_round_results_screen.show()
-		_round_results_screen.start_point_solving(_round_stats, _dyad0.get_dyad_point_stack(), _dyad1.get_dyad_point_stack())
+		_round_results_screen.start_point_solving(_round_stats)
 	else: # else, keep going
 		_timer.start(1)
 

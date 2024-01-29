@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://src/dyad_game/states/wrong_state.gd" id="6_t7b25"]
 [ext_resource type="PackedScene" uid="uid://da7wxe2reu70r" path="res://src/dyad_game/ui/prompt/prompt_ui.tscn" id="7_bxmv3"]
 [ext_resource type="PackedScene" uid="uid://7c4smtyjcn3m" path="res://src/dyad_game/ui/player/player_ui.tscn" id="8_6rlia"]
-[ext_resource type="PackedScene" uid="uid://bvafdm68j240m" path="res://src/dyad_game/ui/dyad_score_ui.tscn" id="8_oaqla"]
+[ext_resource type="PackedScene" uid="uid://dcgckpqoo0y3m" path="res://src/dyad_game/point_stack.tscn" id="10_pi61h"]
 
 [node name="DyadGame" type="Control"]
 layout_mode = 3
@@ -56,19 +56,27 @@ layout_mode = 2
 [node name="PromptUI" parent="UI/VBoxContainer" instance=ExtResource("7_bxmv3")]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_vertical = 1
 
-[node name="DyadScoreUI" parent="UI/VBoxContainer" instance=ExtResource("8_oaqla")]
-unique_name_in_owner = true
+[node name="MarginContainer" type="MarginContainer" parent="UI/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
 
-[node name="PlayerUIs" type="HBoxContainer" parent="UI/VBoxContainer"]
+[node name="PlayerUIs" type="HBoxContainer" parent="UI/VBoxContainer/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 alignment = 1
 
-[node name="Player1" parent="UI/VBoxContainer/PlayerUIs" instance=ExtResource("8_6rlia")]
+[node name="Player1" parent="UI/VBoxContainer/MarginContainer/PlayerUIs" instance=ExtResource("8_6rlia")]
 layout_mode = 2
 
-[node name="Player2" parent="UI/VBoxContainer/PlayerUIs" instance=ExtResource("8_6rlia")]
+[node name="Player2" parent="UI/VBoxContainer/MarginContainer/PlayerUIs" instance=ExtResource("8_6rlia")]
 layout_mode = 2
+
+[node name="Control" type="Control" parent="UI/VBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="PointStack" parent="UI/VBoxContainer/MarginContainer/Control" instance=ExtResource("10_pi61h")]
+unique_name_in_owner = true
+layout_mode = 1

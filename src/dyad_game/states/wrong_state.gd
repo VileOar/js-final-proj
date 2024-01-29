@@ -8,7 +8,6 @@ class_name WrongState
 func enter():
 	var fsm = _fsm as DyadStateMachine
 	fsm.start_stop_timer(false)
-	InputManager.enable(false)
 	fsm.connect_disconnect_timer(true, _timeout)
 	
 	fsm.start_stop_timer(true, Global.WRONG_DELAY)

@@ -57,18 +57,24 @@ func _ready():
 
 ## starts solving each point for each player[br]
 ## it receives the point stack via a parameter (it does NOT fetch it anywhere)
-func start_point_solving(round_stats : Array, dyad0_point_stack : Array, dyad1_point_stack : Array) -> void:
+func start_point_solving(round_stats : Array) -> void:
 	await get_tree().create_timer(1.0).timeout
 	
 	_round_stats = round_stats
-	
-	_point_stack0 = dyad0_point_stack
-	_point_stack1 = dyad1_point_stack
 	
 	_dyad0_results.set_scores(0, 0)
 	_dyad1_results.set_scores(0, 0)
 	
 	_solve_point()
+
+
+## set the point stacks
+func set_point_stacks(dyad0_point_stack : Array, dyad1_point_stack : Array) -> void:
+	_point_stack0 = dyad0_point_stack
+	_point_stack1 = dyad1_point_stack
+	
+	_dyad0_results.set_point_stack(dyad0_point_stack.size())
+	_dyad1_results.set_point_stack(dyad1_point_stack.size())
 
 
 ## ready and stable to progress to next round

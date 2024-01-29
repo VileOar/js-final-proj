@@ -15,7 +15,6 @@ var _prompt = Global.Directions.NONE
 func enter():
 	var fsm = _fsm as DyadStateMachine
 	fsm.stop_everything()
-	InputManager.enable(true) # enable player input
 	Signals.input_player_action.connect(_on_player_input)
 	fsm.connect_disconnect_timer(true, _timeout)
 	

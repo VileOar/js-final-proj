@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://doly0aqjw7m6l"]
+[gd_scene load_steps=6 format=3 uid="uid://doly0aqjw7m6l"]
 
 [ext_resource type="Script" path="res://src/round_game/round_results/dyad_display/dyad_results_panel.gd" id="1_06j8w"]
 [ext_resource type="PackedScene" uid="uid://hbx38k3wfwha" path="res://src/round_game/round_results/dyad_display/score_number.tscn" id="2_jcxgw"]
 [ext_resource type="PackedScene" uid="uid://c8cadvctsyqpa" path="res://src/round_game/round_results/matrix_display/point_outcome_grid.tscn" id="2_snf3t"]
 [ext_resource type="PackedScene" uid="uid://oqgqq4mpijmn" path="res://src/round_game/round_results/dyad_display/player_score_panel.tscn" id="3_42x6v"]
+[ext_resource type="PackedScene" uid="uid://dcgckpqoo0y3m" path="res://src/dyad_game/point_stack.tscn" id="5_jcf2g"]
 
 [node name="DyadResultsPanel" type="MarginContainer"]
 anchors_preset = 15
@@ -38,3 +39,10 @@ layout_mode = 2
 [node name="P2Panel" parent="VBoxContainer/PlayerDiplay/HBoxContainer" instance=ExtResource("3_42x6v")]
 unique_name_in_owner = true
 layout_mode = 2
+
+[node name="Control" type="Control" parent="VBoxContainer/PlayerDiplay"]
+layout_mode = 2
+
+[node name="PointStack" parent="VBoxContainer/PlayerDiplay/Control" instance=ExtResource("5_jcf2g")]
+unique_name_in_owner = true
+layout_mode = 1

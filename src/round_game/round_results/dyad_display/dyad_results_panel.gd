@@ -15,6 +15,9 @@ class_name DyadResultsPanel
 @onready var _p1_panel = %P1Panel as PlayerScorePanel
 @onready var _p2_panel = %P2Panel as PlayerScorePanel
 
+## ref to point stack
+@onready var _point_stack: PointStack = %PointStack
+
 # -----
 
 ## player 1 index of the dyad
@@ -44,11 +47,19 @@ func set_scores(p1_score : int, p2_score : int):
 	_p2_panel.set_score(p2_score)
 
 
+## manually set point stack
+func set_point_stack(points : int) -> void:
+	_point_stack.set_points(points)
+
+
 ## trigger ONCE the animation for solving a point[br]
 ## this screen doesn't need to know or add the actual score to data, it just needs to know what to diplay
 func solve_single_point(outcome_mask : int, p1_added_score : int, p2_added_score : int):
 	
 	_payoff_grid.trigger_outcome_anim(outcome_mask, _anim_speed)
+	
+	# remove one point from stack
+	_point_stack.pop_point()
 	
 	# spawn score indicator
 	var score = _score_number_scene.instantiate() as ScoreNumber

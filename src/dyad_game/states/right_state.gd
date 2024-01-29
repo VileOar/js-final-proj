@@ -11,7 +11,6 @@ var answers = []
 func enter():
 	var fsm = _fsm as DyadStateMachine
 	fsm.start_stop_timer(false)
-	InputManager.enable(false)
 	fsm.connect_disconnect_timer(true, _timeout)
 	
 	fsm.start_stop_timer(true, Global.CORRECT_DELAY)

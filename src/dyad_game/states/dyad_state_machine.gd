@@ -103,5 +103,3 @@ func stop_everything() -> void:
 	start_stop_timer(false) # stop the timer completely
 	show_prompt_ui(false, Global.Directions.NONE)
 	show_answers_ui(false, [])
-	
-	InputManager.enable(false) # disable player input

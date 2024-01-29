@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://dcgckpqoo0y3m"]
+
+[ext_resource type="Texture2D" uid="uid://bu7f0hcj1vr2b" path="res://assets/gfx/ui/point.png" id="1_hensh"]
+[ext_resource type="Script" path="res://src/dyad_game/point_stack.gd" id="1_wft47"]
+
+[node name="PointStack" type="MarginContainer"]
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_bottom = 64
+script = ExtResource("1_wft47")
+_point_texture = ExtResource("1_hensh")
+
+[node name="Columns" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1

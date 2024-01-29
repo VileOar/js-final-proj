@@ -17,7 +17,7 @@ signal stable
 ## reference to the Prompt Controller
 @onready var _prompt_ui = %PromptUI as PromptUI
 ## reference to the Dyad Score Controller
-@onready var _score_ui = %DyadScoreUI as DyadScoreUI
+@onready var _point_stack: PointStack = %PointStack
 ## reference to the list of PlayerUIs
 @onready var _player_ui_list = %PlayerUIs.get_children()
 
@@ -66,11 +66,13 @@ func ready_dyad() -> void:
 ## start the state machine
 func start_dyad() -> void:
 	_fsm.replace_state("PromptState")
+	InputManager.enable(true)
 
 
 ## stop the state machine
 func stop_dyad() -> void:
 	_fsm.replace_state("StoppedState")
+	InputManager.enable(false)
 
 
 ## NOTE: called by fsm only[br]
@@ -105,7 +107,7 @@ func get_dyad_point_stack()-> Array:
 func add_point(point_mask : int):
 	if point_mask in Global.Outcomes.values():
 		_game_points.append(point_mask)
-		_score_ui.add_points()
+		_point_stack.push_point()
 	else:
 		push_error("Tried to add an invalid matrix outcome")
 
@@ -113,7 +115,7 @@ func add_point(point_mask : int):
 ## reset points
 func _reset_dyad_points() -> void:
 	_game_points.clear()
-	_score_ui.reset_points()
+	_point_stack.clear_points()
 
 
 # ----------------------
