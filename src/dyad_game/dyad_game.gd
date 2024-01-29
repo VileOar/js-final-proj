@@ -11,6 +11,8 @@ signal stable
 
 ## reference to the state machine
 @onready var _fsm = $StateMachine as DyadStateMachine
+## ref to the ai "folder"
+@onready var _ai = $AI
 
 ## reference to the Prompt Controller
 @onready var _prompt_ui = %PromptUI as PromptUI
@@ -39,6 +41,8 @@ func _ready():
 ## reset this dyad
 func reset_dyad() -> void:
 	_reset_dyad_points()
+	for ai in _ai.get_children():
+		ai.queue_free()
 
 
 ## start-up sequence, does not actually start the dyad
@@ -47,6 +51,16 @@ func ready_dyad() -> void:
 	stable.emit()
 	_player_ui_list[0].set_player(_player1_index)
 	_player_ui_list[1].set_player(_player2_index)
+	
+	# add ai players if required
+	if !InputManager.is_human_device(InputManager.get_player_device(_player1_index)):
+		var ai = AIPlayer.new() as AIPlayer
+		ai.set_player(_player1_index)
+		_ai.add_child(ai)
+	if !InputManager.is_human_device(InputManager.get_player_device(_player2_index)):
+		var ai = AIPlayer.new() as AIPlayer
+		ai.set_player(_player2_index)
+		_ai.add_child(ai)
 
 
 ## start the state machine
@@ -57,6 +71,13 @@ func start_dyad() -> void:
 ## stop the state machine
 func stop_dyad() -> void:
 	_fsm.replace_state("StoppedState")
+
+
+## NOTE: called by fsm only[br]
+## notify for a new prompt
+func notify_new_prompt(prompt : int) -> void:
+	for ai in _ai.get_children():
+		ai.on_new_prompt(prompt)
 
 
 # -----------------------------

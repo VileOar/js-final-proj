@@ -69,4 +69,4 @@ func get_player_score(player_id : int) -> int:
 		return _player_data[player_id].get_score()
 	else:
 		assert(false, "Fatal: invalid player_id given")
-		return INF
+		return -1

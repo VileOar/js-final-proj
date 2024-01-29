@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dfxml8qs653c5"
-path="res://.godot/imported/direction_prompt.png-06fc90a0001c4aa669e5ee0b0a258e36.ctex"
+uid="uid://crk5lb7wd2a0l"
+path="res://.godot/imported/answer.png-556023e9f0d2164100b9794dc2e770c6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/dyad_game/direction_prompt.png"
-dest_files=["res://.godot/imported/direction_prompt.png-06fc90a0001c4aa669e5ee0b0a258e36.ctex"]
+source_file="res://assets/gfx/dyad_game/answer.png"
+dest_files=["res://.godot/imported/answer.png-556023e9f0d2164100b9794dc2e770c6.ctex"]
 
 [params]
 

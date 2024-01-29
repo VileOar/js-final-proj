@@ -1,0 +1,75 @@
+[gd_resource type="SpriteFrames" load_steps=9 format=3 uid="uid://bmm6rsqolnk4m"]
+
+[ext_resource type="Texture2D" uid="uid://crk5lb7wd2a0l" path="res://assets/gfx/dyad_game/answer.png" id="1_2rou3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4sch4"]
+atlas = ExtResource("1_2rou3")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4qcfs"]
+atlas = ExtResource("1_2rou3")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_11hls"]
+atlas = ExtResource("1_2rou3")
+region = Rect2(32, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vmeaa"]
+atlas = ExtResource("1_2rou3")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_whcd4"]
+atlas = ExtResource("1_2rou3")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fvcdi"]
+atlas = ExtResource("1_2rou3")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3psho"]
+atlas = ExtResource("1_2rou3")
+region = Rect2(0, 64, 32, 32)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4sch4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4qcfs")
+}],
+"loop": true,
+"name": &"correct",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_11hls")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vmeaa")
+}],
+"loop": true,
+"name": &"defect",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_whcd4")
+}],
+"loop": false,
+"name": &"none",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fvcdi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3psho")
+}],
+"loop": true,
+"name": &"wrong",
+"speed": 6.0
+}]

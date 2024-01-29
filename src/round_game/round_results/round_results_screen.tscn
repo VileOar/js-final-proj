@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bbe7i8g4nyqp1"]
 
 [ext_resource type="Script" path="res://src/round_game/round_results/round_results_screen.gd" id="1_eay3j"]
-[ext_resource type="PackedScene" uid="uid://doly0aqjw7m6l" path="res://src/round_game/round_results/dyad_results_panel.tscn" id="1_pya0j"]
+[ext_resource type="PackedScene" uid="uid://doly0aqjw7m6l" path="res://src/round_game/round_results/dyad_display/dyad_results_panel.tscn" id="1_pya0j"]
 
 [node name="RoundResultsSreen" type="MarginContainer"]
 anchors_preset = 15

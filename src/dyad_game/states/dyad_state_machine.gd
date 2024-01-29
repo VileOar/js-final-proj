@@ -51,6 +51,11 @@ func add_dyad_point(point : int) -> void:
 	_dyad_game.add_point(point)
 
 
+## alert for a new prompt
+func new_prompt(direction : int) -> void:
+	_dyad_game.notify_new_prompt(direction)
+
+
 # -------------------
 # || --- TIMER --- ||
 # -------------------

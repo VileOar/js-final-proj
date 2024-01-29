@@ -6,7 +6,7 @@ extends Control
 class_name RoundGame
 
 ## delay at the end of a round
-const ROUND_END_DELAY = 0.5
+const ROUND_END_DELAY = 3.0
 
 ## ref to the 1sec timer
 @onready var _timer = $SecondsTimer

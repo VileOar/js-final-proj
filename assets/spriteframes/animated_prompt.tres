@@ -1,17 +1,17 @@
 [gd_resource type="SpriteFrames" load_steps=5 format=3 uid="uid://cqm0mrkkjr6x4"]
 
-[ext_resource type="Texture2D" uid="uid://dfxml8qs653c5" path="res://assets/dyad_game/direction_prompt.png" id="1_vk0ar"]
+[ext_resource type="Texture2D" uid="uid://dfxml8qs653c5" path="res://assets/gfx/dyad_game/direction_prompt.png" id="1_somov"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ie1ja"]
-atlas = ExtResource("1_vk0ar")
+atlas = ExtResource("1_somov")
 region = Rect2(0, 64, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vdtv3"]
-atlas = ExtResource("1_vk0ar")
+atlas = ExtResource("1_somov")
 region = Rect2(0, 128, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fb7io"]
-atlas = ExtResource("1_vk0ar")
+atlas = ExtResource("1_somov")
 region = Rect2(0, 0, 64, 64)
 
 [resource]

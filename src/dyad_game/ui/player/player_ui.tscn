@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://7c4smtyjcn3m"]
+[gd_scene load_steps=3 format=3 uid="uid://7c4smtyjcn3m"]
 
 [ext_resource type="Script" path="res://src/dyad_game/ui/player/player_ui.gd" id="1_00vx3"]
+[ext_resource type="PackedScene" uid="uid://cxeceweo8851j" path="res://src/dyad_game/ui/player/animated_answer.tscn" id="2_ufdwb"]
 
 [node name="PlayerUI" type="MarginContainer"]
 anchors_preset = 15
@@ -13,14 +14,19 @@ script = ExtResource("1_00vx3")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
-alignment = 1
+alignment = 2
 
-[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
 
-[node name="Answer" type="Label" parent="VBoxContainer/PanelContainer2"]
+[node name="Control" type="Control" parent="VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Answer" parent="VBoxContainer/MarginContainer/Control" instance=ExtResource("2_ufdwb")]
 unique_name_in_owner = true
-layout_mode = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
 layout_mode = 2

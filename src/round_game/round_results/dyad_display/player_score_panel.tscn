@@ -1,12 +1,23 @@
 [gd_scene load_steps=2 format=3 uid="uid://oqgqq4mpijmn"]
 
-[ext_resource type="Script" path="res://src/round_game/round_results/player_score_panel.gd" id="1_qwim8"]
+[ext_resource type="Script" path="res://src/round_game/round_results/dyad_display/player_score_panel.gd" id="1_qwim8"]
 
 [node name="PlayerScorePanel" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource("1_qwim8")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
+
+[node name="StatsDisplay" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -18,7 +29,11 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 text = "Player 1"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="PlayerScore" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1

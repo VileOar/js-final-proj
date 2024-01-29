@@ -41,7 +41,7 @@ func parse_answer(answer : PlayerAnswer):
 # -------------------------------
 
 func set_score(score : int) -> void:
-	_score = _score
+	_score = score
 
 
 func get_score() -> int:

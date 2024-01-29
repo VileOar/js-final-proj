@@ -5,9 +5,12 @@
 extends MarginContainer
 class_name DyadResultsPanel
 
+@export var _score_number_scene : PackedScene
+
+# -----
+
 ## ref to the payoff grid
 @onready var _payoff_grid = %PointOutcomeGrid as PointOutcomeGrid
-
 ## ref to player 1 panel
 @onready var _p1_panel = %P1Panel as PlayerScorePanel
 @onready var _p2_panel = %P2Panel as PlayerScorePanel
@@ -47,7 +50,15 @@ func solve_single_point(outcome_mask : int, p1_added_score : int, p2_added_score
 	
 	_payoff_grid.trigger_outcome_anim(outcome_mask, _anim_speed)
 	
-	# TODO: spawn numbers that fade out for each of the added scores
+	# spawn score indicator
+	var score = _score_number_scene.instantiate() as ScoreNumber
+	var pos = _p1_panel.get_global_rect().get_center()
+	score.start(pos, p1_added_score)
+	get_parent().add_child(score)
+	score = _score_number_scene.instantiate() as ScoreNumber
+	pos = _p2_panel.get_global_rect().get_center()
+	score.start(pos, p2_added_score)
+	get_parent().add_child(score)
 	
 	# set the total scores on the player panels
 	_p1_panel.add_score(p1_added_score)

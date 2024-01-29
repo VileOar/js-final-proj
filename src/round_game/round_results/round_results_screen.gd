@@ -58,6 +58,8 @@ func _ready():
 ## starts solving each point for each player[br]
 ## it receives the point stack via a parameter (it does NOT fetch it anywhere)
 func start_point_solving(round_stats : Array, dyad0_point_stack : Array, dyad1_point_stack : Array) -> void:
+	await get_tree().create_timer(1.0).timeout
+	
 	_round_stats = round_stats
 	
 	_point_stack0 = dyad0_point_stack

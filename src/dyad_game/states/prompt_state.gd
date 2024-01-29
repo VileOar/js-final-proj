@@ -28,6 +28,7 @@ func enter():
 	# this state is used to generate a new prompt, so this is done on enter
 	_prompt = randi_range(0, 3) as Global.Directions # generate a new dir as per those defined in Directions
 	fsm.show_prompt_ui(true, _prompt)
+	fsm.new_prompt(_prompt)
 
 
 func exit():

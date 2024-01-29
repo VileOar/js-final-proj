@@ -7,7 +7,7 @@ class_name PlayerUI
 ## ref to the player label
 @onready var _player_label = %Identifier as Label
 ## ref to the answer label
-@onready var _answer_label = %Answer as Label
+@onready var _answer = %Answer as AnimatedAnswer
 
 
 ## set the player identification
@@ -17,14 +17,9 @@ func set_player(player : int):
 
 ## reveal or hide the answer
 func show_answer(answer : PlayerAnswer):
-	if answer == null:
-		_answer_label.text = "(NONE)"
-	elif answer.is_correct():
-		_answer_label.text = "CORRECT"
-	else:
-		_answer_label.text = "WRONG - %s, %s" % [answer.direction(), "cooperated" if answer.cooperated() else "defected"]
+	_answer.animate_answer(answer)
 
 
 ## hide the amswer
 func hide_answer():
-	_answer_label.text = ""
+	_answer.hide_answer()
