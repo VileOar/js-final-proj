@@ -36,6 +36,11 @@ func _ready():
 	_fsm.replace_state("StoppedState")
 
 
+## reset this dyad
+func reset_dyad() -> void:
+	_reset_dyad_points()
+
+
 ## start-up sequence, does not actually start the dyad
 func ready_dyad() -> void:
 	# TODO: add some start animation
@@ -85,7 +90,7 @@ func add_point(point_mask : int):
 
 
 ## reset points
-func reset_dyad_points() -> void:
+func _reset_dyad_points() -> void:
 	_game_points.clear()
 	_score_ui.reset_points()
 

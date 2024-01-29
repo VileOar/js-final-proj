@@ -35,14 +35,20 @@ func set_anim_speed(speed : float):
 	_anim_speed = speed
 
 
+## manually set the scores
+func set_scores(p1_score : int, p2_score : int):
+	_p1_panel.set_score(p1_score)
+	_p2_panel.set_score(p2_score)
+
+
 ## trigger ONCE the animation for solving a point[br]
 ## this screen doesn't need to know or add the actual score to data, it just needs to know what to diplay
-func solve_single_point(outcome_mask : int, p1_total_score : int, p1_added_score : int, p2_total_score : int, p2_added_score : int):
+func solve_single_point(outcome_mask : int, p1_added_score : int, p2_added_score : int):
 	
 	_payoff_grid.trigger_outcome_anim(outcome_mask, _anim_speed)
 	
-	# TODO: spawn number that fade out for each of the added scores
+	# TODO: spawn numbers that fade out for each of the added scores
 	
 	# set the total scores on the player panels
-	_p1_panel.set_score(p1_total_score)
-	_p2_panel.set_score(p2_total_score)
+	_p1_panel.add_score(p1_added_score)
+	_p2_panel.add_score(p2_added_score)

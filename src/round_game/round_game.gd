@@ -22,7 +22,6 @@ var _unstable_dyads = -1
 
 ## ref to the end results screen
 @onready var _round_results_screen = %RoundResultsSreen as RoundResultsScreen
-
 ## ref to the timer label
 @onready var _timer_label = %TimerLabel
 
@@ -33,6 +32,15 @@ var _time_counter = -1
 
 ## current round counter
 var _round = 0
+
+## the round's stats; these are overwritten each round[br]
+## these are COMPLETELY independent from the ones from SharedData and are only useful for the round
+var _round_stats := [
+	PlayerStats.new(),
+	PlayerStats.new(),
+	PlayerStats.new(),
+	PlayerStats.new(),
+]
 
 
 func _ready():
@@ -62,6 +70,9 @@ func _cleanup_round() -> void:
 		_dyad1.show()
 	else:
 		_dyad1.hide()
+	_dyad0.reset_dyad()
+	_dyad1.reset_dyad()
+	
 	_round_results_screen.hide()
 	
 	_anim.play("fade_in")
@@ -70,12 +81,20 @@ func _cleanup_round() -> void:
 ## func actually add the points to player data[br]
 ## this is done all at once, not sequentially, despite the interface
 func _solve_points(dyad : DyadGame):
+	var players = dyad.get_dyad_players()
+	_round_stats[players[0]].set_score(0)
+	_round_stats[players[1]].set_score(0)
+	
 	for point in dyad.get_dyad_point_stack():
 		var payoffs_array = SharedData.get_payoff_matrix().get_matrix_outcome(point) # get the corresponding payoffs array
 		
-		var players = dyad.get_dyad_players()
-		SharedData.add_player_score(players[0], payoffs_array[0])
-		SharedData.add_player_score(players[1], payoffs_array[1])
+		# add to this round's score
+		_round_stats[players[0]].add_score(payoffs_array[0])
+		_round_stats[players[1]].add_score(payoffs_array[1])
+	
+	# actually add to the total scores
+	SharedData.add_player_score(players[0], _round_stats[players[0]].get_score())
+	SharedData.add_player_score(players[1], _round_stats[players[1]].get_score())
 
 
 # ------------------------------
@@ -89,10 +108,6 @@ func _on_seconds_timer_timeout():
 		_dyad0.stop_dyad()
 		_dyad1.stop_dyad()
 		
-		# the current scores
-		var dyad0_scores = [SharedData.get_player_score(0), SharedData.get_player_score(1)]
-		var dyad1_scores = [SharedData.get_player_score(2), SharedData.get_player_score(3)]
-		
 		# solve points, regardless of UI
 		_solve_points(_dyad0)
 		_solve_points(_dyad1)
@@ -100,7 +115,7 @@ func _on_seconds_timer_timeout():
 		await get_tree().create_timer(ROUND_END_DELAY).timeout
 		
 		_round_results_screen.show()
-		_round_results_screen.start_point_solving(_dyad0.get_dyad_point_stack(), dyad0_scores, _dyad1.get_dyad_point_stack(), dyad1_scores)
+		_round_results_screen.start_point_solving(_round_stats, _dyad0.get_dyad_point_stack(), _dyad1.get_dyad_point_stack())
 	else: # else, keep going
 		_timer.start(1)
 
@@ -109,7 +124,7 @@ func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "fade_in": # start round
 		_start_round()
 	elif anim_name == "fade_out": # cleanup round
-		if _round < Global.NUM_ROUNDS:
+		if _round >= Global.NUM_ROUNDS:
 			get_tree().quit()
 			# TODO: go to game end
 		else:

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://7c4smtyjcn3m"]
 
-[ext_resource type="Script" path="res://src/dyad_game/ui/player_ui.gd" id="1_00vx3"]
+[ext_resource type="Script" path="res://src/dyad_game/ui/player/player_ui.gd" id="1_00vx3"]
 
 [node name="PlayerUI" type="MarginContainer"]
 anchors_preset = 15

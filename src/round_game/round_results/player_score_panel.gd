@@ -10,6 +10,9 @@ class_name PlayerScorePanel
 ## their score label
 @onready var _score = %PlayerScore
 
+## keep the score as an int
+var _score_value := 0
+
 
 ## set the player id and populate the rest of the UI from it
 func set_player(player_id : int) -> void:
@@ -19,4 +22,16 @@ func set_player(player_id : int) -> void:
 
 ## set the score and populate UI
 func set_score(score : int) -> void:
-	_score.text = str(score)
+	_score_value = score
+	_update_score_ui()
+
+
+## add to score
+func add_score(add : int) -> void:
+	_score_value += add
+	_update_score_ui()
+
+
+## update the ui of scores
+func _update_score_ui() -> void:
+	_score.text = str(_score_value)
