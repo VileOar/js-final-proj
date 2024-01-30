@@ -32,5 +32,5 @@ func set_matrix_outcome_from_input() -> void:
 # not even gonna try making this pretty or called on the main controller
 # the matrix is edited right here on the callback, screw it
 
-func _on_value_changed(value):
+func _on_value_changed(_value):
 	set_matrix_outcome_from_input()

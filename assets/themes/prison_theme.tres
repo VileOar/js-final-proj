@@ -1,7 +1,8 @@
-[gd_resource type="Theme" load_steps=12 format=3 uid="uid://b40mnags6aw0n"]
+[gd_resource type="Theme" load_steps=15 format=3 uid="uid://b40mnags6aw0n"]
 
 [ext_resource type="Texture2D" uid="uid://db3a6ybxv5cw6" path="res://assets/gfx/ui/panels.png" id="1_4wc6t"]
 [ext_resource type="FontFile" uid="uid://dcb5yob1d6vl4" path="res://assets/fonts/Super_Mario_Bros_2.ttf" id="2_l4dmt"]
+[ext_resource type="Texture2D" uid="uid://670ks7dxtt38" path="res://assets/gfx/ui/matrix_panel.png" id="3_tvn3c"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2rfd1"]
 texture = ExtResource("1_4wc6t")
@@ -45,6 +46,22 @@ texture_margin_right = 16.0
 texture_margin_bottom = 16.0
 region_rect = Rect2(0, 80, 80, 80)
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_woqqs"]
+texture = ExtResource("3_tvn3c")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+region_rect = Rect2(0, 128, 64, 64)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_enopd"]
+texture = ExtResource("3_tvn3c")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+region_rect = Rect2(0, 64, 64, 64)
+
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ttlb4"]
 texture = ExtResource("1_4wc6t")
 texture_margin_left = 32.0
@@ -82,6 +99,10 @@ ColorText/base_type = &"Label"
 ColorText/colors/font_color = Color(0.94902, 0.65098, 0.368627, 1)
 MainPanel/base_type = &"PanelContainer"
 MainPanel/styles/panel = SubResource("StyleBoxTexture_aj4si")
+MatrixPanelColor/base_type = &"PanelContainer"
+MatrixPanelColor/styles/panel = SubResource("StyleBoxTexture_woqqs")
+MatrixPanelSimple/base_type = &"PanelContainer"
+MatrixPanelSimple/styles/panel = SubResource("StyleBoxTexture_enopd")
 PanelContainer/styles/panel = SubResource("StyleBoxTexture_ttlb4")
 PenaltyLabel/base_type = &"Label"
 PenaltyLabel/colors/font_color = Color(1, 0.419608, 0.592157, 1)
