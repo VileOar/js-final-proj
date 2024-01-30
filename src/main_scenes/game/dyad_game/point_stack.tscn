@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dcgckpqoo0y3m"]
 
 [ext_resource type="Texture2D" uid="uid://bu7f0hcj1vr2b" path="res://assets/gfx/ui/point.png" id="1_hensh"]
-[ext_resource type="Script" path="res://src/menu_scenes/game/dyad_game/point_stack.gd" id="1_wft47"]
+[ext_resource type="Script" path="res://src/main_scenes/game/dyad_game/point_stack.gd" id="1_wft47"]
 
 [node name="PointStack" type="MarginContainer"]
 anchors_preset = 13

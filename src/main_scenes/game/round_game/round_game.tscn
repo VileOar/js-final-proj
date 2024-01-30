@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=3 uid="uid://db78w4tl40jdb"]
 
-[ext_resource type="Script" path="res://src/menu_scenes/game/round_game/round_game.gd" id="1_awtu6"]
-[ext_resource type="PackedScene" uid="uid://csk7v3jwntq18" path="res://src/menu_scenes/game/dyad_game/dyad_game.tscn" id="1_co0oy"]
+[ext_resource type="Script" path="res://src/main_scenes/game/round_game/round_game.gd" id="1_awtu6"]
+[ext_resource type="PackedScene" uid="uid://csk7v3jwntq18" path="res://src/main_scenes/game/dyad_game/dyad_game.tscn" id="1_co0oy"]
 [ext_resource type="Texture2D" uid="uid://dew2pi3sx8u5p" path="res://assets/gfx/ui/divider.png" id="3_a3ig3"]
-[ext_resource type="PackedScene" uid="uid://bbe7i8g4nyqp1" path="res://src/menu_scenes/game/round_game/round_results/round_results_screen.tscn" id="3_oia04"]
+[ext_resource type="PackedScene" uid="uid://bbe7i8g4nyqp1" path="res://src/main_scenes/game/round_game/round_results/round_results_screen.tscn" id="3_oia04"]
 
 [sub_resource type="Animation" id="Animation_voywd"]
 length = 0.001

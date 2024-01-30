@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bvafdm68j240m"]
 
-[ext_resource type="Script" path="res://src/menu_scenes/game/dyad_game/ui/dyad_score_ui.gd" id="1_7lxfm"]
+[ext_resource type="Script" path="res://src/main_scenes/game/dyad_game/ui/dyad_score_ui.gd" id="1_7lxfm"]
 
 [node name="DyadScoreUI" type="MarginContainer"]
 anchors_preset = 15

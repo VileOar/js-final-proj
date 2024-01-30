@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://k8ukx08uuj1h"]
 
-[ext_resource type="Script" path="res://src/menu_scenes/matrix_editor/payoff_outcome_widget.gd" id="1_b3xvk"]
+[ext_resource type="Script" path="res://src/main_scenes/matrix_editor/payoff_outcome_widget.gd" id="1_b3xvk"]
 
 [node name="PayoffOutcomeWidget" type="MarginContainer"]
 size_flags_horizontal = 3
