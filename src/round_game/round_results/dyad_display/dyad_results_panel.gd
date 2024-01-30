@@ -83,7 +83,7 @@ func set_point_stack(points : int) -> void:
 
 ## trigger ONCE the animation for solving a point[br]
 ## this screen doesn't need to know or add the actual score to data, it just needs to know what to diplay
-func solve_single_point(outcome_mask : int, p1_added_score : int, p2_added_score : int):
+func solve_single_point(outcome_mask : int, p1_added_score : int, p2_added_score : int) -> void:
 	
 	_payoff_grid.trigger_outcome_anim(outcome_mask, _anim_speed)
 	
@@ -97,3 +97,9 @@ func solve_single_point(outcome_mask : int, p1_added_score : int, p2_added_score
 	# set the total scores on the player panels
 	_p1_panel.add_score(p1_added_score)
 	_p2_panel.add_score(p2_added_score)
+
+
+## spawn penalty numbers on this dyad
+func display_penalty() -> void:
+	_p1_panel.apply_penalty(get_parent(), _score_number_scene)
+	_p2_panel.apply_penalty(get_parent(), _score_number_scene)

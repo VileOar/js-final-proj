@@ -14,10 +14,10 @@ func _init():
 ## set the matrix to its default value
 func reset() -> void:
 	_outcomes = [
-		[10,10],
-		[0,15],
-		[15,0],
-		[2,2]
+		[2,2],
+		[-2,4],
+		[4,-2],
+		[0,0]
 	]
 
 

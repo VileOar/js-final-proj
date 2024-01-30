@@ -40,6 +40,9 @@ const ROUND_TIME = 10.0 # TODO: make sure this is set to 30.0
 ## number of rounds in a game
 const NUM_ROUNDS = 5
 
+## round lose penalty multiplier
+const LOSE_PENALTY_MULTIPLIER = 0.5
+
 ## a global scope RNG
 var rng := RandomNumberGenerator.new()
 

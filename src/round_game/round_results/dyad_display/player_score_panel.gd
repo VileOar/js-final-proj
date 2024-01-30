@@ -34,12 +34,24 @@ func add_score(add : int) -> void:
 
 ## spawn a number with the added points[br]
 ## target_node specifies where to add the new number
-func spawn_number(target_node : Node, score_number_scene : PackedScene, added_score) -> void:
+func spawn_number(target_node : Node, score_number_scene : PackedScene, added_score : int) -> void:
 	# spawn score indicator
 	var score = score_number_scene.instantiate() as ScoreNumber
 	var pos = get_global_rect().get_center() + Vector2(0, -128)
 	score.start(pos, added_score)
 	target_node.add_child(score)
+
+
+func apply_penalty(target_node : Node, score_number_scene : PackedScene) -> void:
+	# apply penalty
+	_score_value *= Global.LOSE_PENALTY_MULTIPLIER
+	# display penalty
+	var score = score_number_scene.instantiate() as ScoreNumber
+	var pos = get_global_rect().get_center() + Vector2(0, -128)
+	score.start_penalty(pos, Global.LOSE_PENALTY_MULTIPLIER)
+	target_node.add_child(score)
+	
+	_update_score_ui()
 
 
 ## update the ui of scores

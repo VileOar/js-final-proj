@@ -5,12 +5,12 @@
 extends Node
 class_name AIPlayer
 
-## maximum delay value before answer is submitted (dependent on Global timer, so that there is the chance for missing it
-const MAX_DELAY = Global.SECOND_ANSWER_TIMER * 1.5
+## maximum delay value before answer is submitted
+const MAX_DELAY = Global.SECOND_ANSWER_TIMER * 0.8
 ## chance of getting the wrong answer
-const WRONG_PROB = 0.2
+const WRONG_PROB = 0.05
 ## chance of cooperating when answering
-const COOP_PROB = 0.8
+const COOP_PROB = 0.9
 
 ## player index
 var _player_index = -1

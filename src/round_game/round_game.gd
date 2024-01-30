@@ -75,6 +75,9 @@ func _cleanup_round() -> void:
 	_dyad0.reset_dyad()
 	_dyad1.reset_dyad()
 	
+	for stats in _round_stats:
+		(stats as PlayerStats).reset()
+	
 	_round_results_screen.hide()
 	
 	_anim.play("fade_in")
@@ -93,10 +96,28 @@ func _solve_points(dyad : DyadGame):
 		# add to this round's score
 		_round_stats[players[0]].add_score(payoffs_array[0])
 		_round_stats[players[1]].add_score(payoffs_array[1])
+
+
+## add points to players, with regard to lose penalty
+func _add_points_to_player() -> void:
+	var p0_score = _round_stats[0].get_score()
+	var p1_score = _round_stats[1].get_score()
+	var p2_score = _round_stats[2].get_score()
+	var p3_score = _round_stats[3].get_score()
 	
-	# actually add to the total scores
-	SharedData.add_player_score(players[0], _round_stats[players[0]].get_score())
-	SharedData.add_player_score(players[1], _round_stats[players[1]].get_score())
+	if p0_score + p1_score > p2_score + p3_score:
+		# if dyad0 wins, player 2 and 3 receive penalty to their round score
+		p2_score *= Global.LOSE_PENALTY_MULTIPLIER
+		p3_score *= Global.LOSE_PENALTY_MULTIPLIER
+	else:
+		# else, player 0 and 1 do
+		p0_score *= Global.LOSE_PENALTY_MULTIPLIER
+		p1_score *= Global.LOSE_PENALTY_MULTIPLIER
+	
+	SharedData.add_player_score(0, p0_score)
+	SharedData.add_player_score(1, p1_score)
+	SharedData.add_player_score(2, p2_score)
+	SharedData.add_player_score(3, p3_score)
 
 
 # ------------------------------
@@ -113,6 +134,7 @@ func _on_seconds_timer_timeout():
 		# solve points, regardless of UI
 		_solve_points(_dyad0)
 		_solve_points(_dyad1)
+		_add_points_to_player()
 		
 		_round_results_screen.set_point_stacks(_dyad0.get_dyad_point_stack(), _dyad1.get_dyad_point_stack())
 		
