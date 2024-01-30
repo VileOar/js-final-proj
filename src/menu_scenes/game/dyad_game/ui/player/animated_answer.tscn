@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cxeceweo8851j"]
 
-[ext_resource type="Script" path="res://src/dyad_game/ui/player/animated_answer.gd" id="1_dgfj4"]
+[ext_resource type="Script" path="res://src/menu_scenes/game/dyad_game/ui/player/animated_answer.gd" id="1_dgfj4"]
 [ext_resource type="SpriteFrames" uid="uid://bmm6rsqolnk4m" path="res://assets/spriteframes/animated_answer.tres" id="2_eera6"]
 
 [node name="AnimatedAnswer" type="Node2D"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://co2xh2lmxvpq4"]
 
 [ext_resource type="Script" path="res://src/player_select/player_select_menu.gd" id="1_bjdma"]
-[ext_resource type="PackedScene" uid="uid://db78w4tl40jdb" path="res://src/round_game/round_game.tscn" id="2_flqf3"]
+[ext_resource type="PackedScene" uid="uid://db78w4tl40jdb" path="res://src/menu_scenes/game/round_game/round_game.tscn" id="2_flqf3"]
 [ext_resource type="PackedScene" uid="uid://d1kkkom2ktphs" path="res://src/player_select/ui/device_selector.tscn" id="2_q5eyk"]
 [ext_resource type="FontFile" uid="uid://dcb5yob1d6vl4" path="res://assets/fonts/Super_Mario_Bros_2.ttf" id="4_3kf4d"]
 

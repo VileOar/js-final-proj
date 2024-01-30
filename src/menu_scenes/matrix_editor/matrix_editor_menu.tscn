@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://b2bsmha0cajgq"]
 
-[ext_resource type="PackedScene" uid="uid://k8ukx08uuj1h" path="res://src/matrix_editor/payoff_outcome_widget.tscn" id="1_52vhs"]
-[ext_resource type="Script" path="res://src/matrix_editor/matrix_editor_menu.gd" id="1_i60a6"]
-[ext_resource type="PackedScene" uid="uid://cr1i4ulnsdsu2" path="res://src/main_menu/main_menu.tscn" id="2_yjytn"]
+[ext_resource type="PackedScene" uid="uid://k8ukx08uuj1h" path="res://src/menu_scenes/matrix_editor/payoff_outcome_widget.tscn" id="1_52vhs"]
+[ext_resource type="Script" path="res://src/menu_scenes/matrix_editor/matrix_editor_menu.gd" id="1_i60a6"]
+[ext_resource type="PackedScene" uid="uid://cr1i4ulnsdsu2" path="res://src/menu_scenes/main_menu/main_menu.tscn" id="2_yjytn"]
 [ext_resource type="FontFile" uid="uid://dcb5yob1d6vl4" path="res://assets/fonts/Super_Mario_Bros_2.ttf" id="3_6gk7m"]
 
 [node name="MatrixEditorMenu" type="Control"]

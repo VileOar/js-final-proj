@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://7c4smtyjcn3m"]
 
-[ext_resource type="Script" path="res://src/dyad_game/ui/player/player_ui.gd" id="1_00vx3"]
-[ext_resource type="PackedScene" uid="uid://cxeceweo8851j" path="res://src/dyad_game/ui/player/animated_answer.tscn" id="2_ufdwb"]
+[ext_resource type="Script" path="res://src/menu_scenes/game/dyad_game/ui/player/player_ui.gd" id="1_00vx3"]
+[ext_resource type="PackedScene" uid="uid://cxeceweo8851j" path="res://src/menu_scenes/game/dyad_game/ui/player/animated_answer.tscn" id="2_ufdwb"]
 
 [node name="PlayerUI" type="MarginContainer"]
 anchors_preset = 15

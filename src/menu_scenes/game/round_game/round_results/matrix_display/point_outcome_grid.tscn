@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://c8cadvctsyqpa"]
 
-[ext_resource type="Script" path="res://src/round_game/round_results/matrix_display/point_outcome_grid.gd" id="1_x6635"]
-[ext_resource type="PackedScene" uid="uid://ddcekyyc5qtsm" path="res://src/round_game/round_results/matrix_display/outcome_panel.tscn" id="2_m076l"]
+[ext_resource type="Script" path="res://src/menu_scenes/game/round_game/round_results/matrix_display/point_outcome_grid.gd" id="1_x6635"]
+[ext_resource type="PackedScene" uid="uid://ddcekyyc5qtsm" path="res://src/menu_scenes/game/round_game/round_results/matrix_display/outcome_panel.tscn" id="2_m076l"]
 
 [node name="PointOutcomeGrid" type="MarginContainer"]
 script = ExtResource("1_x6635")

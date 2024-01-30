@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://ddcekyyc5qtsm"]
 
-[ext_resource type="Script" path="res://src/round_game/round_results/matrix_display/outcome_panel.gd" id="1_2baj4"]
+[ext_resource type="Script" path="res://src/menu_scenes/game/round_game/round_results/matrix_display/outcome_panel.gd" id="1_2baj4"]
 [ext_resource type="Texture2D" uid="uid://670ks7dxtt38" path="res://assets/gfx/ui/matrix_panel.png" id="2_h27ma"]
 
 [sub_resource type="Animation" id="Animation_apscr"]
