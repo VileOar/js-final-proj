@@ -1,7 +1,7 @@
 ## UI widget responsible for mapping a player to a device or AI
 ##
 ## should allow to listen for an input from a connected device or set as AI
-extends PanelContainer
+extends MarginContainer
 class_name DeviceSelector
 
 ## signal to request that this widget be set to listen to input (or release listening)

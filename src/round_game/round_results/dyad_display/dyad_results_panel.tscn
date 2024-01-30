@@ -47,6 +47,7 @@ size_flags_vertical = 4
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PlayerDiplay"]
 layout_mode = 2
+theme_override_constants/separation = 0
 alignment = 1
 
 [node name="P1Panel" parent="VBoxContainer/PlayerDiplay/HBoxContainer" instance=ExtResource("3_42x6v")]

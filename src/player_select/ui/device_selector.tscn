@@ -2,39 +2,51 @@
 
 [ext_resource type="Script" path="res://src/player_select/ui/player_device_selector.gd" id="1_aw8pw"]
 
-[node name="DeviceSelector" type="PanelContainer"]
+[node name="DeviceSelector" type="MarginContainer"]
 offset_right = 320.0
 offset_bottom = 85.0
 size_flags_horizontal = 3
 script = ExtResource("1_aw8pw")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+theme_type_variation = &"MainPanel"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
 layout_mode = 2
 
-[node name="PlayerId" type="Label" parent="VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"SimplePanel"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="PlayerId" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 horizontal_alignment = 1
 
-[node name="Device" type="Label" parent="VBoxContainer"]
+[node name="Device" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = 0
 
-[node name="ListenButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="ListenButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 toggle_mode = true
 text = "Choose Device"
 
-[node name="AIButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="AIButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "CPU"
 
-[connection signal="toggled" from="VBoxContainer/HBoxContainer/ListenButton" to="." method="_on_device_button_toggled"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/AIButton" to="." method="_on_ai_button_pressed"]
+[connection signal="toggled" from="PanelContainer/VBoxContainer/HBoxContainer/ListenButton" to="." method="_on_device_button_toggled"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/AIButton" to="." method="_on_ai_button_pressed"]

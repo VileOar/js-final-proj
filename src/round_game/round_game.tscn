@@ -113,10 +113,6 @@ _player2_index = 3
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
-theme_override_constants/margin_left = 32
-theme_override_constants/margin_top = 32
-theme_override_constants/margin_right = 32
-theme_override_constants/margin_bottom = 32
 
 [node name="FadeScreen" type="ColorRect" parent="."]
 layout_mode = 1

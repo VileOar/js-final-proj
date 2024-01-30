@@ -1,0 +1,74 @@
+[gd_resource type="Theme" load_steps=10 format=3 uid="uid://b40mnags6aw0n"]
+
+[ext_resource type="Texture2D" uid="uid://db3a6ybxv5cw6" path="res://assets/gfx/ui/panels.png" id="1_4wc6t"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2rfd1"]
+texture = ExtResource("1_4wc6t")
+texture_margin_left = 24.0
+texture_margin_top = 24.0
+texture_margin_right = 24.0
+texture_margin_bottom = 24.0
+region_rect = Rect2(240, 248, 80, 64)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iukfd"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_h22nk"]
+texture = ExtResource("1_4wc6t")
+texture_margin_left = 24.0
+texture_margin_top = 24.0
+texture_margin_right = 24.0
+texture_margin_bottom = 24.0
+region_rect = Rect2(80, 248, 80, 64)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f8ecn"]
+texture = ExtResource("1_4wc6t")
+texture_margin_left = 24.0
+texture_margin_top = 24.0
+texture_margin_right = 24.0
+texture_margin_bottom = 24.0
+region_rect = Rect2(0, 248, 80, 64)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5bxgp"]
+texture = ExtResource("1_4wc6t")
+texture_margin_left = 24.0
+texture_margin_top = 24.0
+texture_margin_right = 24.0
+texture_margin_bottom = 24.0
+region_rect = Rect2(160, 248, 80, 64)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_aj4si"]
+texture = ExtResource("1_4wc6t")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+region_rect = Rect2(0, 80, 80, 80)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ttlb4"]
+texture = ExtResource("1_4wc6t")
+texture_margin_left = 32.0
+texture_margin_top = 32.0
+texture_margin_right = 32.0
+texture_margin_bottom = 32.0
+region_rect = Rect2(0, 0, 80, 80)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3v1q5"]
+texture = ExtResource("1_4wc6t")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+region_rect = Rect2(0, 160, 80, 80)
+
+[resource]
+Button/font_sizes/font_size = 12
+Button/styles/disabled = SubResource("StyleBoxTexture_2rfd1")
+Button/styles/focus = SubResource("StyleBoxEmpty_iukfd")
+Button/styles/hover = SubResource("StyleBoxTexture_h22nk")
+Button/styles/normal = SubResource("StyleBoxTexture_f8ecn")
+Button/styles/pressed = SubResource("StyleBoxTexture_5bxgp")
+MainPanel/base_type = &"PanelContainer"
+MainPanel/styles/panel = SubResource("StyleBoxTexture_aj4si")
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_ttlb4")
+SimplePanel/base_type = &"PanelContainer"
+SimplePanel/styles/panel = SubResource("StyleBoxTexture_3v1q5")
