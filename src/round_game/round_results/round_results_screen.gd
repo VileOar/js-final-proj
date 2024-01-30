@@ -42,6 +42,9 @@ var _point_stack1 := []
 ## obtained externally, variable for cache
 var _round_stats : Array
 
+## counter for finished animations of dyad displays
+var _dyad_animation_counter = 0
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -58,13 +61,17 @@ func _ready():
 ## starts solving each point for each player[br]
 ## it receives the point stack via a parameter (it does NOT fetch it anywhere)
 func start_point_solving(round_stats : Array) -> void:
-	await get_tree().create_timer(1.0).timeout
 	
 	_round_stats = round_stats
 	
 	_dyad0_results.set_scores(0, 0)
 	_dyad1_results.set_scores(0, 0)
 	
+	_dyad_animation_counter = 0
+	
+	await get_tree().create_timer(1.0).timeout
+	
+	# calling this starts the sequence
 	_solve_point()
 
 
@@ -87,7 +94,12 @@ func _solve_point() -> void:
 	
 	# if point stack is done, finish and stop
 	if _point_stack0.is_empty() and (_point_stack1.is_empty() or !SharedData.is_4player_mode()):
-		_set_advanceable()
+		# on end, start animating the stats
+		var dyad_score = _round_stats[0].get_score() + _round_stats[1].get_score()
+		_dyad0_results.animate_stats(_round_stats[0], _round_stats[1], dyad_score)
+		# do the same for the other dyad
+		dyad_score = _round_stats[2].get_score() + _round_stats[3].get_score()
+		_dyad1_results.animate_stats(_round_stats[2], _round_stats[3], dyad_score)
 		return
 	
 	# increment counter
@@ -131,5 +143,26 @@ func _solve_dyad_point(point : int, dyad : DyadResultsPanel, matrix : PayoffMatr
 		)
 
 
+# ------------------------------
+# || --- SIGNAL CALLBACKS --- ||
+# ------------------------------
+
 func _on_button_pressed():
 	next_round.emit()
+
+
+func _on_dyad_finished_animation() -> void:
+	_dyad_animation_counter += 1
+	if _dyad_animation_counter >= 2:
+		# TODO: parse and show win/lose and trigger animation adding points to players
+		# 		(the actual data of this has already been done though, this is just ui)
+		await get_tree().create_timer(1.0).timeout
+		var score0 = _round_stats[0].get_score() + _round_stats[1].get_score()
+		var score1 = _round_stats[2].get_score() + _round_stats[3].get_score()
+		if score0 > score1:
+			_dyad0_results.set_win_lose(true)
+			_dyad1_results.set_win_lose(false)
+		else:
+			_dyad0_results.set_win_lose(false)
+			_dyad1_results.set_win_lose(true)
+		_set_advanceable()

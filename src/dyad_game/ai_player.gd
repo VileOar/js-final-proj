@@ -31,6 +31,7 @@ func on_new_prompt(prompt : int) -> void:
 func _on_answer_delay_finished(prompt : int) -> void:
 	var directions = Global.Directions.values()
 	directions.erase(prompt)
+	directions.erase(Global.Directions.NONE) # exclude none
 	
 	# generate an input event
 	var event = InputEventAction.new()
@@ -58,5 +59,7 @@ func _parse_action(direction : int, coop : bool) -> StringName:
 			answer += "up"
 		Global.Directions.DOWN:
 			answer += "down"
+		_:
+			assert(false, "Direction not found, this should not be possible")
 	
 	return answer

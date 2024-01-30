@@ -5,15 +5,20 @@
 extends MarginContainer
 class_name DyadResultsPanel
 
+signal finished_animation
+
 @export var _score_number_scene : PackedScene
 
 # -----
 
 ## ref to the payoff grid
 @onready var _payoff_grid = %PointOutcomeGrid as PointOutcomeGrid
-## ref to player 1 panel
+# refs to player panels
 @onready var _p1_panel = %P1Panel as PlayerScorePanel
 @onready var _p2_panel = %P2Panel as PlayerScorePanel
+
+## ref to the stats list
+@onready var _stats_list: StatsList = %StatsList
 
 ## ref to point stack
 @onready var _point_stack: PointStack = %PointStack
@@ -41,11 +46,35 @@ func set_anim_speed(speed : float):
 	_anim_speed = speed
 
 
+# -------------------
+# || --- STATS --- ||
+# -------------------
+
 ## manually set the scores
 func set_scores(p1_score : int, p2_score : int):
 	_p1_panel.set_score(p1_score)
 	_p2_panel.set_score(p2_score)
+	
+	_stats_list.hide()
 
+
+## start animating statistics for this dyad
+func animate_stats(p1_stats: PlayerStats, p2_stats: PlayerStats, score: int) -> void:
+	_stats_list.show()
+	_stats_list.animate_stats(p1_stats, p2_stats, score)
+
+
+func _on_stats_list_finished_animation() -> void:
+	finished_animation.emit()
+
+
+func set_win_lose(win_lose: bool) -> void:
+	_stats_list.set_win_lose(win_lose)
+
+
+# -------------------------
+# || --- POINT STACK --- ||
+# -------------------------
 
 ## manually set point stack
 func set_point_stack(points : int) -> void:
@@ -62,14 +91,8 @@ func solve_single_point(outcome_mask : int, p1_added_score : int, p2_added_score
 	_point_stack.pop_point()
 	
 	# spawn score indicator
-	var score = _score_number_scene.instantiate() as ScoreNumber
-	var pos = _p1_panel.get_global_rect().get_center()
-	score.start(pos, p1_added_score)
-	get_parent().add_child(score)
-	score = _score_number_scene.instantiate() as ScoreNumber
-	pos = _p2_panel.get_global_rect().get_center()
-	score.start(pos, p2_added_score)
-	get_parent().add_child(score)
+	_p1_panel.spawn_number(get_parent(), _score_number_scene, p1_added_score)
+	_p2_panel.spawn_number(get_parent(), _score_number_scene, p2_added_score)
 	
 	# set the total scores on the player panels
 	_p1_panel.add_score(p1_added_score)

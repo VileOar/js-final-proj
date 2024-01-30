@@ -51,7 +51,9 @@ func pop_point() -> void:
 ## delete all points
 func clear_points() -> void:
 	while _columns.get_child_count() > 0:
-		_columns.get_child(-1).queue_free()
+		var col = _columns.get_child(-1)
+		_columns.remove_child(col)
+		col.queue_free()
 
 
 ## manually set amount of points

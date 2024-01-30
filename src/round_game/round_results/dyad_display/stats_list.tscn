@@ -1,0 +1,118 @@
+[gd_scene load_steps=3 format=3 uid="uid://c46pe3fgg1b0n"]
+
+[ext_resource type="Script" path="res://src/round_game/round_results/dyad_display/stats_list.gd" id="1_hxru7"]
+[ext_resource type="FontFile" uid="uid://dcb5yob1d6vl4" path="res://assets/fonts/Super_Mario_Bros_2.ttf" id="2_17eiq"]
+
+[node name="StatsList" type="MarginContainer"]
+script = ExtResource("1_hxru7")
+
+[node name="StatsList" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 64
+
+[node name="StatValues" type="GridContainer" parent="StatsList"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/h_separation = 64
+theme_override_constants/v_separation = 32
+columns = 3
+
+[node name="AnsweredStat0" type="Label" parent="StatsList/StatValues"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="AnsweredLabel" type="Label" parent="StatsList/StatValues"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+text = "Questions Answered"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnsweredStat1" type="Label" parent="StatsList/StatValues"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+vertical_alignment = 1
+
+[node name="CorrectStat0" type="Label" parent="StatsList/StatValues"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="CorrectLabel" type="Label" parent="StatsList/StatValues"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+text = "Correct Answers"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CorrectStat1" type="Label" parent="StatsList/StatValues"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+vertical_alignment = 1
+
+[node name="CoopStat0" type="Label" parent="StatsList/StatValues"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="CoopLabel" type="Label" parent="StatsList/StatValues"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+text = "Times Cooperated"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CoopStat1" type="Label" parent="StatsList/StatValues"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+vertical_alignment = 1
+
+[node name="ScoreRow" type="HBoxContainer" parent="StatsList"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 64
+alignment = 1
+
+[node name="ScoreLabel" type="Label" parent="StatsList/ScoreRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 24
+text = "Total Score:"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="ScoreStat" type="Label" parent="StatsList/ScoreRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 24
+text = "0"
+vertical_alignment = 1
+
+[node name="WinLoseLabel" type="Label" parent="StatsList"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_17eiq")
+theme_override_font_sizes/font_size = 32
+horizontal_alignment = 1

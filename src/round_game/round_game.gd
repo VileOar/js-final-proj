@@ -50,6 +50,8 @@ func _ready():
 		_dyad1.hide()
 	
 	_anim.play("fade_in")
+	
+	Signals.new_player_answer.connect(_on_new_player_answer)
 
 
 ## start the round
@@ -146,3 +148,9 @@ func _on_dyad_stable():
 
 func _on_round_results_sreen_next_round():
 	_anim.play("fade_out")
+
+
+## callback to when an answer is created, for statistics
+func _on_new_player_answer(answer: PlayerAnswer) -> void:
+	var stats = _round_stats[answer.player_id()] as PlayerStats
+	stats.parse_answer(answer)

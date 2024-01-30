@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://doly0aqjw7m6l"]
+[gd_scene load_steps=7 format=3 uid="uid://doly0aqjw7m6l"]
 
 [ext_resource type="Script" path="res://src/round_game/round_results/dyad_display/dyad_results_panel.gd" id="1_06j8w"]
 [ext_resource type="PackedScene" uid="uid://hbx38k3wfwha" path="res://src/round_game/round_results/dyad_display/score_number.tscn" id="2_jcxgw"]
 [ext_resource type="PackedScene" uid="uid://c8cadvctsyqpa" path="res://src/round_game/round_results/matrix_display/point_outcome_grid.tscn" id="2_snf3t"]
 [ext_resource type="PackedScene" uid="uid://oqgqq4mpijmn" path="res://src/round_game/round_results/dyad_display/player_score_panel.tscn" id="3_42x6v"]
+[ext_resource type="PackedScene" uid="uid://c46pe3fgg1b0n" path="res://src/round_game/round_results/dyad_display/stats_list.tscn" id="5_guypt"]
 [ext_resource type="PackedScene" uid="uid://dcgckpqoo0y3m" path="res://src/dyad_game/point_stack.tscn" id="5_jcf2g"]
 
 [node name="DyadResultsPanel" type="MarginContainer"]
@@ -24,9 +25,25 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="PlayerDiplay" type="MarginContainer" parent="VBoxContainer"]
+[node name="StatsDisplay" type="MarginContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+
+[node name="Control" type="Control" parent="VBoxContainer/StatsDisplay"]
+layout_mode = 2
+
+[node name="PointStack" parent="VBoxContainer/StatsDisplay/Control" instance=ExtResource("5_jcf2g")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[node name="StatsList" parent="VBoxContainer/StatsDisplay" instance=ExtResource("5_guypt")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="PlayerDiplay" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PlayerDiplay"]
 layout_mode = 2
@@ -40,9 +57,4 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Control" type="Control" parent="VBoxContainer/PlayerDiplay"]
-layout_mode = 2
-
-[node name="PointStack" parent="VBoxContainer/PlayerDiplay/Control" instance=ExtResource("5_jcf2g")]
-unique_name_in_owner = true
-layout_mode = 1
+[connection signal="finished_animation" from="VBoxContainer/StatsDisplay/StatsList" to="." method="_on_stats_list_finished_animation"]

@@ -24,6 +24,8 @@ func _ready():
 		PlayerStats.new(),
 	]
 	reset_player_data()
+	
+	Signals.new_player_answer.connect(_on_new_player_answer)
 
 
 ## set the player mode
@@ -70,3 +72,9 @@ func get_player_score(player_id : int) -> int:
 	else:
 		assert(false, "Fatal: invalid player_id given")
 		return -1
+
+
+## callback to when an answer is created, for statistics
+func _on_new_player_answer(answer: PlayerAnswer) -> void:
+	var stats = _player_data[answer.player_id()] as PlayerStats
+	stats.parse_answer(answer)

@@ -32,6 +32,16 @@ func add_score(add : int) -> void:
 	_update_score_ui()
 
 
+## spawn a number with the added points[br]
+## target_node specifies where to add the new number
+func spawn_number(target_node : Node, score_number_scene : PackedScene, added_score) -> void:
+	# spawn score indicator
+	var score = score_number_scene.instantiate() as ScoreNumber
+	var pos = get_global_rect().get_center() + Vector2(0, -128)
+	score.start(pos, added_score)
+	target_node.add_child(score)
+
+
 ## update the ui of scores
 func _update_score_ui() -> void:
 	_score.text = str(_score_value)

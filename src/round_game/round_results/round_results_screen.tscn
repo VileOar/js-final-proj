@@ -51,5 +51,7 @@ text = "Next Round"
 [node name="BetweenTimer" type="Timer" parent="."]
 one_shot = true
 
+[connection signal="finished_animation" from="PanelContainer/VBoxContainer/HBoxContainer/Dyad0" to="." method="_on_dyad_finished_animation"]
+[connection signal="finished_animation" from="PanelContainer/VBoxContainer/HBoxContainer/Dyad1" to="." method="_on_dyad_finished_animation"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/NextRoundBtn" to="." method="_on_button_pressed"]
 [connection signal="timeout" from="BetweenTimer" to="." method="_solve_point"]

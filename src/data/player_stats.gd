@@ -61,7 +61,7 @@ func get_correct_count() -> int:
 
 
 func get_correct_ratio() -> float:
-	return float(_correct_count) / float(_answer_count)
+	return 100 * float(_correct_count) / float(_answer_count)
 
 
 func get_coop_count() -> int:
@@ -69,4 +69,4 @@ func get_coop_count() -> int:
 
 
 func get_coop_ratio() -> float:
-	return float(_coop_count) / float(_answer_count)
+	return 100 * float(_coop_count) / float(_answer_count)

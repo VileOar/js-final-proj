@@ -43,7 +43,9 @@ func _on_player_input(player, input_event : InputEvent):
 	# check if the player belongs in this dyad and has not yet answered
 	if _player_answers.has(player) and _player_answers[player] == null:
 		# generate new answer from input
-		_player_answers[player] = _get_player_action(player, input_event)
+		var answer = _get_player_action(player, input_event)
+		_player_answers[player] = answer
+		Signals.new_player_answer.emit(answer)
 		
 		# check to see how many answers were registered
 		var answer_count = _count_answers()
