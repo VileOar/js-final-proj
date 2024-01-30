@@ -60,6 +60,7 @@ func set_scores(p1_score : int, p2_score : int):
 
 ## start animating statistics for this dyad
 func animate_stats(p1_stats: PlayerStats, p2_stats: PlayerStats, score: int) -> void:
+	await get_tree().create_timer(0.8).timeout
 	_stats_list.show()
 	_stats_list.animate_stats(p1_stats, p2_stats, score)
 

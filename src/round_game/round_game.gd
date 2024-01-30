@@ -105,14 +105,17 @@ func _add_points_to_player() -> void:
 	var p2_score = _round_stats[2].get_score()
 	var p3_score = _round_stats[3].get_score()
 	
-	if p0_score + p1_score > p2_score + p3_score:
-		# if dyad0 wins, player 2 and 3 receive penalty to their round score
-		p2_score *= Global.LOSE_PENALTY_MULTIPLIER
-		p3_score *= Global.LOSE_PENALTY_MULTIPLIER
-	else:
-		# else, player 0 and 1 do
-		p0_score *= Global.LOSE_PENALTY_MULTIPLIER
-		p1_score *= Global.LOSE_PENALTY_MULTIPLIER
+	var dyad0_score = p0_score + p1_score
+	var dyad1_score = p2_score + p3_score
+	if dyad0_score != dyad1_score:
+		if dyad0_score > dyad1_score:
+			# if dyad0 wins, player 2 and 3 receive penalty to their round score
+			p2_score *= Global.LOSE_PENALTY_MULTIPLIER
+			p3_score *= Global.LOSE_PENALTY_MULTIPLIER
+		else:
+			# else, player 0 and 1 do
+			p0_score *= Global.LOSE_PENALTY_MULTIPLIER
+			p1_score *= Global.LOSE_PENALTY_MULTIPLIER
 	
 	SharedData.add_player_score(0, p0_score)
 	SharedData.add_player_score(1, p1_score)

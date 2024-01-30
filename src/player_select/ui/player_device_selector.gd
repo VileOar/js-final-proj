@@ -14,6 +14,10 @@ signal toggled_listen(onoff)
 ## ref to the listen button
 @onready var _listen_btn = %ListenButton
 
+@onready var _device_icon: Control = %DeviceIcon
+## the sprite with the icons
+@onready var _device_sprite: Sprite2D = %DeviceSprite
+
 ## the player id this widget is mapped to
 var _player_id = -2
 
@@ -31,19 +35,21 @@ func set_player_id(player : int):
 func set_device(device : int):
 	InputManager.add_player_device(_player_id, device)
 	if InputManager.is_human_device(device):
-		
-		# TODO: change this to icons
+		_device_ui.show()
+		_device_icon.show()
 		match device:
 			-1:
-				_device_ui.text = "Keyboard"
+				_device_sprite.frame = 1
+				_device_ui.hide()
 			0, 1, 2, 3, 4, 5, 6, 7:
-				_device_ui.text = "Joypad %s" % [device]
+				_device_sprite.frame = 0
+				_device_ui.text = "%s" % [device]
 			_:
+				_device_icon.hide()
 				_device_ui.text = "Wait, what?"
 				push_warning("added valid device, but not recognised by the UI script???")
 	else:
-		# TODO: setup AI players
-		
+		_device_icon.hide()
 		_device_ui.text = "CPU"
 
 

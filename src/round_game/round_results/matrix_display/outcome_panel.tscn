@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://ddcekyyc5qtsm"]
 
 [ext_resource type="Script" path="res://src/round_game/round_results/matrix_display/outcome_panel.gd" id="1_2baj4"]
-[ext_resource type="Texture2D" uid="uid://b3rjlidj1lmin" path="res://icon.svg" id="2_jprcx"]
+[ext_resource type="Texture2D" uid="uid://670ks7dxtt38" path="res://assets/gfx/ui/matrix_panel.png" id="2_h27ma"]
 
 [sub_resource type="Animation" id="Animation_apscr"]
 length = 0.001
@@ -15,7 +15,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0.5, 0.5)]
+"values": [Vector2(1, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -43,7 +43,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(0.4, 1),
 "update": 0,
-"values": [Vector2(0.75, 0.75), Vector2(0.5, 0.5)]
+"values": [Vector2(1.5, 1.5), Vector2(1, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -55,7 +55,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(0.4, 1),
 "update": 0,
-"values": [Color(0, 1, 0, 1), Color(1, 1, 1, 1)]
+"values": [Color(0.560784, 0.870588, 0.364706, 1), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_v5x7x"]
@@ -71,7 +71,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(0.4, 1),
 "update": 0,
-"values": [Vector2(0.75, 0.75), Vector2(0.5, 0.5)]
+"values": [Vector2(1.5, 1.5), Vector2(1, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -83,7 +83,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(0.4, 1),
 "update": 0,
-"values": [Color(1, 0, 0, 1), Color(1, 1, 1, 1)]
+"values": [Color(0.921569, 0.337255, 0.294118, 1), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_skee3"]
@@ -99,7 +99,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(0.4, 1),
 "update": 0,
-"values": [Vector2(0.75, 0.75), Vector2(0.5, 0.5)]
+"values": [Vector2(1.5, 1.5), Vector2(1, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -111,7 +111,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(0.4, 1),
 "update": 0,
-"values": [Color(1, 0, 1, 1), Color(1, 1, 1, 1)]
+"values": [Color(0.278431, 0.231373, 0.470588, 1), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_nw5ce"]
@@ -131,27 +131,53 @@ script = ExtResource("1_2baj4")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(32, 32)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_jprcx")
-
-[node name="Label" type="Label" parent="."]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "12, 12"
+texture = ExtResource("2_h27ma")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_nw5ce")
 }
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 2
+
+[node name="Label0" type="Label" parent="GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 12
+text = "12"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Pad1" type="MarginContainer" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Pad2" type="MarginContainer" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label1" type="Label" parent="GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 12
+text = "12"
+horizontal_alignment = 1
+vertical_alignment = 1

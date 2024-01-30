@@ -7,7 +7,8 @@ class_name OutcomePanel
 
 ## set the payoff label
 func set_payoff(p1_payoff : int, p2_payoff : int) -> void:
-	%Label.text = "%s / %s" % [p1_payoff, p2_payoff]
+	%Label0.text = "%s" % [p1_payoff]
+	%Label1.text = "%s" % [p2_payoff]
 
 
 ## trigger an animation according to an outcome identifier as defined in global Outcome enum

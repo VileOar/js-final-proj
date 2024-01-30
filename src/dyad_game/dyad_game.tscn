@@ -80,3 +80,5 @@ layout_mode = 2
 [node name="PointStack" parent="UI/VBoxContainer/MarginContainer/Control" instance=ExtResource("10_pi61h")]
 unique_name_in_owner = true
 layout_mode = 1
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_bottom = 80

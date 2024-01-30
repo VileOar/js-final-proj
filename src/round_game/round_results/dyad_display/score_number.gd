@@ -29,7 +29,6 @@ func start(pos : Vector2, value : int) -> void:
 func start_penalty(pos : Vector2, penalty : float) -> void:
 	global_position = pos
 	$Label.text = "-%s%%" % [100*(1-penalty)]
-	$Label.add_theme_color_override("font_color", Color("ff6b97"))
-	($Label as Label).add_theme_font_size_override("font_size", 24)
+	($Label as Label).theme_type_variation = "PenaltyLabel"
 	_speed = 180
 	_penalty = true

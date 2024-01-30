@@ -154,23 +154,22 @@ func _on_button_pressed():
 func _on_dyad_finished_animation() -> void:
 	_dyad_animation_counter += 1
 	if _dyad_animation_counter >= 2:
-		# TODO: parse and show win/lose and trigger animation adding points to players
-		# 		(the actual data of this has already been done though, this is just ui)
 		await get_tree().create_timer(1.0).timeout
 		var score0 = _round_stats[0].get_score() + _round_stats[1].get_score()
 		var score1 = _round_stats[2].get_score() + _round_stats[3].get_score()
 		var dyad0_wins = score0 > score1
-		if dyad0_wins:
-			_dyad0_results.set_win_lose(true)
-			_dyad1_results.set_win_lose(false)
-		else:
-			_dyad0_results.set_win_lose(false)
-			_dyad1_results.set_win_lose(true)
-		await get_tree().create_timer(0.8).timeout
-		
-		if dyad0_wins:
-			_dyad1_results.display_penalty()
-		else:
-			_dyad0_results.display_penalty()
+		if score0 != score1:
+			if dyad0_wins:
+				_dyad0_results.set_win_lose(true)
+				_dyad1_results.set_win_lose(false)
+			else:
+				_dyad0_results.set_win_lose(false)
+				_dyad1_results.set_win_lose(true)
+			await get_tree().create_timer(0.8).timeout
+			
+			if dyad0_wins:
+				_dyad1_results.display_penalty()
+			else:
+				_dyad0_results.display_penalty()
 		
 		_set_advanceable()

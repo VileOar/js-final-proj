@@ -1,16 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://d1kkkom2ktphs"]
+[gd_scene load_steps=3 format=3 uid="uid://d1kkkom2ktphs"]
 
 [ext_resource type="Script" path="res://src/player_select/ui/player_device_selector.gd" id="1_aw8pw"]
+[ext_resource type="Texture2D" uid="uid://cbo7y558cb7it" path="res://assets/gfx/ui/device_icon.png" id="2_2d4nh"]
 
 [node name="DeviceSelector" type="MarginContainer"]
 offset_right = 320.0
 offset_bottom = 85.0
-size_flags_horizontal = 3
 script = ExtResource("1_aw8pw")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 2
-theme_type_variation = &"MainPanel"
+theme_type_variation = &"SmallPanel"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
 layout_mode = 2
@@ -27,10 +27,30 @@ unique_name_in_owner = true
 layout_mode = 2
 horizontal_alignment = 1
 
-[node name="Device" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="DeviceIcon" type="Control" parent="PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="DeviceSprite" type="Sprite2D" parent="PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/DeviceIcon"]
+unique_name_in_owner = true
+position = Vector2(32, 32)
+texture = ExtResource("2_2d4nh")
+vframes = 2
+
+[node name="Device" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+theme_type_variation = &"BigText"
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
@@ -38,12 +58,15 @@ theme_override_constants/separation = 0
 
 [node name="ListenButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(144, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 toggle_mode = true
-text = "Choose Device"
+text = "Choose
+Device"
 
 [node name="AIButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(144, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 text = "CPU"

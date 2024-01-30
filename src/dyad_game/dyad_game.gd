@@ -48,7 +48,6 @@ func reset_dyad() -> void:
 ## start-up sequence, does not actually start the dyad
 func ready_dyad() -> void:
 	# TODO: add some start animation
-	stable.emit()
 	_player_ui_list[0].set_player(_player1_index)
 	_player_ui_list[1].set_player(_player2_index)
 	
@@ -56,11 +55,15 @@ func ready_dyad() -> void:
 	if !InputManager.is_human_device(InputManager.get_player_device(_player1_index)):
 		var ai = AIPlayer.new() as AIPlayer
 		ai.set_player(_player1_index)
-		_ai.add_child(ai)
+		_ai.call_deferred("add_child", ai)
+		await ai.ready
 	if !InputManager.is_human_device(InputManager.get_player_device(_player2_index)):
 		var ai = AIPlayer.new() as AIPlayer
 		ai.set_player(_player2_index)
-		_ai.add_child(ai)
+		_ai.call_deferred("add_child", ai)
+		await ai.ready
+	
+	stable.emit()
 
 
 ## start the state machine

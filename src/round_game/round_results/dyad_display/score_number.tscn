@@ -17,6 +17,6 @@ offset_right = 128.0
 offset_bottom = 64.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_color = Color(1, 0.894118, 0.470588, 1)
+theme_type_variation = &"ScoreLabel"
 horizontal_alignment = 1
 vertical_alignment = 1
