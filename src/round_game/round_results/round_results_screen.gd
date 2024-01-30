@@ -64,6 +64,9 @@ func start_point_solving(round_stats : Array) -> void:
 	
 	_round_stats = round_stats
 	
+	_points_solved = 0
+	
+	_set_advanceable(false)
 	_dyad0_results.set_scores(0, 0)
 	_dyad1_results.set_scores(0, 0)
 	
@@ -85,8 +88,8 @@ func set_point_stacks(dyad0_point_stack : Array, dyad1_point_stack : Array) -> v
 
 
 ## ready and stable to progress to next round
-func _set_advanceable() -> void:
-	_next_round_btn.disabled = false
+func _set_advanceable(en := true) -> void:
+	_next_round_btn.disabled = !en
 
 
 ## solve a point for each dyads
