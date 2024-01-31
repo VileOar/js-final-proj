@@ -38,7 +38,7 @@ const WRONG_DELAY = 2.0
 const ROUND_TIME = 20.0
 
 ## number of rounds in a game
-const NUM_ROUNDS = 3
+const NUM_ROUNDS = 5
 
 ## round lose penalty multiplier
 const LOSE_PENALTY_MULTIPLIER = 0.5
