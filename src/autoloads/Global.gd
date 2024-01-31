@@ -35,13 +35,23 @@ const CORRECT_DELAY = 0.5
 const WRONG_DELAY = 2.0
 
 ## total time for a round
-const ROUND_TIME = 20.0 # TODO: make sure this is set to 30.0
+const ROUND_TIME = 20.0
 
 ## number of rounds in a game
 const NUM_ROUNDS = 5
 
 ## round lose penalty multiplier
 const LOSE_PENALTY_MULTIPLIER = 0.5
+
+## dictionary of music
+var _music_tracks = {
+	"title": preload("res://assets/sfx/music/Main_Theme_Melancholia.mp3"),
+	"game": preload("res://assets/sfx/music/Security_Circuitry_and_You.mp3"),
+	"end": preload("res://assets/sfx/music/One_Stop_Spy_Shop_Unused.mp3"),
+}
+
+## audio stream player for the music
+var _audio_player : AudioStreamPlayer
 
 ## a global scope RNG
 var rng := RandomNumberGenerator.new()
@@ -56,7 +66,22 @@ func get_player_texture(player) -> Texture:
 	return _player_texture_array[player]
 
 
+## play a music track
+func play_music_track(track_name: String) -> void:
+	if track_name == "":
+		_audio_player.stop()
+		return
+	var track = _music_tracks[track_name]
+	if !_audio_player.playing or _audio_player.stream != track:
+		_audio_player.stop()
+		_audio_player.stream = track
+		_audio_player.play()
+
+
 func _ready():
+	_audio_player = AudioStreamPlayer.new()
+	_audio_player.volume_db = -30.0
+	add_child(_audio_player)
 	
 	randomize() # randomise the global-scope random functions
 	rng.randomize() # randomise the RNG instance

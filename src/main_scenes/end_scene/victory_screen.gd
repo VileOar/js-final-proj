@@ -29,6 +29,8 @@ var second = -1
 
 
 func _ready() -> void:
+	Global.play_music_track("")
+	
 	_player_stats = [
 		SharedData.get_player_stats(0),
 		SharedData.get_player_stats(1),
@@ -63,6 +65,8 @@ func _start_animation() -> void:
 
 ## set the victory type on the labels
 func _set_victory_type() -> void:
+	Global.play_music_track("end")
+	
 	# team victory
 	if abs(first - second) == 1: # first and second place are from the same team
 		if _player_stats[first].get_score() == _player_stats[second].get_score(): # perfect victory

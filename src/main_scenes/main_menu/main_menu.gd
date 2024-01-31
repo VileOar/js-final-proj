@@ -8,6 +8,10 @@ extends Control
 @onready var _credits: PanelContainer = %Credits
 
 
+func _ready() -> void:
+	Global.play_music_track("title")
+
+
 func _on_quit_btn_pressed() -> void:
 	get_tree().quit()
 

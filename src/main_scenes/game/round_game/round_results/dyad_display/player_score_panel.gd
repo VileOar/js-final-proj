@@ -16,7 +16,6 @@ var _score_value := 0
 
 ## set the player id and populate the rest of the UI from it
 func set_player(player_id : int) -> void:
-	# TODO: populate rest of UI
 	_label.text = "Player %s" % [player_id + 1]
 
 

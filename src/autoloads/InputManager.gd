@@ -9,7 +9,6 @@ var _listening = false
 
 ## map of players and input devices: -1 for KBM, 0-7 for gamepads; array indices are the player indices
 var _player_devices = [-2, -2, -2, -2]
-# TODO: remove default values
 
 
 ## enable or disable input listening

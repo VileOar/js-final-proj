@@ -61,6 +61,7 @@ func _ready():
 
 ## start the round
 func _start_round() -> void:
+	Global.play_music_track("")
 	_time_counter = Global.ROUND_TIME
 	
 	_unstable_dyads = 1
@@ -72,7 +73,6 @@ func _start_round() -> void:
 
 ## finish everything, while everything is faded out and restart round or advance to end
 func _cleanup_round() -> void:
-	# TODO: reset animations and such
 	if SharedData.is_4player_mode():
 		_dyad1.show()
 	else:
@@ -136,6 +136,8 @@ func _on_seconds_timer_timeout():
 	_time_counter -= 1
 	_timer_label.text = str(_time_counter)
 	if _time_counter <= 0: # if time reached end
+		Global.play_music_track("")
+		
 		_dyad0.stop_dyad()
 		_dyad1.stop_dyad()
 		
@@ -174,6 +176,7 @@ func _on_dyad_stable():
 		if SharedData.is_4player_mode(): # if 4 players also start the second one
 			_dyad1.start_dyad()
 		_timer.start(1)
+		Global.play_music_track("game")
 
 
 func _on_round_results_sreen_next_round():

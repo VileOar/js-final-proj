@@ -10,9 +10,6 @@ class_name PromptUI
 
 ## function to set the prompt to display a new prompt
 func set_prompt(direction) -> void:
-	# TODO: add logic to randomly scramble the UI (mismatching colours, buttons, in order to trick
-	#		the player
-	# TODO: change this from a label to something better
 	_prompt.visible = true
 	match direction:
 		Global.Directions.LEFT:
