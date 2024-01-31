@@ -49,6 +49,6 @@ func _on_interval_timer_timeout() -> void:
 		_current_displayed = _my_score
 		finished_animation.emit()
 	else:
-		_interval_timer.start(INCREMENT_INTERVAL)
+		_interval_timer.start(INCREMENT_INTERVAL if _current_displayed < 50 else INCREMENT_INTERVAL * 0.1)
 	
 	_score_label.text = str(_current_displayed)
