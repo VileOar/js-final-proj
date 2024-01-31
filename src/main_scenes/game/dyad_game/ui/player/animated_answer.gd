@@ -18,13 +18,28 @@ func animate_answer(answer : PlayerAnswer) -> void:
 	# decide animation
 	if !Utils.nullcheck(answer): # if no answer is given, display nothing
 		return
-	elif answer.is_correct():
+	else:
+		force_animation(answer.direction(), answer.is_correct(), answer.cooperated())
+
+
+## manually animate a direction
+func force_animation(direction: int, correct: bool, coop: bool) -> void:
+	var anim = "none"
+	
+	# default cancel all 4
+	$Left.play(anim)
+	$Right.play(anim)
+	$Up.play(anim)
+	$Down.play(anim)
+	
+	# decide animation
+	if correct:
 		anim = "correct"
 	else:
-		anim = "wrong" if answer.cooperated() else "defect"
+		anim = "wrong" if coop else "defect"
 	
 	# play the correct direction
-	match answer.direction():
+	match direction:
 		Global.Directions.LEFT:
 			$Left.play(anim)
 		Global.Directions.RIGHT:

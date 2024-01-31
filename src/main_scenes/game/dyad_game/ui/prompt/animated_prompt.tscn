@@ -10,6 +10,7 @@ script = ExtResource("1_lim21")
 position = Vector2(48, 0)
 sprite_frames = ExtResource("1_6uo1o")
 animation = &"flashing"
+autoplay = "flashing"
 frame_progress = 0.336098
 
 [node name="Other1" type="AnimatedSprite2D" parent="."]

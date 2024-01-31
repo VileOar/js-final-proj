@@ -80,7 +80,7 @@ func play_music_track(track_name: String) -> void:
 
 func _ready():
 	_audio_player = AudioStreamPlayer.new()
-	_audio_player.volume_db = -30.0
+	_audio_player.volume_db = 0.0
 	add_child(_audio_player)
 	
 	randomize() # randomise the global-scope random functions
