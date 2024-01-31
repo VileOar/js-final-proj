@@ -53,14 +53,14 @@ grow_vertical = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="UI"]
 layout_mode = 2
 
-[node name="PromptUI" parent="UI/VBoxContainer" instance=ExtResource("7_bxmv3")]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_vertical = 1
-
 [node name="MarginContainer" type="MarginContainer" parent="UI/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+
+[node name="PromptUI" parent="UI/VBoxContainer/MarginContainer" instance=ExtResource("7_bxmv3")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
 
 [node name="PlayerUIs" type="HBoxContainer" parent="UI/VBoxContainer/MarginContainer"]
 unique_name_in_owner = true

@@ -25,6 +25,10 @@ theme_override_constants/separation = 24
 layout_mode = 2
 size_flags_vertical = 3
 
+[node name="StatsList" parent="VBoxContainer/StatsDisplay" instance=ExtResource("5_guypt")]
+unique_name_in_owner = true
+layout_mode = 2
+
 [node name="Control" type="Control" parent="VBoxContainer/StatsDisplay"]
 layout_mode = 2
 
@@ -33,11 +37,6 @@ unique_name_in_owner = true
 layout_mode = 1
 theme_override_constants/margin_top = 32
 theme_override_constants/margin_bottom = 64
-
-[node name="StatsList" parent="VBoxContainer/StatsDisplay" instance=ExtResource("5_guypt")]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
 
 [node name="PointOutcomeGrid" parent="VBoxContainer" instance=ExtResource("2_snf3t")]
 unique_name_in_owner = true

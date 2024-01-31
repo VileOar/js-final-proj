@@ -35,7 +35,7 @@ const CORRECT_DELAY = 0.5
 const WRONG_DELAY = 2.0
 
 ## total time for a round
-const ROUND_TIME = 10.0 # TODO: make sure this is set to 30.0
+const ROUND_TIME = 20.0 # TODO: make sure this is set to 30.0
 
 ## number of rounds in a game
 const NUM_ROUNDS = 5
@@ -45,6 +45,15 @@ const LOSE_PENALTY_MULTIPLIER = 0.5
 
 ## a global scope RNG
 var rng := RandomNumberGenerator.new()
+
+var _player_texture_array : Array = [
+	preload("res://assets/gfx/entities/player1.png"),
+	preload("res://assets/gfx/entities/player2.png"),
+	preload("res://assets/gfx/entities/player3.png"),
+	preload("res://assets/gfx/entities/player4.png")
+]
+func get_player_texture(player) -> Texture:
+	return _player_texture_array[player]
 
 
 func _ready():

@@ -22,19 +22,22 @@ const LOSE_COLOUR = "66ffe3"
 @onready var _win_lose_label: Label = %WinLoseLabel
 
 
-## set the stats for this player, in this round[br]
-## animation to show them with delays
-func animate_stats(stats0: PlayerStats, stats1: PlayerStats, score: int) -> void:
+## reset everything
+func reset() -> void:
 	# hide everything
 	for child in _stat_values.get_children():
 		child.hide()
 	_score_row.hide()
 	_win_lose_label.text = ""
-	
+
+
+## set the stats for this player, in this round[br]
+## animation to show them with delays
+func animate_stats(stats0: PlayerStats, stats1: PlayerStats, score: int) -> void:
 	_answered_stat0.text = str(stats0.get_answer_count())
 	_answered_stat1.text = str(stats1.get_answer_count())
-	_correct_stat0.text = "%s (%d%%)" % [stats1.get_correct_count(), stats0.get_correct_ratio()]
-	_correct_stat1.text = "%s (%d%%)" % [stats0.get_correct_count(), stats1.get_correct_ratio()]
+	_correct_stat0.text = "%s (%d%%)" % [stats0.get_correct_count(), stats0.get_correct_ratio()]
+	_correct_stat1.text = "%s (%d%%)" % [stats1.get_correct_count(), stats1.get_correct_ratio()]
 	_coop_stat0.text = "%s (%d%%)" % [stats0.get_coop_count(), stats0.get_coop_ratio()]
 	_coop_stat1.text = "%s (%d%%)" % [stats1.get_coop_count(), stats1.get_coop_ratio()]
 	_score_stat.text = str(score)

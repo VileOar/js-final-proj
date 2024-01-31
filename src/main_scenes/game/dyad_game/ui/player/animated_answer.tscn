@@ -9,7 +9,7 @@ script = ExtResource("1_dgfj4")
 [node name="Left" type="AnimatedSprite2D" parent="."]
 position = Vector2(-24, 0)
 sprite_frames = ExtResource("2_eera6")
-animation = &"correct"
+animation = &"none"
 
 [node name="Right" type="AnimatedSprite2D" parent="."]
 position = Vector2(24, 0)

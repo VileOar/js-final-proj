@@ -74,6 +74,15 @@ func get_player_score(player_id : int) -> int:
 		return -1
 
 
+## get the PlayerStats of a player
+func get_player_stats(player_id: int) -> PlayerStats:
+	if player_id >= 0 and player_id < _player_data.size():
+		return _player_data[player_id]
+	else:
+		assert(false, "Fatal: invalid player_id given")
+		return null
+
+
 ## callback to when an answer is created, for statistics
 func _on_new_player_answer(answer: PlayerAnswer) -> void:
 	var stats = _player_data[answer.player_id()] as PlayerStats

@@ -5,6 +5,8 @@
 extends Control
 class_name RoundGame
 
+@export var _end_scene : PackedScene
+
 ## delay at the end of a round
 const ROUND_END_DELAY = 3.0
 
@@ -155,8 +157,7 @@ func _on_animation_player_animation_finished(anim_name):
 		_start_round()
 	elif anim_name == "fade_out": # cleanup round
 		if _round >= Global.NUM_ROUNDS:
-			get_tree().quit()
-			# TODO: go to game end
+			get_tree().change_scene_to_packed(_end_scene)
 		else:
 			_cleanup_round()
 

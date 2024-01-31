@@ -17,6 +17,7 @@ signal toggled_listen(onoff)
 @onready var _device_icon: Control = %DeviceIcon
 ## the sprite with the icons
 @onready var _device_sprite: Sprite2D = %DeviceSprite
+@onready var _player_sprite: Sprite2D = %PlayerSprite
 
 ## the player id this widget is mapped to
 var _player_id = -2
@@ -27,6 +28,7 @@ func set_player_id(player : int):
 	if InputManager.validate_player(player):
 		_player_id = player
 		_player_label.text = "Player %s" % [player + 1]
+		_player_sprite.texture = Global.get_player_texture(player)
 	else:
 		push_error("Tried setting an invalid player")
 
