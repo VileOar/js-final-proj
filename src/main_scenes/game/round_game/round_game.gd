@@ -157,11 +157,11 @@ func _on_seconds_timer_timeout():
 
 
 func _on_animation_player_animation_finished(anim_name):
-	_round += 1
 	if anim_name == "fade_in": # start round
+		_round += 1
 		_start_round()
 	elif anim_name == "fade_out": # cleanup round
-		if _round >= Global.NUM_ROUNDS:
+		if _round > Global.NUM_ROUNDS:
 			get_tree().change_scene_to_packed(_end_scene)
 		else:
 			_cleanup_round()
