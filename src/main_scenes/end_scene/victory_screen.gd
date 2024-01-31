@@ -68,12 +68,12 @@ func _set_victory_type() -> void:
 	Global.play_music_track("end")
 	
 	# team victory
-	if abs(first - second) == 1: # first and second place are from the same team
+	if first + second == 1 or first + second == 5: # first and second place are from the same team
 		if _player_stats[first].get_score() == _player_stats[second].get_score(): # perfect victory
 			_victory_type.text = "PERFECT VICTORY"
 		else: # just team victory
 			_victory_type.text = "TEAM VICTORY"
-		_player_win.text = "TEAM %s%s WINS!" % [first + 1, second + 1]
+		_player_win.text = "TEAM %s and %s WINS!" % [first + 1, second + 1]
 		
 		_score_graphs[first].show_winner(true)
 		_score_graphs[second].show_winner(true)

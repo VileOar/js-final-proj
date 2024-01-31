@@ -4,6 +4,8 @@
 extends MarginContainer
 class_name PlayerUI
 
+var _can_sound : bool
+
 ## ref to the player label
 @onready var _player_label = %Identifier as Label
 ## ref to the answer label
@@ -14,6 +16,7 @@ class_name PlayerUI
 
 ## set the player identification
 func set_player(player : int):
+	_can_sound = player == 0
 	_player_label.text = "Player %s" % [player + 1]
 	_player_sprite.texture = Global.get_player_texture(player)
 
@@ -36,3 +39,13 @@ func hide_answer():
 func _on_anim_cop_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "drink_slam":
 		%AnimCop.play("sit")
+
+
+func _play_drink_sound() -> void:
+	if _can_sound:
+		$DrinkSound.play()
+
+
+func _play_slam_sound() -> void:
+	if _can_sound:
+		$SlamSound.play()

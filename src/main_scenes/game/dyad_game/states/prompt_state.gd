@@ -28,6 +28,7 @@ func enter():
 	_prompt = randi_range(0, 3) as Global.Directions # generate a new dir as per those defined in Directions
 	fsm.show_prompt_ui(true, _prompt)
 	fsm.new_prompt(_prompt)
+	$PromptAudio.play()
 
 
 func exit():

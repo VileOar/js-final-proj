@@ -1,13 +1,16 @@
-[gd_scene load_steps=10 format=3 uid="uid://csk7v3jwntq18"]
+[gd_scene load_steps=13 format=3 uid="uid://csk7v3jwntq18"]
 
 [ext_resource type="Script" path="res://src/main_scenes/game/dyad_game/dyad_game.gd" id="1_rj5ni"]
 [ext_resource type="Script" path="res://src/main_scenes/game/dyad_game/states/dyad_state_machine.gd" id="2_hq41h"]
 [ext_resource type="Script" path="res://src/main_scenes/game/dyad_game/states/stopped_state.gd" id="3_q8i4y"]
 [ext_resource type="Script" path="res://src/main_scenes/game/dyad_game/states/prompt_state.gd" id="4_23ul0"]
+[ext_resource type="AudioStream" uid="uid://73366si228xt" path="res://assets/sfx/sounds/answers/talk2.wav" id="5_aky61"]
 [ext_resource type="Script" path="res://src/main_scenes/game/dyad_game/states/right_state.gd" id="5_u1kn3"]
 [ext_resource type="Script" path="res://src/main_scenes/game/dyad_game/states/wrong_state.gd" id="6_t7b25"]
 [ext_resource type="PackedScene" uid="uid://da7wxe2reu70r" path="res://src/main_scenes/game/dyad_game/ui/prompt/prompt_ui.tscn" id="7_bxmv3"]
+[ext_resource type="AudioStream" uid="uid://c4mclvkruucqv" path="res://assets/sfx/sounds/answers/have_this.wav" id="7_jskwk"]
 [ext_resource type="PackedScene" uid="uid://7c4smtyjcn3m" path="res://src/main_scenes/game/dyad_game/ui/player/player_ui.tscn" id="8_6rlia"]
+[ext_resource type="AudioStream" uid="uid://bqbkaca3vtc3d" path="res://assets/sfx/sounds/answers/alarm_a.wav" id="9_d204i"]
 [ext_resource type="PackedScene" uid="uid://dcgckpqoo0y3m" path="res://src/main_scenes/game/dyad_game/point_stack.tscn" id="10_pi61h"]
 
 [node name="DyadGame" type="Control"]
@@ -36,11 +39,23 @@ script = ExtResource("3_q8i4y")
 [node name="PromptState" type="Node" parent="StateMachine"]
 script = ExtResource("4_23ul0")
 
+[node name="PromptAudio" type="AudioStreamPlayer" parent="StateMachine/PromptState"]
+stream = ExtResource("5_aky61")
+volume_db = -10.0
+
 [node name="RightState" type="Node" parent="StateMachine"]
 script = ExtResource("5_u1kn3")
 
+[node name="CorrectAudio" type="AudioStreamPlayer" parent="StateMachine/RightState"]
+stream = ExtResource("7_jskwk")
+volume_db = -10.0
+
 [node name="WrongState" type="Node" parent="StateMachine"]
 script = ExtResource("6_t7b25")
+
+[node name="WrongAudio" type="AudioStreamPlayer" parent="StateMachine/WrongState"]
+stream = ExtResource("9_d204i")
+volume_db = -10.0
 
 [node name="UI" type="MarginContainer" parent="."]
 layout_mode = 1

@@ -95,6 +95,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ur1mt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rgvf5")
 }],
 "loop": true,
 "name": &"default",
@@ -156,7 +159,7 @@ region_rect = Rect2(0, 0, 128, 128)
 position = Vector2(24, 32)
 sprite_frames = SubResource("SpriteFrames_q8ony")
 autoplay = "default"
-frame_progress = 0.133834
+frame_progress = 0.204289
 
 [node name="Table" type="Sprite2D" parent="MarginContainer/VBoxContainer/MarginContainer/Control/Node2D"]
 texture = ExtResource("2_symma")

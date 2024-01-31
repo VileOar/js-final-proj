@@ -142,6 +142,11 @@ func _solve_dyad_point(point : int, dyad : DyadResultsPanel, matrix : PayoffMatr
 	## determine who gets what score based on point
 	var payoffs_array = matrix.get_matrix_outcome(point) # get the corresponding payoffs array
 	
+	if payoffs_array[0] < 0 or payoffs_array[1] < 0:
+		$RemPointAudio.play()
+	else:
+		$AddPointAudio.play()
+	
 	dyad.solve_single_point(
 		point,
 		payoffs_array[0],

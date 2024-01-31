@@ -44,6 +44,7 @@ func set_flash(flash: bool) -> void:
 
 
 func _on_interval_timer_timeout() -> void:
+	$AudioStreamPlayer.play()
 	_current_displayed += 1
 	if _current_displayed >= _my_score:
 		_current_displayed = _my_score

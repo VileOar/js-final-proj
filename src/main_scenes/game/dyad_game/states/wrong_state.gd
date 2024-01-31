@@ -13,6 +13,7 @@ func enter():
 	fsm.start_stop_timer(true, Global.WRONG_DELAY)
 	
 	fsm.show_answers_ui(true, fsm.get_registered_answers())
+	$WrongAudio.play()
 
 
 func exit():

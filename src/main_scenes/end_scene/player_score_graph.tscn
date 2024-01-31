@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bjy1xnxblu6qu"]
+[gd_scene load_steps=3 format=3 uid="uid://bjy1xnxblu6qu"]
 
 [ext_resource type="Script" path="res://src/main_scenes/end_scene/player_score_graph.gd" id="1_6ttnp"]
+[ext_resource type="AudioStream" uid="uid://cd1hw3hh6cqhv" path="res://assets/sfx/sounds/points/032-Switch01.ogg" id="2_d50mk"]
 
 [node name="PlayerScoreGraph" type="MarginContainer"]
 size_flags_horizontal = 3
@@ -54,5 +55,8 @@ vertical_alignment = 1
 
 [node name="IntervalTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_d50mk")
 
 [connection signal="timeout" from="IntervalTimer" to="." method="_on_interval_timer_timeout"]

@@ -17,6 +17,7 @@ func enter():
 	
 	answers = fsm.get_registered_answers()
 	fsm.show_answers_ui(true, answers)
+	$CorrectAudio.play()
 
 
 func exit():
