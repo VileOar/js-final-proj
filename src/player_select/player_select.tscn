@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://co2xh2lmxvpq4"]
+[gd_scene load_steps=6 format=3 uid="uid://co2xh2lmxvpq4"]
 
 [ext_resource type="Script" path="res://src/player_select/player_select_menu.gd" id="1_bjdma"]
 [ext_resource type="PackedScene" uid="uid://db78w4tl40jdb" path="res://src/main_scenes/game/round_game/round_game.tscn" id="2_flqf3"]
 [ext_resource type="PackedScene" uid="uid://d1kkkom2ktphs" path="res://src/player_select/ui/device_selector.tscn" id="2_q5eyk"]
+[ext_resource type="PackedScene" uid="uid://cr1i4ulnsdsu2" path="res://src/main_scenes/main_menu/main_menu.tscn" id="3_8s8c0"]
 [ext_resource type="FontFile" uid="uid://dcb5yob1d6vl4" path="res://assets/fonts/Super_Mario_Bros_2.ttf" id="4_3kf4d"]
 
 [node name="PlayerSelectMenu" type="Control"]
@@ -14,6 +15,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_bjdma")
 _round_scene = ExtResource("2_flqf3")
+_title_scene = ExtResource("3_8s8c0")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -83,11 +85,28 @@ layout_mode = 2
 [node name="Selector3" parent="MarginContainer/VBoxContainer/PlayerSelectors" instance=ExtResource("2_q5eyk")]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
+theme_override_constants/margin_left = 256
+theme_override_constants/margin_right = 256
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("4_3kf4d")
 theme_override_font_sizes/font_size = 24
 text = "Start Game"
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]
+[node name="BackBtn" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("4_3kf4d")
+theme_override_font_sizes/font_size = 24
+text = "Back to Title"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer2/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer2/BackBtn" to="." method="_on_back_btn_pressed"]

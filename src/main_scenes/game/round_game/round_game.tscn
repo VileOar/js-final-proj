@@ -94,7 +94,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
@@ -102,12 +101,19 @@ theme_override_constants/margin_bottom = 16
 layout_mode = 2
 
 [node name="TimerContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(128, 96)
 layout_mode = 2
+size_flags_horizontal = 4
+theme_type_variation = &"TimerPanel"
 
 [node name="TimerLabel" type="Label" parent="MarginContainer/VBoxContainer/TimerContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+theme_type_variation = &"ScoreLabel"
 horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/TimerContainer"]
+layout_mode = 2
 
 [node name="DyadContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2

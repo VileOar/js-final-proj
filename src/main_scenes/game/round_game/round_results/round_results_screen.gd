@@ -56,6 +56,9 @@ func _ready():
 	_points_solved = 0
 	_point_stack0 = []
 	_point_stack1 = []
+	
+	if !SharedData.is_4player_mode():
+		$Divider.hide()
 
 
 ## starts solving each point for each player[br]
@@ -161,7 +164,7 @@ func _on_dyad_finished_animation() -> void:
 		var score0 = _round_stats[0].get_score() + _round_stats[1].get_score()
 		var score1 = _round_stats[2].get_score() + _round_stats[3].get_score()
 		var dyad0_wins = score0 > score1
-		if score0 != score1:
+		if score0 != score1 and SharedData.is_4player_mode():
 			if dyad0_wins:
 				_dyad0_results.set_win_lose(true)
 				_dyad1_results.set_win_lose(false)

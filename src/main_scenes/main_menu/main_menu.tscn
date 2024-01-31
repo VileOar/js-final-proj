@@ -1,4 +1,105 @@
-[gd_scene format=3 uid="uid://cr1i4ulnsdsu2"]
+[gd_scene load_steps=13 format=3 uid="uid://cr1i4ulnsdsu2"]
+
+[ext_resource type="FontFile" uid="uid://dcb5yob1d6vl4" path="res://assets/fonts/Super_Mario_Bros_2.ttf" id="1_lrugt"]
+[ext_resource type="Script" path="res://src/main_scenes/main_menu/main_menu.gd" id="1_ukv5m"]
+[ext_resource type="Texture2D" uid="uid://dkb5gktxterij" path="res://assets/gfx/entities/room.png" id="2_symma"]
+[ext_resource type="Texture2D" uid="uid://cosb6rt24bnms" path="res://assets/gfx/entities/cop.png" id="3_q3fcx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p8kud"]
+atlas = ExtResource("3_q3fcx")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aq0jd"]
+atlas = ExtResource("3_q3fcx")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c8fnn"]
+atlas = ExtResource("3_q3fcx")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6kboa"]
+atlas = ExtResource("3_q3fcx")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rgvf5"]
+atlas = ExtResource("3_q3fcx")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c72q2"]
+atlas = ExtResource("3_q3fcx")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ur1mt"]
+atlas = ExtResource("3_q3fcx")
+region = Rect2(192, 64, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_q8ony"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p8kud")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aq0jd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c8fnn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6kboa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p8kud")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aq0jd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c8fnn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6kboa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p8kud")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aq0jd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c8fnn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6kboa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rgvf5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rgvf5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c72q2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ur1mt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c72q2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ur1mt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c72q2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ur1mt")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -7,3 +108,142 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_ukv5m")
+_matrix_scene_path = "res://src/main_scenes/matrix_editor/matrix_editor_menu.tscn"
+_game_scene_path = "res://src/player_select/player_select.tscn"
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_lrugt")
+theme_override_font_sizes/font_size = 96
+text = "Double
+Dilemma"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Node2D" type="Node2D" parent="MarginContainer/VBoxContainer/MarginContainer/Control"]
+scale = Vector2(2, 2)
+
+[node name="Lamp" type="Sprite2D" parent="MarginContainer/VBoxContainer/MarginContainer/Control/Node2D"]
+texture = ExtResource("2_symma")
+region_enabled = true
+region_rect = Rect2(0, 0, 128, 128)
+
+[node name="Cop" type="AnimatedSprite2D" parent="MarginContainer/VBoxContainer/MarginContainer/Control/Node2D"]
+position = Vector2(24, 32)
+sprite_frames = SubResource("SpriteFrames_q8ony")
+autoplay = "default"
+frame_progress = 0.133834
+
+[node name="Table" type="Sprite2D" parent="MarginContainer/VBoxContainer/MarginContainer/Control/Node2D"]
+texture = ExtResource("2_symma")
+region_enabled = true
+region_rect = Rect2(0, 128, 128, 128)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 64
+alignment = 1
+
+[node name="QuitBtn" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Quit"
+
+[node name="MatrixBtn" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Edit Payoff Matrix"
+
+[node name="StartBtn" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Start Game"
+
+[node name="CreditsBtn" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Credits"
+
+[node name="Credits" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Credits"]
+layout_mode = 2
+theme_type_variation = &"SimplePanel"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Credits/PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="Label" type="Label" parent="Credits/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+text = "Programming, Art, Design"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Credits/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"HeaderSmall"
+text = "Pedro Valério"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="Credits/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+text = "Font"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label4" type="Label" parent="Credits/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"HeaderSmall"
+text = "Copyright (c) 2020, Roberto Mocci (<patreon.com/rmocci | da.iosonor@gmail.com>),
+with Reserved Font Name Dogica Pixel."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="BackBtn" type="Button" parent="Credits/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Back"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/QuitBtn" to="." method="_on_quit_btn_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/MatrixBtn" to="." method="_on_matrix_btn_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/StartBtn" to="." method="_on_start_btn_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/CreditsBtn" to="." method="_on_credits_btn_pressed"]
+[connection signal="pressed" from="Credits/PanelContainer/VBoxContainer/BackBtn" to="." method="_on_back_btn_pressed"]

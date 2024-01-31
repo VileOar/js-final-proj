@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="JS_Project"
-run/main_scene="res://src/player_select/player_select.tscn"
+run/main_scene="res://src/main_scenes/main_menu/main_menu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 

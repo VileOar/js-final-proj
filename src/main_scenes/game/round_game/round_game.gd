@@ -54,6 +54,9 @@ func _ready():
 	_anim.play("fade_in")
 	
 	Signals.new_player_answer.connect(_on_new_player_answer)
+	
+	if !SharedData.is_4player_mode():
+		$Divider.hide()
 
 
 ## start the round
@@ -109,7 +112,7 @@ func _add_points_to_player() -> void:
 	
 	var dyad0_score = p0_score + p1_score
 	var dyad1_score = p2_score + p3_score
-	if dyad0_score != dyad1_score:
+	if dyad0_score != dyad1_score and SharedData.is_4player_mode():
 		if dyad0_score > dyad1_score:
 			# if dyad0 wins, player 2 and 3 receive penalty to their round score
 			p2_score *= Global.LOSE_PENALTY_MULTIPLIER

@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=15 format=3 uid="uid://b40mnags6aw0n"]
+[gd_resource type="Theme" load_steps=16 format=3 uid="uid://b40mnags6aw0n"]
 
 [ext_resource type="Texture2D" uid="uid://db3a6ybxv5cw6" path="res://assets/gfx/ui/panels.png" id="1_4wc6t"]
 [ext_resource type="FontFile" uid="uid://dcb5yob1d6vl4" path="res://assets/fonts/Super_Mario_Bros_2.ttf" id="2_l4dmt"]
@@ -86,6 +86,13 @@ texture_margin_right = 16.0
 texture_margin_bottom = 16.0
 region_rect = Rect2(0, 320, 80, 80)
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kvyhy"]
+texture = ExtResource("1_4wc6t")
+texture_margin_left = 24.0
+texture_margin_right = 24.0
+texture_margin_bottom = 24.0
+region_rect = Rect2(0, 400, 80, 64)
+
 [resource]
 BigText/base_type = &"Label"
 BigText/font_sizes/font_size = 24
@@ -128,3 +135,5 @@ SimplePanel/base_type = &"PanelContainer"
 SimplePanel/styles/panel = SubResource("StyleBoxTexture_3v1q5")
 SmallPanel/base_type = &"PanelContainer"
 SmallPanel/styles/panel = SubResource("StyleBoxTexture_n1w5q")
+TimerPanel/base_type = &"PanelContainer"
+TimerPanel/styles/panel = SubResource("StyleBoxTexture_kvyhy")

@@ -7,6 +7,8 @@ class_name PlayerSelectMenu
 
 ## ref to the packed scene of the round game
 @export var _round_scene : PackedScene
+## ref to the packed scene of title screen
+@export var _title_scene : PackedScene
 
 ## ref to 2 player btn
 @onready var _2player_btn = %TwoPlayerBtn
@@ -94,3 +96,7 @@ func _on_signals_input_player_action(_player : int, event : InputEvent):
 
 func _on_button_pressed():
 	get_tree().change_scene_to_packed(_round_scene)
+
+
+func _on_back_btn_pressed() -> void:
+	get_tree().change_scene_to_packed(_title_scene)
