@@ -2,6 +2,3 @@
 ##
 ## ex: player, world map, entity factory, custom camera, ...
 extends Node
-
-
-

@@ -15,6 +15,7 @@ dest_files=["res://.godot/imported/dogica.ttf-d416a04907bc49fe4f4bd6b2d7f2ea91.f
 Rendering=null
 antialiasing=1
 generate_mipmaps=false
+disable_embedded_bitmaps=true
 multichannel_signed_distance_field=false
 msdf_pixel_range=8
 msdf_size=48

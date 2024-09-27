@@ -35,10 +35,10 @@ const CORRECT_DELAY = 0.5
 const WRONG_DELAY = 2.0
 
 ## total time for a round
-const ROUND_TIME = 20.0
+const ROUND_TIME = 5.0
 
 ## number of rounds in a game
-const NUM_ROUNDS = 5
+const NUM_ROUNDS = 2
 
 ## round lose penalty multiplier
 const LOSE_PENALTY_MULTIPLIER = 0.5

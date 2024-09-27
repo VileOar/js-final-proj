@@ -51,7 +51,7 @@ func _ready():
 	else:
 		_dyad1.hide()
 	
-	_anim.play("fade_in")
+	_setup_round()
 	
 	Signals.new_player_answer.connect(_on_new_player_answer)
 	
@@ -63,6 +63,7 @@ func _ready():
 func _start_round() -> void:
 	Global.play_music_track("")
 	_time_counter = Global.ROUND_TIME
+	_timer_label.text = str(_time_counter)
 	
 	_unstable_dyads = 1
 	if SharedData.is_4player_mode(): # if 4 players also start the second one
@@ -85,7 +86,9 @@ func _cleanup_round() -> void:
 	
 	_round_results_screen.hide()
 	
-	_anim.play("fade_in")
+	_timer_label.hide()
+	
+	_setup_round()
 
 
 ## func actually add the points to player data[br]
@@ -128,6 +131,31 @@ func _add_points_to_player() -> void:
 	SharedData.add_player_score(3, p3_score)
 
 
+## wait for all round preparations to be complete (in-game animations like screen fade)
+func _setup_round():
+	Global.play_music_track("") # stop music before fade in
+	_anim.play('fade_in')
+	await _anim.animation_finished
+	if _anim.assigned_animation != 'fade_in': # sanity check
+		push_warning("Last played animation '%s' does not correspond to expected 'fade_in'")
+	
+	_start_round()
+
+
+## advance to new round, depending on current round count, may restart or advance to end screen
+func _wrapup_round():
+	_anim.play('fade_out')
+	await _anim.animation_finished
+	if _anim.assigned_animation != 'fade_out': # sanity check
+		push_warning("Last played animation '%s' does not correspond to expected 'fade_out'")
+	
+	_round += 1 # increment round counter
+	if _round >= Global.NUM_ROUNDS:
+		get_tree().change_scene_to_packed(_end_scene)
+	else:
+		_cleanup_round()
+
+
 # ------------------------------
 # || --- SIGNAL CALLBACKS --- ||
 # ------------------------------
@@ -136,7 +164,6 @@ func _on_seconds_timer_timeout():
 	_time_counter -= 1
 	_timer_label.text = str(_time_counter)
 	if _time_counter <= 0: # if time reached end
-		Global.play_music_track("")
 		
 		_dyad0.stop_dyad()
 		_dyad1.stop_dyad()
@@ -156,17 +183,6 @@ func _on_seconds_timer_timeout():
 		_timer.start(1)
 
 
-func _on_animation_player_animation_finished(anim_name):
-	if anim_name == "fade_in": # start round
-		_round += 1
-		_start_round()
-	elif anim_name == "fade_out": # cleanup round
-		if _round > Global.NUM_ROUNDS:
-			get_tree().change_scene_to_packed(_end_scene)
-		else:
-			_cleanup_round()
-
-
 ## for when a dyad reports being ready
 func _on_dyad_stable():
 	_unstable_dyads -= 1
@@ -177,10 +193,12 @@ func _on_dyad_stable():
 			_dyad1.start_dyad()
 		_timer.start(1)
 		Global.play_music_track("game")
+		_timer_label.show()
 
 
+## callback for when round results screen 'next round' button is pressed
 func _on_round_results_sreen_next_round():
-	_anim.play("fade_out")
+	_wrapup_round()
 
 
 ## callback to when an answer is created, for statistics

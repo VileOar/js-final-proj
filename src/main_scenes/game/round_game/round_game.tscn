@@ -108,6 +108,7 @@ theme_type_variation = &"TimerPanel"
 
 [node name="TimerLabel" type="Label" parent="MarginContainer/VBoxContainer/TimerContainer"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 theme_type_variation = &"ScoreLabel"
 horizontal_alignment = 1
@@ -157,4 +158,3 @@ libraries = {
 [connection signal="stable" from="MarginContainer/VBoxContainer/DyadContainer/Dyad0" to="." method="_on_dyad_stable"]
 [connection signal="stable" from="MarginContainer/VBoxContainer/DyadContainer/Dyad1" to="." method="_on_dyad_stable"]
 [connection signal="next_round" from="RoundResultsSreen" to="." method="_on_round_results_sreen_next_round"]
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
