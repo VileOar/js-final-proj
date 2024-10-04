@@ -26,6 +26,9 @@ var _unstable_dyads = -1
 @onready var _round_results_screen = %RoundResultsSreen as RoundResultsScreen
 ## ref to the timer label
 @onready var _timer_label = %TimerLabel
+## ref to round label
+@onready var _round_label: Label = %RoundLabel
+
 
 ## the actual timer variable[br]
 ## this acts as a counter that gets decremented every time the timer (1 sec) times out[br]
@@ -62,7 +65,7 @@ func _ready():
 ## start the round
 func _start_round() -> void:
 	Global.play_music_track("")
-	_time_counter = Global.ROUND_TIME
+	_time_counter = Global.SETTINGS.round_time
 	_timer_label.text = str(_time_counter)
 	
 	_unstable_dyads = 1
@@ -85,8 +88,6 @@ func _cleanup_round() -> void:
 		(stats as PlayerStats).reset()
 	
 	_round_results_screen.hide()
-	
-	_timer_label.hide()
 	
 	_setup_round()
 
@@ -115,15 +116,17 @@ func _add_points_to_player() -> void:
 	
 	var dyad0_score = p0_score + p1_score
 	var dyad1_score = p2_score + p3_score
+	
+	var lose_penalty = Global.SETTINGS.lose_penalty_multiplier
 	if dyad0_score != dyad1_score and SharedData.is_4player_mode():
 		if dyad0_score > dyad1_score:
 			# if dyad0 wins, player 2 and 3 receive penalty to their round score
-			p2_score *= Global.LOSE_PENALTY_MULTIPLIER
-			p3_score *= Global.LOSE_PENALTY_MULTIPLIER
+			p2_score *= lose_penalty
+			p3_score *= lose_penalty
 		else:
 			# else, player 0 and 1 do
-			p0_score *= Global.LOSE_PENALTY_MULTIPLIER
-			p1_score *= Global.LOSE_PENALTY_MULTIPLIER
+			p0_score *= lose_penalty
+			p1_score *= lose_penalty
 	
 	SharedData.add_player_score(0, p0_score)
 	SharedData.add_player_score(1, p1_score)
@@ -133,6 +136,8 @@ func _add_points_to_player() -> void:
 
 ## wait for all round preparations to be complete (in-game animations like screen fade)
 func _setup_round():
+	_timer_label.modulate.a = 0.0
+	_round_label.text = "Round %d" % (_round+1)
 	Global.play_music_track("") # stop music before fade in
 	_anim.play('fade_in')
 	await _anim.animation_finished
@@ -150,7 +155,7 @@ func _wrapup_round():
 		push_warning("Last played animation '%s' does not correspond to expected 'fade_out'")
 	
 	_round += 1 # increment round counter
-	if _round >= Global.NUM_ROUNDS:
+	if _round >= Global.SETTINGS.num_rounds:
 		get_tree().change_scene_to_packed(_end_scene)
 	else:
 		_cleanup_round()
@@ -177,6 +182,7 @@ func _on_seconds_timer_timeout():
 		
 		await get_tree().create_timer(ROUND_END_DELAY).timeout
 		
+		_round_results_screen.set_round(_round, Global.SETTINGS.num_rounds-1)
 		_round_results_screen.show()
 		_round_results_screen.start_point_solving(_round_stats)
 	else: # else, keep going
@@ -193,7 +199,7 @@ func _on_dyad_stable():
 			_dyad1.start_dyad()
 		_timer.start(1)
 		Global.play_music_track("game")
-		_timer_label.show()
+		_timer_label.modulate.a = 1.0
 
 
 ## callback for when round results screen 'next round' button is pressed

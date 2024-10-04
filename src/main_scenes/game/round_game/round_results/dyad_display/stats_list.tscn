@@ -36,7 +36,6 @@ columns = 3
 
 [node name="AnsweredStat0" type="Label" parent="PanelContainer/MarginContainer/StatsList/StatValues"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 12
@@ -44,7 +43,6 @@ horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="AnsweredLabel" type="Label" parent="PanelContainer/MarginContainer/StatsList/StatValues"]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 12
@@ -54,7 +52,6 @@ vertical_alignment = 1
 
 [node name="AnsweredStat1" type="Label" parent="PanelContainer/MarginContainer/StatsList/StatValues"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 12
@@ -62,7 +59,6 @@ vertical_alignment = 1
 
 [node name="CorrectStat0" type="Label" parent="PanelContainer/MarginContainer/StatsList/StatValues"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 12
@@ -70,7 +66,6 @@ horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="CorrectLabel" type="Label" parent="PanelContainer/MarginContainer/StatsList/StatValues"]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 12
@@ -80,7 +75,6 @@ vertical_alignment = 1
 
 [node name="CorrectStat1" type="Label" parent="PanelContainer/MarginContainer/StatsList/StatValues"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 12
@@ -88,7 +82,6 @@ vertical_alignment = 1
 
 [node name="CoopStat0" type="Label" parent="PanelContainer/MarginContainer/StatsList/StatValues"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 12
@@ -96,7 +89,6 @@ horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="CoopLabel" type="Label" parent="PanelContainer/MarginContainer/StatsList/StatValues"]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 12
@@ -106,7 +98,6 @@ vertical_alignment = 1
 
 [node name="CoopStat1" type="Label" parent="PanelContainer/MarginContainer/StatsList/StatValues"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 12
@@ -114,7 +105,6 @@ vertical_alignment = 1
 
 [node name="ScoreRow" type="HBoxContainer" parent="PanelContainer/MarginContainer/StatsList"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 theme_override_constants/separation = 64
 alignment = 1

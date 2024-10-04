@@ -35,6 +35,7 @@ func _ready():
 	_player_mode_btn_group = ButtonGroup.new()
 	_2player_btn.button_group = _player_mode_btn_group
 	_4player_btn.button_group = _player_mode_btn_group
+	_4player_btn.set_pressed_no_signal(true)
 	_player_mode_btn_group.pressed.connect(_on_player_mode_changed)
 	
 	# setup the device selectors

@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://co2xh2lmxvpq4"]
 
-[ext_resource type="Script" path="res://src/player_select/player_select_menu.gd" id="1_bjdma"]
+[ext_resource type="Script" path="res://src/main_scenes/player_select/player_select_menu.gd" id="1_bjdma"]
 [ext_resource type="PackedScene" uid="uid://be1joxrc38num" path="res://src/main_scenes/instructions_scene/instructions_scene.tscn" id="2_bw8hu"]
-[ext_resource type="PackedScene" uid="uid://d1kkkom2ktphs" path="res://src/player_select/ui/device_selector.tscn" id="2_q5eyk"]
+[ext_resource type="PackedScene" uid="uid://d1kkkom2ktphs" path="res://src/main_scenes/player_select/ui/device_selector.tscn" id="2_q5eyk"]
 [ext_resource type="PackedScene" uid="uid://cr1i4ulnsdsu2" path="res://src/main_scenes/main_menu/main_menu.tscn" id="3_8s8c0"]
 [ext_resource type="FontFile" uid="uid://dcb5yob1d6vl4" path="res://assets/fonts/Super_Mario_Bros_2.ttf" id="4_3kf4d"]
 

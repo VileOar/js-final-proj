@@ -26,8 +26,8 @@ const LOSE_COLOUR = "66ffe3"
 func reset() -> void:
 	# hide everything
 	for child in _stat_values.get_children():
-		child.hide()
-	_score_row.hide()
+		child.modulate.a = 0.0
+	_score_row.modulate.a = 0.0
 	_win_lose_label.text = ""
 
 
@@ -46,14 +46,14 @@ func animate_stats(stats0: PlayerStats, stats1: PlayerStats, score: int) -> void
 	var stat_row = 0
 	while stat_row < _stat_values.get_child_count():
 		await get_tree().create_timer(0.4).timeout
-		_stat_values.get_child(stat_row).show()
-		_stat_values.get_child(stat_row + 1).show() # the second one is the value label
-		_stat_values.get_child(stat_row + 2).show()
+		_stat_values.get_child(stat_row).modulate.a = 1.0
+		_stat_values.get_child(stat_row + 1).modulate.a = 1.0 # the second one is the value label
+		_stat_values.get_child(stat_row + 2).modulate.a = 1.0
 		
 		stat_row += 3
 	
 	await get_tree().create_timer(0.6).timeout
-	_score_row.show()
+	_score_row.modulate.a = 1.0
 	
 	finished_animation.emit()
 

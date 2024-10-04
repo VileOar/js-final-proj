@@ -27,6 +27,9 @@ const SPEED_POINT_THRESHOLD = 30
 @onready var _dyad1_results = %Dyad1 as DyadResultsPanel
 ## ref to the button to advance
 @onready var _next_round_btn = %NextRoundBtn as Button
+## label identifying current round
+@onready var _round_label: Label = %RoundLabel
+
 
 ## timer between each point
 @onready var _between_timer = $BetweenTimer as Timer
@@ -59,6 +62,12 @@ func _ready():
 	
 	if !SharedData.is_4player_mode():
 		$Divider.hide()
+
+
+## receive data about current round to update displays
+func set_round(current_round: int, last: int) -> void:
+	_round_label.text = "Round %d out of %d End" % [current_round+1, last+1]
+	_next_round_btn.text = "End Results" if current_round == last else "Next Round"
 
 
 ## starts solving each point for each player[br]

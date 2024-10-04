@@ -64,13 +64,14 @@ layout_mode = 2
 size_flags_vertical = 0
 theme_type_variation = &"MainPanel"
 
-[node name="Label" type="Label" parent="PanelContainer2"]
+[node name="RoundLabel" type="Label" parent="PanelContainer2"]
+unique_name_in_owner = true
 layout_mode = 2
+size_flags_vertical = 1
 theme_type_variation = &"HeaderLarge"
-text = "
-Round End"
+text = "Round End"
 horizontal_alignment = 1
-vertical_alignment = 1
+vertical_alignment = 2
 
 [node name="BetweenTimer" type="Timer" parent="."]
 one_shot = true

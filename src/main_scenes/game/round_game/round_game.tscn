@@ -106,15 +106,22 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_type_variation = &"TimerPanel"
 
-[node name="TimerLabel" type="Label" parent="MarginContainer/VBoxContainer/TimerContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TimerContainer"]
+layout_mode = 2
+theme_override_constants/separation = 4
+alignment = 2
+
+[node name="RoundLabel" type="Label" parent="MarginContainer/VBoxContainer/TimerContainer/VBoxContainer"]
 unique_name_in_owner = true
-visible = false
+layout_mode = 2
+theme_type_variation = &"ScoreLabel"
+theme_override_font_sizes/font_size = 32
+
+[node name="TimerLabel" type="Label" parent="MarginContainer/VBoxContainer/TimerContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"ScoreLabel"
 horizontal_alignment = 1
-
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/TimerContainer"]
-layout_mode = 2
 
 [node name="DyadContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -139,6 +146,7 @@ visible = false
 layout_mode = 1
 
 [node name="FadeScreen" type="ColorRect" parent="."]
+visible = false
 z_index = 10
 layout_mode = 1
 anchors_preset = 15

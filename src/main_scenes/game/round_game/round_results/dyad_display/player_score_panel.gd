@@ -43,13 +43,15 @@ func spawn_number(target_node : Node, score_number_scene : PackedScene, added_sc
 
 
 func apply_penalty(target_node : Node, score_number_scene : PackedScene) -> void:
+	var penalty = Global.SETTINGS.lose_penalty_multiplier
+	
 	# apply penalty
-	_score_value = int(float(_score_value) * Global.LOSE_PENALTY_MULTIPLIER)
+	_score_value = int(float(_score_value) * penalty)
 	# display penalty
 	var score = score_number_scene.instantiate() as ScoreNumber
 	var pos = get_global_rect().get_center()
 	pos.y = get_global_rect().position.y - 128
-	score.start_penalty(pos, Global.LOSE_PENALTY_MULTIPLIER)
+	score.start_penalty(pos, penalty)
 	target_node.add_child(score)
 	
 	_update_score_ui()

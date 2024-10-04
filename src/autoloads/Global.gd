@@ -34,14 +34,15 @@ const CORRECT_DELAY = 0.5
 ## longer delay when answers are wrong
 const WRONG_DELAY = 2.0
 
-## total time for a round
-const ROUND_TIME = 5.0
+class GameSettings:
+	## total time for a round
+	var round_time : float = 5.0#30.0
+	## number of rounds in a game
+	var num_rounds : int = 2#3
+	## round lose penalty multiplier
+	var lose_penalty_multiplier : float = 0.5
 
-## number of rounds in a game
-const NUM_ROUNDS = 2
-
-## round lose penalty multiplier
-const LOSE_PENALTY_MULTIPLIER = 0.5
+var SETTINGS = GameSettings.new()
 
 ## dictionary of music
 var _music_tracks = {
