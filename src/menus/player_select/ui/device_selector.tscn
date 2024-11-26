@@ -1,0 +1,143 @@
+[gd_scene load_steps=7 format=3 uid="uid://d1kkkom2ktphs"]
+
+[ext_resource type="Script" path="res://src/menus/player_select/ui/player_device_selector.gd" id="1_aw8pw"]
+[ext_resource type="Texture2D" uid="uid://cbo7y558cb7it" path="res://assets/gfx/ui/device_icon.png" id="2_2d4nh"]
+[ext_resource type="Texture2D" uid="uid://cv2vkapkd35gr" path="res://assets/gfx/entities/player1.png" id="3_vjsow"]
+
+[sub_resource type="Animation" id="Animation_uopt4"]
+resource_name = "default"
+length = 1.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8, 1.2, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1), Vector2i(3, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_7qhdh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_eotua"]
+_data = {
+"RESET": SubResource("Animation_7qhdh"),
+"default": SubResource("Animation_uopt4")
+}
+
+[node name="DeviceSelector" type="MarginContainer"]
+offset_right = 320.0
+offset_bottom = 85.0
+size_flags_vertical = 3
+script = ExtResource("1_aw8pw")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"SmallPanel"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"SimplePanel"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="PlayerId" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ColorText"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="DeviceIcon" type="Control" parent="VBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="DeviceSprite" type="Sprite2D" parent="VBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/DeviceIcon"]
+unique_name_in_owner = true
+position = Vector2(32, 32)
+texture = ExtResource("2_2d4nh")
+vframes = 2
+
+[node name="Device" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"BigText"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="ListenButton" type="Button" parent="VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(144, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+text = "Choose
+Device"
+
+[node name="AIButton" type="Button" parent="VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(144, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "CPU"
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Control" type="Control" parent="VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="PlayerSprite" type="Sprite2D" parent="VBoxContainer/MarginContainer/Control"]
+unique_name_in_owner = true
+scale = Vector2(2, 2)
+texture = ExtResource("3_vjsow")
+hframes = 4
+vframes = 2
+frame = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="VBoxContainer/MarginContainer/Control"]
+libraries = {
+"": SubResource("AnimationLibrary_eotua")
+}
+autoplay = "default"
+
+[connection signal="toggled" from="VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/ListenButton" to="." method="_on_device_button_toggled"]
+[connection signal="pressed" from="VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/AIButton" to="." method="_on_ai_button_pressed"]

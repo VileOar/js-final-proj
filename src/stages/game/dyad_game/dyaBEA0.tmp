@@ -1,0 +1,52 @@
+[gd_scene load_steps=8 format=3 uid="uid://csk7v3jwntq18"]
+
+[ext_resource type="Script" path="res://src/dyad_game/dyad_game.gd" id="1_rj5ni"]
+[ext_resource type="Script" path="res://src/dyad_game/states/dyad_state_machine.gd" id="2_hq41h"]
+[ext_resource type="Script" path="res://src/dyad_game/states/stopped_state.gd" id="3_q8i4y"]
+[ext_resource type="Script" path="res://src/dyad_game/states/prompt_state.gd" id="4_23ul0"]
+[ext_resource type="Script" path="res://src/dyad_game/states/right_state.gd" id="5_u1kn3"]
+[ext_resource type="Script" path="res://src/dyad_game/states/wrong_state.gd" id="6_t7b25"]
+[ext_resource type="Script" path="res://src/dyad_game/ui/ui_controller.gd" id="7_0musk"]
+
+[node name="DyadGame" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rj5ni")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("_timer")]
+script = ExtResource("2_hq41h")
+_timer = NodePath("../Timer")
+
+[node name="StoppedState" type="Node" parent="StateMachine"]
+script = ExtResource("3_q8i4y")
+
+[node name="PromptState" type="Node" parent="StateMachine"]
+script = ExtResource("4_23ul0")
+
+[node name="RightState" type="Node" parent="StateMachine"]
+script = ExtResource("5_u1kn3")
+
+[node name="WrongState" type="Node" parent="StateMachine"]
+script = ExtResource("6_t7b25")
+
+[node name="UIController" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("7_0musk")
+
+[node name="PromptUI" type="Label" parent="UIController"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Hello"

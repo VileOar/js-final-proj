@@ -1,0 +1,22 @@
+"Vibing Over Venus" Kevin MacLeod (incompetech.com)
+Licensed under Creative Commons: By Attribution 4.0 License
+http://creativecommons.org/licenses/by/4.0/
+
+"Spy Glass" Kevin MacLeod (incompetech.com)
+Licensed under Creative Commons: By Attribution 4.0 License
+http://creativecommons.org/licenses/by/4.0/
+
+"Lobby Time" Kevin MacLeod (incompetech.com)
+Licensed under Creative Commons: By Attribution 4.0 License
+http://creativecommons.org/licenses/by/4.0/
+
+possible (from incompetech):
+round:
+-hard boiled
+-backbay lounge
+-secret of tiki island
+-deadly roulette
+-spy glass <-
+
+ending:
+-lobby time

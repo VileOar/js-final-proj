@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://cxeceweo8851j"]
+
+[ext_resource type="Script" path="res://src/stages/game/dyad_game/ui/player/animated_answer.gd" id="1_dgfj4"]
+[ext_resource type="SpriteFrames" uid="uid://bmm6rsqolnk4m" path="res://assets/spriteframes/animated_answer.tres" id="2_eera6"]
+
+[node name="AnimatedAnswer" type="Node2D"]
+script = ExtResource("1_dgfj4")
+
+[node name="Left" type="AnimatedSprite2D" parent="."]
+position = Vector2(-24, 0)
+sprite_frames = ExtResource("2_eera6")
+animation = &"none"
+
+[node name="Right" type="AnimatedSprite2D" parent="."]
+position = Vector2(24, 0)
+sprite_frames = ExtResource("2_eera6")
+animation = &"none"
+
+[node name="Up" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -24)
+sprite_frames = ExtResource("2_eera6")
+animation = &"none"
+
+[node name="Down" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 24)
+sprite_frames = ExtResource("2_eera6")
+animation = &"none"

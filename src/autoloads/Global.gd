@@ -36,19 +36,25 @@ const WRONG_DELAY = 2.0
 
 class GameSettings:
 	## total time for a round
-	var round_time : float = 5.0#30.0
+	var round_time: float
 	## number of rounds in a game
-	var num_rounds : int = 2#3
+	var num_rounds: int
 	## round lose penalty multiplier
-	var lose_penalty_multiplier : float = 0.5
+	var lose_penalty_multiplier: float
+	
+	func reset() -> GameSettings:
+		round_time = 5.0#30.0
+		num_rounds = 2#5
+		lose_penalty_multiplier = 0.5#0.5
+		return self
 
-var SETTINGS = GameSettings.new()
+var SETTINGS := GameSettings.new().reset()
 
 ## dictionary of music
 var _music_tracks = {
-	"title": preload("res://assets/sfx/music/Main_Theme_Melancholia.mp3"),
-	"game": preload("res://assets/sfx/music/Security_Circuitry_and_You.mp3"),
-	"end": preload("res://assets/sfx/music/One_Stop_Spy_Shop_Unused.mp3"),
+	"title": preload("res://assets/sfx/music/Vibing_Over_Venus.mp3"),
+	"game": preload("res://assets/sfx/music/Spy_Glass.mp3"),
+	"end": preload("res://assets/sfx/music/Lobby_Time.mp3"),
 }
 
 ## audio stream player for the music
