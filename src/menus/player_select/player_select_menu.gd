@@ -5,23 +5,26 @@
 extends Control
 class_name PlayerSelectMenu
 
-## ref to the packed scene of the round game
-@export var _round_scene : PackedScene
-## ref to the packed scene of title screen
-@export var _title_scene : PackedScene
+# ref to the packed scene of the round game
+@export var _round_scene: PackedScene
+# ref to the packed scene of title screen
+@export var _title_scene: PackedScene
 
-## ref to 2 player btn
+# ref to 2 player btn
 @onready var _2player_btn = %TwoPlayerBtn
-## ref to 4 player btn
+# ref to 4 player btn
 @onready var _4player_btn = %FourPlayerBtn
-## button group for the player count buttons
-var _player_mode_btn_group : ButtonGroup
+# button group for the player count buttons
+var _player_mode_btn_group: ButtonGroup
 
-## ref to the list of device selectors
+# ref to the list of device selectors
 @onready var _player_selectors = %PlayerSelectors
 
-## which player is listening for a device
-var _listening_player : DeviceSelector = null
+# which player is listening for a device
+var _listening_player: DeviceSelector = null
+# local variable identifying how many players, later used to initialise the actual game data
+# if true, 4 players, 2 if false
+var _mode_4p = true
 
 
 func _ready():
@@ -31,7 +34,7 @@ func _ready():
 	# reset listening player
 	_listening_player = null
 	
-	# setup the button group
+	# setup the button group for selecting how many players
 	_player_mode_btn_group = ButtonGroup.new()
 	_2player_btn.button_group = _player_mode_btn_group
 	_4player_btn.button_group = _player_mode_btn_group
@@ -58,24 +61,20 @@ func _notification(what):
 # || --- SIGNAL CALLBACKS --- ||
 # ------------------------------
 
-## callback for when one of the player mode buttons is pressed
+# callback for when one of the player mode buttons is pressed
 func _on_player_mode_changed(btn : BaseButton):
-	var mode_4p = true
-	if btn == _2player_btn:
-		mode_4p = false
-	SharedData.set_player_mode(mode_4p)
+	_mode_4p = btn == _4player_btn # check which button was pressed
 	
-	# hide or show last two player selectors
-	if mode_4p:
-		_player_selectors.get_child(-1).show()
-		_player_selectors.get_child(-2).show()
-	else:
-		_player_selectors.get_child(-1).hide()
-		_player_selectors.get_child(-2).hide()
+	var players = 4 if _mode_4p else 2 # aux to following loop
+	for i in _player_selectors.get_children().size():
+		if i < players: # show the selector for the current num of players
+			_player_selectors.get_child(i).show()
+		else: # hide the others
+			_player_selectors.get_child(i).hide()
 
 
-## callback to a request to listen for devices by one of the device selectors
-func _on_device_selector_toggled_listen(onoff : bool, selector : DeviceSelector):
+# callback to a request to listen for devices by one of the device selectors
+func _on_device_selector_toggled_listen(onoff: bool, selector: DeviceSelector):
 	for other in _player_selectors.get_children():
 		if !(onoff and other == selector): # only release for others
 			other.release_listen()
@@ -88,14 +87,15 @@ func _on_device_selector_toggled_listen(onoff : bool, selector : DeviceSelector)
 		_listening_player = null
 
 
-## callback to input event from manager
-func _on_signals_input_player_action(_player : int, event : InputEvent):
+# callback to input event from manager
+func _on_signals_input_player_action(_player: int, event: InputEvent) -> void:
 	if is_instance_valid(_listening_player) and event.is_pressed():
 		if InputManager.device_free(event.device):
 			_listening_player.forward_input_event(event)
 
 
-func _on_button_pressed():
+func _on_start_btn_pressed() -> void:
+	SharedData.setup_dyads_playerdata(2 if _mode_4p else 1)
 	get_tree().change_scene_to_packed(_round_scene)
 
 

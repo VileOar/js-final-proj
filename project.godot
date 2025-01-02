@@ -21,8 +21,8 @@ Signals="*res://src/autoloads/Signals.gd"
 Utils="*res://src/autoloads/Utils.gd"
 Global="*res://src/autoloads/Global.gd"
 Locator="*res://src/autoloads/Locator.gd"
-InputManager="*res://src/autoloads/InputManager.gd"
 SharedData="*res://src/autoloads/SharedData.gd"
+InputManager="*res://src/autoloads/InputManager.gd"
 
 [display]
 

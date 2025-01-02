@@ -94,7 +94,7 @@ theme_override_constants/margin_right = 256
 layout_mode = 2
 alignment = 1
 
-[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer2"]
+[node name="StartBtn" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("4_3kf4d")
@@ -108,5 +108,5 @@ theme_override_fonts/font = ExtResource("4_3kf4d")
 theme_override_font_sizes/font_size = 24
 text = "Back to Title"
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer2/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer2/StartBtn" to="." method="_on_start_btn_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer2/BackBtn" to="." method="_on_back_btn_pressed"]

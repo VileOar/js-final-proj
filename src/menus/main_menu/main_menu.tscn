@@ -232,6 +232,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Label4" type="Label" parent="Credits/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(1024, 0)
 layout_mode = 2
 theme_type_variation = &"HeaderSmall"
 text = "Copyright (c) 2020, Roberto Mocci (<patreon.com/rmocci | da.iosonor@gmail.com>),
@@ -248,6 +249,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Label6" type="Label" parent="Credits/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(1024, 0)
 layout_mode = 2
 theme_type_variation = &"HeaderSmall"
 text = "\"Melancholia\"

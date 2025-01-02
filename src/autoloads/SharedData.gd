@@ -4,44 +4,69 @@
 ## autoload), the payoff matrix and total statistics for each player
 extends Node
 
+const _PLAYERS_PER_DYAD = 2 # obviously...
 
-## the total scores and statistics of each individual player
-var _player_data : Array
+# the total scores and statistics of each individual player
+var _player_data: Array
 
-## the payoff matrix values
+# the payoff matrix values
 var _payoff_matrix
 
-## 2 or 4 player mode (true for 4, false for 2)
-var _4player = true
+# TODO: remove
+# 2 or 4 player mode (true for 4, false for 2)
+#var _4player = true
+
+# defines the number of dyads in the game (should only be changed in the player select screen
+var _dyad_count = 0 # defaults to 0, so that if, for some reason, the game is started and the dyads
+					# have not been set, they will not even be created
 
 
 func _ready():
 	_payoff_matrix = PayoffMatrix.new()
-	_player_data = [
-		PlayerStats.new(),
-		PlayerStats.new(),
-		PlayerStats.new(),
-		PlayerStats.new(),
-	]
-	reset_player_data()
+	#_player_data = [
+		#PlayerStats.new(),
+		#PlayerStats.new(),
+		#PlayerStats.new(),
+		#PlayerStats.new(),
+	#]
+	#reset_player_data()
 	
 	Signals.new_player_answer.connect(_on_new_player_answer)
 
 
+# TODO: remove
 ## set the player mode
-func set_player_mode(four_or_two_player : bool) -> void:
-	_4player = four_or_two_player
+#func set_player_mode(four_or_two_player : bool) -> void:
+	#_4player = four_or_two_player
 
 
+# TODO: remove
 ## get the player mode
-func is_4player_mode() -> bool:
-	return _4player
+#func is_4player_mode() -> bool:
+	#return _4player
 
 
-## reset the player data to its initial values
-func reset_player_data() -> void:
-	for i in 4: # for each of the four players
-		_player_data[i].reset()
+## setup dyads and player data
+func setup_dyads_playerdata(dyad_count) -> void:
+	_set_dyad_count(dyad_count)
+	_player_data = []
+	while _player_data.size() < get_player_count():
+		_player_data.append(PlayerStats.new())
+
+
+## setter for dyad amount
+func _set_dyad_count(count: int) -> void:
+	_dyad_count = count
+
+
+## getter for dyad amount
+func get_dyad_count() -> int:
+	return _dyad_count
+
+
+## shorthand to get player count
+func get_player_count() -> int:
+	return get_dyad_count() * _PLAYERS_PER_DYAD
 
 
 ## get the matrix
@@ -50,40 +75,74 @@ func get_payoff_matrix() -> PayoffMatrix:
 
 
 ## manually set player total score
-func set_player_score(player_id : int, score : int) -> void:
-	if player_id >= 0 and player_id < _player_data.size():
-		_player_data[player_id].set_score(score)
+func set_player_score(player_id: int, score: int) -> void:
+	#if player_id >= 0 and player_id < _player_data.size():
+		#_player_data[player_id].set_score(score)
+	#else:
+		#assert(false, "Fatal: invalid player_id given")
+	var stats = get_player_stats(player_id)
+	if stats != null:
+		return stats.set_score(score)
 	else:
-		assert(false, "Fatal: invalid player_id given")
+		push_error("Unable to read player stats. Aborting.")
 
 
 ## add to a player's score
-func add_player_score(player_id : int, score : int) -> void:
-	if player_id >= 0 and player_id < _player_data.size():
-		_player_data[player_id].add_score(score)
+func add_player_score(player_id: int, delta: int) -> void:
+	#if player_id >= 0 and player_id < _player_data.size():
+		#_player_data[player_id].add_score(delta)
+	#else:
+		#assert(false, "Fatal: invalid player_id given")
+	var stats = get_player_stats(player_id)
+	if stats != null:
+		return stats.add_score(delta)
 	else:
-		assert(false, "Fatal: invalid player_id given")
+		push_error("Unable to read player stats. Aborting.")
 
 
 ## get a player's score
-func get_player_score(player_id : int) -> int:
-	if player_id >= 0 and player_id < _player_data.size():
-		return _player_data[player_id].get_score()
+func get_player_score(player_id: int) -> int:
+	#if player_id >= 0 and player_id < _player_data.size():
+		#return _player_data[player_id].get_score()
+	#else:
+		#assert(false, "Fatal: invalid player_id given")
+		#return -1
+	var stats = get_player_stats(player_id)
+	if stats != null:
+		return stats.get_score()
 	else:
-		assert(false, "Fatal: invalid player_id given")
+		push_error("Unable to read player stats. Returning -1.")
 		return -1
 
 
 ## get the PlayerStats of a player
 func get_player_stats(player_id: int) -> PlayerStats:
-	if player_id >= 0 and player_id < _player_data.size():
+	#if player_id >= 0 and player_id < _player_data.size():
+		#return _player_data[player_id]
+	if player_id >= 0 and player_id < get_player_count(): # if player id is within current bounds
+		# the next two checks must be here, because they are about the internal workings of the
+		# player data array, whose functionality should be hidden from outside scripts
+		
+		# check if necessary to fix array to right size
+		var missing_entries = 0 # just to throw the warning
+		while player_id >= _player_data.size(): # if player id is valid but is not in array
+			missing_entries += 1
+			_player_data.append(PlayerStats.new())
+		if missing_entries > 0: # throw a warning if the array was not the right size, it should ideally not happen
+			push_warning("%s entries were missing in player stats. Added empty stats." % missing_entries)
+		
+		# check if desired entry is valid
+		if _player_data[player_id] == null:
+			_player_data[player_id] = PlayerStats.new()
+			push_warning("Player stats of player %s was null. Initialised as empty." % player_id)
+		
 		return _player_data[player_id]
 	else:
-		assert(false, "Fatal: invalid player_id given")
+		push_error("Invalid player_id given. Returning null.")
 		return null
 
 
-## callback to when an answer is created, for statistics
+# callback to when an answer is created, for statistics
 func _on_new_player_answer(answer: PlayerAnswer) -> void:
 	var stats = _player_data[answer.player_id()] as PlayerStats
 	stats.parse_answer(answer)

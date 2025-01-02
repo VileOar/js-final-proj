@@ -28,41 +28,34 @@ signal toggled_listen(onoff)
 @onready var _player_sprite: Sprite2D = %PlayerSprite
 
 ## the player id this widget is mapped to
-var _player_id = -2
+var _player_id = -1
 
 
-## set this widgets player
-func set_player_id(player : int):
-	if InputManager.validate_player(player):
-		_player_id = player
-		_player_label.text = "Player %s" % [player + 1]
-		_player_sprite.texture = Global.get_player_texture(player)
-	else:
-		push_error("Tried setting an invalid player")
+## set this widget's player
+func set_player_id(player: int):
+	_player_id = player
+	_player_label.text = "Player %s" % [player + 1]
+	_player_sprite.texture = Global.get_player_texture(player)
 
 
 ## set the device for this player
-func set_device(device : int):
+func set_device(device: int) -> void:
 	InputManager.add_player_device(_player_id, device)
-	if InputManager.is_human_device(device):
-		_device_ui.show()
-		_device_icon.show()
-		match device:
-			-1:
-				_device_sprite.frame = 1
-				_device_ui.hide()
-			0, 1, 2, 3, 4, 5, 6, 7:
-				_device_sprite.frame = 0
-				_device_ui.text = "%s" % [device]
-			_:
-				_device_icon.hide()
-				_device_ui.text = "Wait, what?"
-				push_warning("added valid device, but not recognised by the UI script???")
-	else:
-		_device_icon.hide()
-		_device_ui.show()
-		_device_ui.text = "CPU"
 	
+	_device_ui.show()
+	_device_icon.show()
+	
+	var device_type = InputManager.get_device_type(device)
+	match device_type:
+		InputManager.DeviceType.KBM:
+			_device_sprite.frame = 1
+			_device_ui.hide()
+		InputManager.DeviceType.JOYPAD:
+			_device_sprite.frame = 0
+			_device_ui.text = "%s" % [device]
+		InputManager.DeviceType.AI:
+			_device_icon.hide()
+			_device_ui.text = "CPU"
 
 
 ## cleanup function for when another selector requests listening for a device
@@ -78,7 +71,7 @@ func release_listen():
 ## this is not necessarily connected to a signal (hence the name)
 ## it is instead managed by its controller[br]
 ## in this function, the device that originated this is implicitly free
-func forward_input_event(event : InputEvent):
+func forward_input_event(event: InputEvent):
 	set_device(event.device)
 	
 	# at the end, stop listening
