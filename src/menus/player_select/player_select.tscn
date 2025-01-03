@@ -1,10 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://co2xh2lmxvpq4"]
+[gd_scene load_steps=4 format=3 uid="uid://co2xh2lmxvpq4"]
 
 [ext_resource type="Script" path="res://src/menus/player_select/player_select_menu.gd" id="1_bjdma"]
 [ext_resource type="PackedScene" uid="uid://be1joxrc38num" path="res://src/menus/instructions_scene/instructions_scene.tscn" id="2_bw8hu"]
 [ext_resource type="PackedScene" uid="uid://d1kkkom2ktphs" path="res://src/menus/player_select/ui/device_selector.tscn" id="2_q5eyk"]
-[ext_resource type="PackedScene" uid="uid://cr1i4ulnsdsu2" path="res://src/menus/main_menu/main_menu.tscn" id="3_8s8c0"]
-[ext_resource type="FontFile" uid="uid://dcb5yob1d6vl4" path="res://assets/fonts/Super_Mario_Bros_2.ttf" id="4_3kf4d"]
 
 [node name="PlayerSelectMenu" type="Control"]
 layout_mode = 3
@@ -14,10 +12,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_bjdma")
-_round_scene = ExtResource("2_bw8hu")
-_title_scene = ExtResource("3_8s8c0")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="PlayerSelect" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -27,86 +23,126 @@ grow_vertical = 2
 theme_override_constants/margin_top = 32
 theme_override_constants/margin_bottom = 32
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PlayerSelect"]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="PlayerSelect/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer"]
+[node name="Label" type="Label" parent="PlayerSelect/VBoxContainer/PanelContainer"]
 layout_mode = 2
 text = "Choose players"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PlayerSelect/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="PlayerSelect/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="TwoPlayerBtn" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/CenterContainer"]
+[node name="TwoPlayerBtn" type="Button" parent="PlayerSelect/VBoxContainer/HBoxContainer/CenterContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 toggle_mode = true
 text = "2 Player Mode"
 
-[node name="CenterContainer2" type="CenterContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="CenterContainer2" type="CenterContainer" parent="PlayerSelect/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="FourPlayerBtn" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/CenterContainer2"]
+[node name="FourPlayerBtn" type="Button" parent="PlayerSelect/VBoxContainer/HBoxContainer/CenterContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 toggle_mode = true
 text = "4 Player Mode"
 
-[node name="PlayerSelectors" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="PlayerSelectors" type="HBoxContainer" parent="PlayerSelect/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="Selector0" parent="MarginContainer/VBoxContainer/PlayerSelectors" instance=ExtResource("2_q5eyk")]
+[node name="Selector0" parent="PlayerSelect/VBoxContainer/PlayerSelectors" instance=ExtResource("2_q5eyk")]
 layout_mode = 2
 
-[node name="Selector1" parent="MarginContainer/VBoxContainer/PlayerSelectors" instance=ExtResource("2_q5eyk")]
+[node name="Selector1" parent="PlayerSelect/VBoxContainer/PlayerSelectors" instance=ExtResource("2_q5eyk")]
 layout_mode = 2
 
-[node name="Selector2" parent="MarginContainer/VBoxContainer/PlayerSelectors" instance=ExtResource("2_q5eyk")]
+[node name="Selector2" parent="PlayerSelect/VBoxContainer/PlayerSelectors" instance=ExtResource("2_q5eyk")]
 layout_mode = 2
 
-[node name="Selector3" parent="MarginContainer/VBoxContainer/PlayerSelectors" instance=ExtResource("2_q5eyk")]
+[node name="Selector3" parent="PlayerSelect/VBoxContainer/PlayerSelectors" instance=ExtResource("2_q5eyk")]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="PlayerSelect/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 256
 theme_override_constants/margin_right = 256
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="PlayerSelect/VBoxContainer/MarginContainer"]
 layout_mode = 2
+theme_override_constants/separation = 64
 alignment = 1
 
-[node name="StartBtn" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer2"]
+[node name="BackBtn" type="Button" parent="PlayerSelect/VBoxContainer/MarginContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("4_3kf4d")
-theme_override_font_sizes/font_size = 24
-text = "Start Game"
-
-[node name="BackBtn" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("4_3kf4d")
-theme_override_font_sizes/font_size = 24
+theme_type_variation = &"HeaderButton"
 text = "Back to Title"
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer2/StartBtn" to="." method="_on_start_btn_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer2/BackBtn" to="." method="_on_back_btn_pressed"]
+[node name="StartBtn" type="Button" parent="PlayerSelect/VBoxContainer/MarginContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"HeaderButton"
+text = "Start Game"
+
+[node name="InstructionsScene" parent="." instance=ExtResource("2_bw8hu")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="InstructionsScene"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 128
+theme_override_constants/margin_right = 128
+theme_override_constants/margin_bottom = 64
+
+[node name="HBoxContainer" type="HBoxContainer" parent="InstructionsScene/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+mouse_filter = 2
+
+[node name="BackBtn" type="Button" parent="InstructionsScene/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+theme_type_variation = &"HeaderButton"
+text = "Back"
+
+[node name="MarginContainer" type="MarginContainer" parent="InstructionsScene/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="StartBtn" type="Button" parent="InstructionsScene/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+theme_type_variation = &"HeaderButton"
+text = "Start"
+
+[connection signal="pressed" from="PlayerSelect/VBoxContainer/MarginContainer/HBoxContainer2/BackBtn" to="." method="_on_back_btn_pressed"]
+[connection signal="pressed" from="PlayerSelect/VBoxContainer/MarginContainer/HBoxContainer2/StartBtn" to="." method="_on_start_btn_pressed"]
+[connection signal="pressed" from="InstructionsScene/MarginContainer/HBoxContainer/BackBtn" to="." method="_on_instructions_back_pressed"]
+[connection signal="pressed" from="InstructionsScene/MarginContainer/HBoxContainer/StartBtn" to="." method="_on_instructions_start_pressed"]

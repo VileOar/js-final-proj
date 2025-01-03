@@ -1,11 +1,9 @@
 ## scene for the instructions screen presented before the game
 extends Control
 
+@onready var _pages: MarginContainer = %Pages
+@onready var _page_counter: Label = %PageCounter
 
-@export var _game_scene : PackedScene
-
-@onready var _pages: Array = %Pages.get_children()
-@onready var _page_btn: Button = %PageBtn
 
 var _current_page = 0
 
@@ -13,17 +11,23 @@ var _current_page = 0
 func _ready() -> void:
 	%Answer1.force_animation(Global.Directions.RIGHT, false, true)
 	%Answer2.force_animation(Global.Directions.RIGHT, false, false)
+	
+	_set_page(0)
 
 
-func _on_page_btn_pressed() -> void:
-	_current_page = (_current_page + 1) % _pages.size()
-	for page in _pages.size():
-		if page == _current_page:
-			_pages[page].show()
-		else:
-			_pages[page].hide()
-	_page_btn.text = "Next Page" if _current_page == 0 else "Previous Page"
+func _set_page(pagenum: int) -> void:
+	var pagesize = _pages.get_child_count()
+	if pagenum >= 0 && pagenum < pagesize:
+		for ix in pagesize:
+			var page = _pages.get_child(ix)
+			if ix == pagenum:
+				page.show()
+			else:
+				page.hide()
+		
+		_page_counter.text = "%d / %d" % [pagenum + 1, pagesize]
+		_current_page = pagenum
 
 
-func _on_start_btn_pressed() -> void:
-	get_tree().change_scene_to_packed(_game_scene)
+func _on_page_turner_pressed(rightleft: bool) -> void:
+	_set_page(_current_page + (1 if rightleft else -1))

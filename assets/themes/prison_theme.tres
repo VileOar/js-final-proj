@@ -1,8 +1,9 @@
-[gd_resource type="Theme" load_steps=16 format=3 uid="uid://b40mnags6aw0n"]
+[gd_resource type="Theme" load_steps=23 format=3 uid="uid://b40mnags6aw0n"]
 
 [ext_resource type="Texture2D" uid="uid://db3a6ybxv5cw6" path="res://assets/gfx/ui/panels.png" id="1_4wc6t"]
 [ext_resource type="FontFile" uid="uid://dcb5yob1d6vl4" path="res://assets/fonts/Super_Mario_Bros_2.ttf" id="2_l4dmt"]
 [ext_resource type="Texture2D" uid="uid://670ks7dxtt38" path="res://assets/gfx/ui/matrix_panel.png" id="3_tvn3c"]
+[ext_resource type="Texture2D" uid="uid://ot78sitb4yxw" path="res://assets/gfx/ui/spinbox.png" id="4_wjn4m"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2rfd1"]
 texture = ExtResource("1_4wc6t")
@@ -62,6 +63,39 @@ texture_margin_right = 8.0
 texture_margin_bottom = 8.0
 region_rect = Rect2(0, 64, 64, 64)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_r86gp"]
+atlas = ExtResource("4_wjn4m")
+region = Rect2(96, 24, 24, 24)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_18thf"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+texture = SubResource("AtlasTexture_r86gp")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v0ui4"]
+atlas = ExtResource("4_wjn4m")
+region = Rect2(48, 24, 24, 24)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_23b1d"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+texture = SubResource("AtlasTexture_v0ui4")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jeuxy"]
+atlas = ExtResource("4_wjn4m")
+region = Rect2(72, 24, 24, 24)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_g2sw7"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+texture = SubResource("AtlasTexture_jeuxy")
+
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ttlb4"]
 texture = ExtResource("1_4wc6t")
 texture_margin_left = 32.0
@@ -116,6 +150,9 @@ EndLabelAnimate/colors/font_outline_color = Color(1, 0.894118, 0.470588, 1)
 EndLabelAnimate/constants/outline_size = 16
 EndLabelAnimate/font_sizes/font_size = 48
 EndLabelAnimate/fonts/font = ExtResource("2_l4dmt")
+HeaderButton/base_type = &"Button"
+HeaderButton/font_sizes/font_size = 24
+HeaderButton/fonts/font = ExtResource("2_l4dmt")
 MainPanel/base_type = &"PanelContainer"
 MainPanel/styles/panel = SubResource("StyleBoxTexture_aj4si")
 MatrixPanelColor/base_type = &"PanelContainer"
@@ -126,6 +163,9 @@ MenuTitle/base_type = &"Label"
 MenuTitle/font_sizes/font_size = 32
 MenuTitle/fonts/font = ExtResource("2_l4dmt")
 PageButtonLeft/base_type = &"Button"
+PageButtonLeft/styles/hover = SubResource("StyleBoxTexture_18thf")
+PageButtonLeft/styles/normal = SubResource("StyleBoxTexture_23b1d")
+PageButtonLeft/styles/pressed = SubResource("StyleBoxTexture_g2sw7")
 PanelContainer/styles/panel = SubResource("StyleBoxTexture_ttlb4")
 PenaltyLabel/base_type = &"Label"
 PenaltyLabel/colors/font_color = Color(1, 0.419608, 0.592157, 1)

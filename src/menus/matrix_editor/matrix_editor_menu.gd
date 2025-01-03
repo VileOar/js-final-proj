@@ -4,8 +4,6 @@
 extends Control
 class_name MatrixEditorMenu
 
-@export var _main_menu_scene: PackedScene
-
 ## array of the outcome uis
 @onready var _outcome_widgets = [ # must do this manually because of the order details
 	%CC,
@@ -35,5 +33,4 @@ func _on_button_pressed():
 
 
 func _on_back_button_pressed() -> void:
-	#get_tree().change_scene_to_packed(_main_menu_scene)
 	SceneSwitcher.switch_topscene_id("title_screen")

@@ -5,11 +5,6 @@
 extends Control
 class_name PlayerSelectMenu
 
-# ref to the packed scene of the round game
-@export var _round_scene: PackedScene
-# ref to the packed scene of title screen
-@export var _title_scene: PackedScene
-
 # ref to 2 player btn
 @onready var _2player_btn = %TwoPlayerBtn
 # ref to 4 player btn
@@ -19,6 +14,9 @@ var _player_mode_btn_group: ButtonGroup
 
 # ref to the list of device selectors
 @onready var _player_selectors = %PlayerSelectors
+
+@onready var _instructions_scene: Control = %InstructionsScene
+
 
 # which player is listening for a device
 var _listening_player: DeviceSelector = null
@@ -96,11 +94,17 @@ func _on_signals_input_player_action(_player: int, event: InputEvent) -> void:
 
 func _on_start_btn_pressed() -> void:
 	SharedData.setup_dyads_playerdata(2 if _mode_4p else 1)
-	#get_tree().change_scene_to_packed(_round_scene)
-	# TODO: add the instructions scene as a separate hidden screen over this scene
-	# also add to it the back and start buttons over the Instructions scene control node
+	_instructions_scene.show()
 
 
 func _on_back_btn_pressed() -> void:
-	#get_tree().change_scene_to_packed(_title_scene)
 	SceneSwitcher.switch_topscene_id("title_screen")
+
+
+func _on_instructions_back_pressed() -> void:
+	_instructions_scene.hide()
+
+
+func _on_instructions_start_pressed() -> void:
+	#SceneSwitcher.switch_topscene_id("game_scene")
+	print_debug("Unimplemented")
