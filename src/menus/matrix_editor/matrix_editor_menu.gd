@@ -35,4 +35,5 @@ func _on_button_pressed():
 
 
 func _on_back_button_pressed() -> void:
-	get_tree().change_scene_to_packed(_main_menu_scene)
+	#get_tree().change_scene_to_packed(_main_menu_scene)
+	SceneSwitcher.switch_topscene_id("title_screen")

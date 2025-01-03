@@ -96,8 +96,11 @@ func _on_signals_input_player_action(_player: int, event: InputEvent) -> void:
 
 func _on_start_btn_pressed() -> void:
 	SharedData.setup_dyads_playerdata(2 if _mode_4p else 1)
-	get_tree().change_scene_to_packed(_round_scene)
+	#get_tree().change_scene_to_packed(_round_scene)
+	# TODO: add the instructions scene as a separate hidden screen over this scene
+	# also add to it the back and start buttons over the Instructions scene control node
 
 
 func _on_back_btn_pressed() -> void:
-	get_tree().change_scene_to_packed(_title_scene)
+	#get_tree().change_scene_to_packed(_title_scene)
+	SceneSwitcher.switch_topscene_id("title_screen")

@@ -115,7 +115,7 @@ script = ExtResource("1_ukv5m")
 _matrix_scene_path = "res://src/menus/matrix_editor/matrix_editor_menu.tscn"
 _game_scene_path = "res://src/menus/player_select/player_select.tscn"
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="Title" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -127,10 +127,10 @@ theme_override_constants/margin_top = 64
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Title"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="Title/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_lrugt")
 theme_override_font_sizes/font_size = 96
@@ -138,55 +138,55 @@ text = "Double
 Dilemma"
 horizontal_alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Title/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/MarginContainer"]
+[node name="Control" type="Control" parent="Title/VBoxContainer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Node2D" type="Node2D" parent="MarginContainer/VBoxContainer/MarginContainer/Control"]
+[node name="Node2D" type="Node2D" parent="Title/VBoxContainer/MarginContainer/Control"]
 scale = Vector2(2, 2)
 
-[node name="Lamp" type="Sprite2D" parent="MarginContainer/VBoxContainer/MarginContainer/Control/Node2D"]
+[node name="Lamp" type="Sprite2D" parent="Title/VBoxContainer/MarginContainer/Control/Node2D"]
 texture = ExtResource("2_symma")
 region_enabled = true
 region_rect = Rect2(0, 0, 128, 128)
 
-[node name="Cop" type="AnimatedSprite2D" parent="MarginContainer/VBoxContainer/MarginContainer/Control/Node2D"]
+[node name="Cop" type="AnimatedSprite2D" parent="Title/VBoxContainer/MarginContainer/Control/Node2D"]
 position = Vector2(24, 32)
 sprite_frames = SubResource("SpriteFrames_q8ony")
 autoplay = "default"
 frame_progress = 0.204289
 
-[node name="Table" type="Sprite2D" parent="MarginContainer/VBoxContainer/MarginContainer/Control/Node2D"]
+[node name="Table" type="Sprite2D" parent="Title/VBoxContainer/MarginContainer/Control/Node2D"]
 texture = ExtResource("2_symma")
 region_enabled = true
 region_rect = Rect2(0, 128, 128, 128)
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Title/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 64
 alignment = 1
 
-[node name="CreditsBtn" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="CreditsBtn" type="Button" parent="Title/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Credits"
 
-[node name="StartBtn" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="StartBtn" type="Button" parent="Title/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Start Game"
 
-[node name="MatrixBtn" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="MatrixBtn" type="Button" parent="Title/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Edit Payoff Matrix"
 
-[node name="QuitBtn" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="QuitBtn" type="Button" parent="Title/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Quit"
@@ -265,8 +265,8 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "Back"
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/CreditsBtn" to="." method="_on_credits_btn_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/StartBtn" to="." method="_on_start_btn_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/MatrixBtn" to="." method="_on_matrix_btn_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/QuitBtn" to="." method="_on_quit_btn_pressed"]
+[connection signal="pressed" from="Title/VBoxContainer/HBoxContainer/CreditsBtn" to="." method="_on_credits_btn_pressed"]
+[connection signal="pressed" from="Title/VBoxContainer/HBoxContainer/StartBtn" to="." method="_on_start_btn_pressed"]
+[connection signal="pressed" from="Title/VBoxContainer/HBoxContainer/MatrixBtn" to="." method="_on_matrix_btn_pressed"]
+[connection signal="pressed" from="Title/VBoxContainer/HBoxContainer/QuitBtn" to="." method="_on_quit_btn_pressed"]
 [connection signal="pressed" from="Credits/PanelContainer/VBoxContainer/BackBtn" to="." method="_on_back_btn_pressed"]

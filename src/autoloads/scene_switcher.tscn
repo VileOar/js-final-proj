@@ -1,0 +1,18 @@
+[gd_scene load_steps=7 format=3 uid="uid://dk0nv1cwwlej1"]
+
+[ext_resource type="Script" path="res://src/autoloads/scene_switcher.gd" id="1_kup6n"]
+[ext_resource type="PackedScene" uid="uid://cr1i4ulnsdsu2" path="res://src/menus/main_menu/main_menu.tscn" id="2_r2jcq"]
+[ext_resource type="PackedScene" uid="uid://b2bsmha0cajgq" path="res://src/menus/matrix_editor/matrix_editor_menu.tscn" id="3_anxao"]
+[ext_resource type="PackedScene" uid="uid://db78w4tl40jdb" path="res://src/stages/game/round_game/round_game.tscn" id="4_xqau0"]
+[ext_resource type="PackedScene" uid="uid://co2xh2lmxvpq4" path="res://src/menus/player_select/player_select.tscn" id="5_s0fd1"]
+[ext_resource type="PackedScene" uid="uid://dmfruovnif6mi" path="res://src/stages/end_scene/end_scene.tscn" id="6_43mfb"]
+
+[node name="SceneSwitcher" type="Node"]
+script = ExtResource("1_kup6n")
+scene_dictionary = {
+"end_scene": ExtResource("6_43mfb"),
+"game_scene": ExtResource("4_xqau0"),
+"matrix_editor": ExtResource("3_anxao"),
+"player_select": ExtResource("5_s0fd1"),
+"title_screen": ExtResource("2_r2jcq")
+}

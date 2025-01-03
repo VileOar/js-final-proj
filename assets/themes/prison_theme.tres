@@ -125,6 +125,7 @@ MatrixPanelSimple/styles/panel = SubResource("StyleBoxTexture_enopd")
 MenuTitle/base_type = &"Label"
 MenuTitle/font_sizes/font_size = 32
 MenuTitle/fonts/font = ExtResource("2_l4dmt")
+PageButtonLeft/base_type = &"Button"
 PanelContainer/styles/panel = SubResource("StyleBoxTexture_ttlb4")
 PenaltyLabel/base_type = &"Label"
 PenaltyLabel/colors/font_color = Color(1, 0.419608, 0.592157, 1)

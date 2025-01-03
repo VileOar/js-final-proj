@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 Signals="*res://src/autoloads/Signals.gd"
 Utils="*res://src/autoloads/Utils.gd"
+SceneSwitcher="*res://src/autoloads/scene_switcher.tscn"
 Global="*res://src/autoloads/Global.gd"
 Locator="*res://src/autoloads/Locator.gd"
 SharedData="*res://src/autoloads/SharedData.gd"
