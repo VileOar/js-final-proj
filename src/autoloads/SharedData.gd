@@ -10,7 +10,10 @@ const _PLAYERS_PER_DYAD = 2 # obviously...
 var _player_data: Array
 
 # the payoff matrix values
-var _payoff_matrix
+var _payoff_matrix: PayoffMatrix
+
+# whether to show instructions screen on start
+var _show_instructions:= true
 
 # TODO: remove
 # 2 or 4 player mode (true for 4, false for 2)
@@ -140,6 +143,16 @@ func get_player_stats(player_id: int) -> PlayerStats:
 	else:
 		push_error("Invalid player_id given. Returning null.")
 		return null
+
+
+## set the instructions settings
+func set_instructions_settings(en: bool) -> void:
+	_show_instructions = en
+
+
+## get the instructions settings
+func get_instructions_settings() -> bool:
+	return _show_instructions
 
 
 # callback to when an answer is created, for statistics

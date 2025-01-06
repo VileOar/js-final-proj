@@ -15,7 +15,7 @@ var _player_mode_btn_group: ButtonGroup
 # ref to the list of device selectors
 @onready var _player_selectors = %PlayerSelectors
 
-@onready var _instructions_scene: Control = %InstructionsScene
+@onready var _instructions_holder: Control = %InstructionsHolder
 
 
 # which player is listening for a device
@@ -55,12 +55,17 @@ func _notification(what):
 		Signals.input_player_action.disconnect(_on_signals_input_player_action)
 
 
+# method to actually go to game scene
+func _go_to_game() -> void:
+	print_debug("Unimplemented")
+
+
 # ------------------------------
 # || --- SIGNAL CALLBACKS --- ||
 # ------------------------------
 
 # callback for when one of the player mode buttons is pressed
-func _on_player_mode_changed(btn : BaseButton):
+func _on_player_mode_changed(btn: BaseButton):
 	_mode_4p = btn == _4player_btn # check which button was pressed
 	
 	var players = 4 if _mode_4p else 2 # aux to following loop
@@ -94,7 +99,10 @@ func _on_signals_input_player_action(_player: int, event: InputEvent) -> void:
 
 func _on_start_btn_pressed() -> void:
 	SharedData.setup_dyads_playerdata(2 if _mode_4p else 1)
-	_instructions_scene.show()
+	if SharedData.get_instructions_settings():
+		_instructions_holder.show()
+	else:
+		_go_to_game()
 
 
 func _on_back_btn_pressed() -> void:
@@ -102,9 +110,8 @@ func _on_back_btn_pressed() -> void:
 
 
 func _on_instructions_back_pressed() -> void:
-	_instructions_scene.hide()
+	_instructions_holder.hide()
 
 
 func _on_instructions_start_pressed() -> void:
-	#SceneSwitcher.switch_topscene_id("game_scene")
-	print_debug("Unimplemented")
+	_go_to_game()

@@ -11,47 +11,38 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_jeur5")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 32
 
-[node name="PanelContainer" type="PanelContainer" parent="PanelContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
-theme_type_variation = &"SimplePanel"
-
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/PanelContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 64
-theme_override_constants/margin_top = 64
-theme_override_constants/margin_right = 64
-theme_override_constants/margin_bottom = 64
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/PanelContainer/MarginContainer"]
-layout_mode = 2
+size_flags_vertical = 3
 theme_override_constants/separation = 64
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/PanelContainer/MarginContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="GridContainer" type="GridContainer" parent="PanelContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/h_separation = 64
-theme_override_constants/v_separation = 64
+theme_override_constants/v_separation = 16
 columns = 2
 
-[node name="DurationLabel" type="Label" parent="PanelContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/GridContainer"]
+[node name="DurationLabel" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 6
 text = "Round Duration"
 
-[node name="DurationInput" type="SpinBox" parent="PanelContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/GridContainer"]
+[node name="DurationInput" type="SpinBox" parent="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
@@ -63,13 +54,13 @@ value = 1.0
 alignment = 1
 suffix = "sec"
 
-[node name="RoundsLabel" type="Label" parent="PanelContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/GridContainer"]
+[node name="RoundsLabel" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 6
 text = "Number of Rounds"
 
-[node name="RoundsInput" type="SpinBox" parent="PanelContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/GridContainer"]
+[node name="RoundsInput" type="SpinBox" parent="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
@@ -79,13 +70,13 @@ min_value = 1.0
 value = 1.0
 alignment = 1
 
-[node name="PenaltyLabel" type="Label" parent="PanelContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/GridContainer"]
+[node name="PenaltyLabel" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 6
 text = "Lose penalty"
 
-[node name="PenaltyInput" type="SpinBox" parent="PanelContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/GridContainer"]
+[node name="PenaltyInput" type="SpinBox" parent="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
@@ -94,17 +85,28 @@ size_flags_vertical = 6
 alignment = 1
 suffix = "%"
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/PanelContainer/MarginContainer/HBoxContainer"]
+[node name="InstructionsLabel" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+text = "Show Instructions Screen"
+
+[node name="InstructionsInput" type="CheckBox" parent="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+button_pressed = true
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="AllDescriptions" type="MarginContainer" parent="PanelContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2"]
+[node name="AllDescriptions" type="MarginContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_vertical = 6
 
-[node name="DurationInputDesc" type="Label" parent="PanelContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2/AllDescriptions"]
+[node name="DurationInputDesc" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer2/AllDescriptions"]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(64, 0)
@@ -113,7 +115,7 @@ size_flags_vertical = 1
 text = "The duration of reach round in seconds."
 autowrap_mode = 2
 
-[node name="RoundsInputDesc" type="Label" parent="PanelContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2/AllDescriptions"]
+[node name="RoundsInputDesc" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer2/AllDescriptions"]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(64, 0)
@@ -122,7 +124,7 @@ size_flags_vertical = 1
 text = "How many rounds in a game."
 autowrap_mode = 2
 
-[node name="PenaltyInputDesc" type="Label" parent="PanelContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2/AllDescriptions"]
+[node name="PenaltyInputDesc" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer2/AllDescriptions"]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(64, 0)
@@ -131,26 +133,44 @@ size_flags_vertical = 1
 text = "What the point penalty will be for the losing team, each round. Every round, the losing team will only receive the set percentage of their score."
 autowrap_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2"]
+[node name="InstructionsInputDesc" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer2/AllDescriptions"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(64, 0)
 layout_mode = 2
+size_flags_vertical = 1
+text = "Whether to show the instructions screen before starting the game."
+autowrap_mode = 2
 
-[node name="DefaultBtn" type="Button" parent="PanelContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_right = 64
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 64
+alignment = 1
+
+[node name="DefaultBtn" type="Button" parent="VBoxContainer/MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Default"
 
-[node name="ApplyBtn" type="Button" parent="PanelContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+[node name="ApplyBtn" type="Button" parent="VBoxContainer/MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Apply"
 
-[connection signal="mouse_entered" from="PanelContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/GridContainer/DurationInput" to="." method="_on_duration_input_mouse_entered"]
-[connection signal="value_changed" from="PanelContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/GridContainer/DurationInput" to="." method="_on_setting_changed"]
-[connection signal="mouse_entered" from="PanelContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/GridContainer/RoundsInput" to="." method="_on_rounds_input_mouse_entered"]
-[connection signal="value_changed" from="PanelContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/GridContainer/RoundsInput" to="." method="_on_setting_changed"]
-[connection signal="mouse_entered" from="PanelContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/GridContainer/PenaltyInput" to="." method="_on_penalty_input_mouse_entered"]
-[connection signal="value_changed" from="PanelContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/GridContainer/PenaltyInput" to="." method="_on_setting_changed"]
-[connection signal="pressed" from="PanelContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/DefaultBtn" to="." method="_on_default_btn_pressed"]
-[connection signal="pressed" from="PanelContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/ApplyBtn" to="." method="_on_apply_btn_pressed"]
+[connection signal="mouse_entered" from="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer/DurationInput" to="." method="_on_duration_input_mouse_entered"]
+[connection signal="value_changed" from="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer/DurationInput" to="." method="_on_setting_changed"]
+[connection signal="mouse_entered" from="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer/RoundsInput" to="." method="_on_rounds_input_mouse_entered"]
+[connection signal="value_changed" from="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer/RoundsInput" to="." method="_on_setting_changed"]
+[connection signal="mouse_entered" from="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer/PenaltyInput" to="." method="_on_penalty_input_mouse_entered"]
+[connection signal="value_changed" from="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer/PenaltyInput" to="." method="_on_setting_changed"]
+[connection signal="mouse_entered" from="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer/InstructionsInput" to="." method="_on_instructions_input_mouse_entered"]
+[connection signal="toggled" from="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer/InstructionsInput" to="." method="_on_instructions_input_toggled"]
+[connection signal="pressed" from="VBoxContainer/MarginContainer/HBoxContainer/DefaultBtn" to="." method="_on_default_btn_pressed"]
+[connection signal="pressed" from="VBoxContainer/MarginContainer/HBoxContainer/ApplyBtn" to="." method="_on_apply_btn_pressed"]

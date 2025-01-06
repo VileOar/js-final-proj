@@ -30,7 +30,3 @@ func _reset_matrix() -> void:
 
 func _on_button_pressed():
 	_reset_matrix()
-
-
-func _on_back_button_pressed() -> void:
-	SceneSwitcher.switch_topscene_id("title_screen")

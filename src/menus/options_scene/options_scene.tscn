@@ -1,0 +1,104 @@
+[gd_scene load_steps=6 format=3 uid="uid://c5jad0dnm8jpt"]
+
+[ext_resource type="PackedScene" uid="uid://be1joxrc38num" path="res://src/menus/instructions_scene/instructions_scene.tscn" id="1_14j5a"]
+[ext_resource type="Script" path="res://src/menus/options_scene/options_scene.gd" id="1_m01ea"]
+[ext_resource type="PackedScene" uid="uid://ctiqjh7xp62sf" path="res://src/menus/settings_menu/settings_menu.tscn" id="2_8ihor"]
+[ext_resource type="PackedScene" uid="uid://f3rasilhlivq" path="res://src/menus/credits_menu/credits_menu.tscn" id="3_h08ha"]
+[ext_resource type="PackedScene" uid="uid://b2bsmha0cajgq" path="res://src/menus/matrix_editor/matrix_editor_menu.tscn" id="4_jqf0v"]
+
+[node name="OptionsScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_m01ea")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_type_variation = &"SimplePanel"
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="SettingsBtn" type="Button" parent="PanelContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"HeaderButton"
+toggle_mode = true
+text = "Settings"
+
+[node name="MatrixBtn" type="Button" parent="PanelContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"HeaderButton"
+toggle_mode = true
+text = "Matrix"
+
+[node name="InstructionsBtn" type="Button" parent="PanelContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"HeaderButton"
+toggle_mode = true
+text = "Instructions"
+
+[node name="CreditsBtn" type="Button" parent="PanelContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"HeaderButton"
+toggle_mode = true
+text = "Credits
+"
+
+[node name="TabDisplayContainer" type="MarginContainer" parent="PanelContainer/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="SettingsScene" parent="PanelContainer/PanelContainer/MarginContainer/VBoxContainer/TabDisplayContainer" instance=ExtResource("2_8ihor")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="MatrixScene" parent="PanelContainer/PanelContainer/MarginContainer/VBoxContainer/TabDisplayContainer" instance=ExtResource("4_jqf0v")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="InstructionsScene" parent="PanelContainer/PanelContainer/MarginContainer/VBoxContainer/TabDisplayContainer" instance=ExtResource("1_14j5a")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="CreditsScene" parent="PanelContainer/PanelContainer/MarginContainer/VBoxContainer/TabDisplayContainer" instance=ExtResource("3_h08ha")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
