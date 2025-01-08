@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://src/menus/matrix_editor/payoff_outcome_widget.gd" id="1_b3xvk"]
 
 [node name="PayoffOutcomeWidget" type="MarginContainer"]
+custom_minimum_size = Vector2(192, 192)
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_b3xvk")
@@ -10,15 +11,17 @@ script = ExtResource("1_b3xvk")
 [node name="PanelContainer" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
+mouse_filter = 1
 theme_type_variation = &"MatrixPanelSimple"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
 layout_mode = 2
-theme_override_constants/separation = 8
+theme_override_constants/separation = 16
 alignment = 1
 
 [node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
+theme_type_variation = &"HeaderMedium"
 text = "P1"
 horizontal_alignment = 1
 
@@ -33,6 +36,7 @@ custom_arrow_step = 1.0
 
 [node name="Label2" type="Label" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
+theme_type_variation = &"HeaderMedium"
 text = "P2"
 horizontal_alignment = 1
 
@@ -45,5 +49,6 @@ min_value = -100.0
 alignment = 1
 custom_arrow_step = 1.0
 
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="value_changed" from="PanelContainer/VBoxContainer/P1" to="." method="_on_value_changed"]
 [connection signal="value_changed" from="PanelContainer/VBoxContainer/P2" to="." method="_on_value_changed"]

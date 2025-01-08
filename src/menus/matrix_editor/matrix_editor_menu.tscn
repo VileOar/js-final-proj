@@ -13,7 +13,8 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_i60a6")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="EditorDisplay" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -22,132 +23,230 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 16
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="EditorDisplay"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/separation = 64
-
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
-layout_mode = 2
 theme_override_constants/separation = 32
-alignment = 1
 
-[node name="GridContainer2" type="GridContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="GridContainer" type="GridContainer" parent="EditorDisplay/HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
 size_flags_vertical = 4
-columns = 2
+columns = 3
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer2"]
+[node name="PlayerIdentifiers" type="PanelContainer" parent="EditorDisplay/HBoxContainer/GridContainer"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 theme_type_variation = &"MatrixPanelColor"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer2/PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="EditorDisplay/HBoxContainer/GridContainer/PlayerIdentifiers"]
 layout_mode = 2
 
-[node name="P1" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer2/PanelContainer/VBoxContainer"]
+[node name="P1" type="Label" parent="EditorDisplay/HBoxContainer/GridContainer/PlayerIdentifiers/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_type_variation = &"BigText"
 text = "P2"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="P2" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer2/PanelContainer/VBoxContainer"]
+[node name="P2" type="Label" parent="EditorDisplay/HBoxContainer/GridContainer/PlayerIdentifiers/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_type_variation = &"BigText"
 text = "P1"
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer2"]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="Coop" type="PanelContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer2/HBoxContainer"]
+[node name="CoopP2" type="PanelContainer" parent="EditorDisplay/HBoxContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"MatrixPanelColor"
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer2/HBoxContainer/Coop"]
+[node name="Label" type="Label" parent="EditorDisplay/HBoxContainer/GridContainer/CoopP2"]
 layout_mode = 2
+theme_type_variation = &"BigText"
 text = "Coop"
 horizontal_alignment = 1
 
-[node name="Defect" type="PanelContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer2/HBoxContainer"]
+[node name="DefectP2" type="PanelContainer" parent="EditorDisplay/HBoxContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"MatrixPanelColor"
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer2/HBoxContainer/Defect"]
+[node name="Label" type="Label" parent="EditorDisplay/HBoxContainer/GridContainer/DefectP2"]
 layout_mode = 2
+theme_type_variation = &"BigText"
 text = "Defect"
 horizontal_alignment = 1
 
-[node name="HBoxContainer2" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer2"]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_constants/separation = 0
-
-[node name="Coop" type="PanelContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer2/HBoxContainer2"]
+[node name="CoopP1" type="PanelContainer" parent="EditorDisplay/HBoxContainer/GridContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_type_variation = &"MatrixPanelColor"
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer2/HBoxContainer2/Coop"]
+[node name="Label" type="Label" parent="EditorDisplay/HBoxContainer/GridContainer/CoopP1"]
 layout_mode = 2
+theme_type_variation = &"BigText"
 text = "Coop"
 horizontal_alignment = 1
 
-[node name="Defect" type="PanelContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer2/HBoxContainer2"]
+[node name="CC" parent="EditorDisplay/HBoxContainer/GridContainer" instance=ExtResource("1_52vhs")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="CD" parent="EditorDisplay/HBoxContainer/GridContainer" instance=ExtResource("1_52vhs")]
+unique_name_in_owner = true
+layout_mode = 2
+_p2_defect = true
+
+[node name="DefectP1" type="PanelContainer" parent="EditorDisplay/HBoxContainer/GridContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_type_variation = &"MatrixPanelColor"
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer2/HBoxContainer2/Defect"]
+[node name="Label" type="Label" parent="EditorDisplay/HBoxContainer/GridContainer/DefectP1"]
 layout_mode = 2
+theme_type_variation = &"BigText"
 text = "Defect"
 horizontal_alignment = 1
 
-[node name="OutcomeWidgets" type="GridContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer2"]
+[node name="DC" parent="EditorDisplay/HBoxContainer/GridContainer" instance=ExtResource("1_52vhs")]
+unique_name_in_owner = true
+layout_mode = 2
+_p1_defect = true
+
+[node name="DD" parent="EditorDisplay/HBoxContainer/GridContainer" instance=ExtResource("1_52vhs")]
+unique_name_in_owner = true
+layout_mode = 2
+_p1_defect = true
+_p2_defect = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EditorDisplay/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EditorDisplay/HBoxContainer/VBoxContainer"]
+layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/h_separation = 0
-theme_override_constants/v_separation = 0
+theme_override_constants/separation = 48
+
+[node name="Label" type="Label" parent="EditorDisplay/HBoxContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"BigText"
+text = "When"
+
+[node name="GridContainer" type="GridContainer" parent="EditorDisplay/HBoxContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 32
 columns = 2
 
-[node name="CC" parent="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer2/OutcomeWidgets" instance=ExtResource("1_52vhs")]
+[node name="Label" type="Label" parent="EditorDisplay/HBoxContainer/VBoxContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Player 1"
+
+[node name="P1InfoChoice" type="Label" parent="EditorDisplay/HBoxContainer/VBoxContainer/VBoxContainer/GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="DC" parent="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer2/OutcomeWidgets" instance=ExtResource("1_52vhs")]
+[node name="Label2" type="Label" parent="EditorDisplay/HBoxContainer/VBoxContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Player 2"
+
+[node name="P2InfoChoice" type="Label" parent="EditorDisplay/HBoxContainer/VBoxContainer/VBoxContainer/GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="CD" parent="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer2/OutcomeWidgets" instance=ExtResource("1_52vhs")]
+[node name="Label2" type="Label" parent="EditorDisplay/HBoxContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"BigText"
+text = "Result"
+
+[node name="GridContainer2" type="GridContainer" parent="EditorDisplay/HBoxContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 32
+columns = 2
+
+[node name="Label" type="Label" parent="EditorDisplay/HBoxContainer/VBoxContainer/VBoxContainer/GridContainer2"]
+layout_mode = 2
+text = "Player 1 receives"
+
+[node name="P1InfoResult" type="Label" parent="EditorDisplay/HBoxContainer/VBoxContainer/VBoxContainer/GridContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="DD" parent="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer2/OutcomeWidgets" instance=ExtResource("1_52vhs")]
+[node name="Label2" type="Label" parent="EditorDisplay/HBoxContainer/VBoxContainer/VBoxContainer/GridContainer2"]
+layout_mode = 2
+text = "Player 2 receives"
+
+[node name="P2InfoResult" type="Label" parent="EditorDisplay/HBoxContainer/VBoxContainer/VBoxContainer/GridContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="EditorDisplay/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="HBoxContainer" type="HBoxContainer" parent="EditorDisplay/HBoxContainer/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="ResetBtn" type="Button" parent="EditorDisplay/HBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(192, 0)
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Reset Matrix"
+text = "Default"
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+[node name="ApplyBtn" type="Button" parent="EditorDisplay/HBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(192, 0)
 layout_mode = 2
+text = "Apply"
+
+[node name="ContextBtn" type="Button" parent="EditorDisplay/HBoxContainer/VBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(192, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Context"
+
+[node name="ContextDisplay" type="MarginContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ContextDisplay"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ContextDisplay/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ContextDisplay/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_constants/separation = 32
 
-[node name="Title" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="Title" type="Label" parent="ContextDisplay/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_6gk7m")
 theme_override_font_sizes/font_size = 32
-text = "Payoff Matrix Editor"
+text = "Payoff Matrix"
 
-[node name="Text" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="Text" type="Label" parent="ContextDisplay/VBoxContainer/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(64, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -162,4 +261,22 @@ In this game, cooperation corresponds to pressing buttons on the D-Pad/WASD whil
 For each point collected by a team, the resulting score for each player will depend on their chosen strategy. Edit the values on the matrix on the left to control this score."
 autowrap_mode = 2
 
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]
+[node name="HideContextBtn" type="Button" parent="ContextDisplay/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_type_variation = &"HeaderButton"
+text = "Mucho Texto"
+
+[connection signal="hovered_into" from="EditorDisplay/HBoxContainer/GridContainer/CC" to="." method="_on_widget_mouse_entered"]
+[connection signal="values_updated" from="EditorDisplay/HBoxContainer/GridContainer/CC" to="." method="_on_payoff_widget_update"]
+[connection signal="hovered_into" from="EditorDisplay/HBoxContainer/GridContainer/CD" to="." method="_on_widget_mouse_entered"]
+[connection signal="values_updated" from="EditorDisplay/HBoxContainer/GridContainer/CD" to="." method="_on_payoff_widget_update"]
+[connection signal="hovered_into" from="EditorDisplay/HBoxContainer/GridContainer/DC" to="." method="_on_widget_mouse_entered"]
+[connection signal="values_updated" from="EditorDisplay/HBoxContainer/GridContainer/DC" to="." method="_on_payoff_widget_update"]
+[connection signal="hovered_into" from="EditorDisplay/HBoxContainer/GridContainer/DD" to="." method="_on_widget_mouse_entered"]
+[connection signal="values_updated" from="EditorDisplay/HBoxContainer/GridContainer/DD" to="." method="_on_payoff_widget_update"]
+[connection signal="pressed" from="EditorDisplay/HBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer/ResetBtn" to="." method="_on_reset_btn_pressed"]
+[connection signal="pressed" from="EditorDisplay/HBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer/ApplyBtn" to="." method="_on_apply_btn_pressed"]
+[connection signal="pressed" from="EditorDisplay/HBoxContainer/VBoxContainer/VBoxContainer2/ContextBtn" to="." method="_on_context_btn_pressed"]
+[connection signal="pressed" from="ContextDisplay/VBoxContainer/HideContextBtn" to="." method="_on_hide_context_btn_pressed"]

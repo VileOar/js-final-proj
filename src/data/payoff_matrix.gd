@@ -22,7 +22,7 @@ func reset() -> void:
 
 
 ## set one of the outcomes
-func set_matrix_outcome(outcome_mask : int, p1_payoff : int, p2_payoff : int) -> bool:
+func set_matrix_outcome(outcome_mask: int, p1_payoff: int, p2_payoff: int) -> bool:
 	if outcome_mask in Global.Outcomes.values():
 		_outcomes[outcome_mask] = [p1_payoff, p2_payoff]
 		return true
@@ -31,7 +31,7 @@ func set_matrix_outcome(outcome_mask : int, p1_payoff : int, p2_payoff : int) ->
 
 
 ## get one of the outcomes
-func get_matrix_outcome(outcome_mask : int) -> Array:
+func get_matrix_outcome(outcome_mask: int) -> Array:
 	if outcome_mask in Global.Outcomes.values():
 		return _outcomes[outcome_mask]
 	assert(false, "Tried to get an invalid matrix outcome")

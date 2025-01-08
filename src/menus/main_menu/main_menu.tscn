@@ -169,12 +169,6 @@ layout_mode = 2
 theme_override_constants/separation = 64
 alignment = 1
 
-[node name="QuitBtn" type="Button" parent="Title/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"HeaderButton"
-text = "Quit"
-
 [node name="OptionsBtn" type="Button" parent="Title/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -187,13 +181,12 @@ size_flags_horizontal = 3
 theme_type_variation = &"HeaderButton"
 text = "Start"
 
-[node name="CreditsBtn" type="Button" parent="Title/VBoxContainer/HBoxContainer"]
+[node name="QuitBtn" type="Button" parent="Title/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"HeaderButton"
-text = "Credits"
+text = "Quit"
 
-[connection signal="pressed" from="Title/VBoxContainer/HBoxContainer/QuitBtn" to="." method="_on_quit_btn_pressed"]
 [connection signal="pressed" from="Title/VBoxContainer/HBoxContainer/OptionsBtn" to="." method="_on_options_btn_pressed"]
 [connection signal="pressed" from="Title/VBoxContainer/HBoxContainer/StartBtn" to="." method="_on_start_btn_pressed"]
-[connection signal="pressed" from="Title/VBoxContainer/HBoxContainer/CreditsBtn" to="." method="_on_credits_btn_pressed"]
+[connection signal="pressed" from="Title/VBoxContainer/HBoxContainer/QuitBtn" to="." method="_on_quit_btn_pressed"]

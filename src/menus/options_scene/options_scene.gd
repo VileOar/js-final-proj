@@ -60,3 +60,7 @@ func _on_tab_changed(btn: BaseButton) -> void:
 			_instructions_scene.show()
 		_credits_btn:
 			_credits_scene.show()
+
+
+func _on_back_btn_pressed() -> void:
+	SceneSwitcher.switch_topscene_id("title_screen")

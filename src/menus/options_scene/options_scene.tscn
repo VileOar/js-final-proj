@@ -27,78 +27,89 @@ grow_vertical = 2
 layout_mode = 2
 theme_type_variation = &"SimplePanel"
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/PanelContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/PanelContainer/MarginContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 32
+theme_type_variation = &"SmallPanel"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/PanelContainer/VBoxContainer/PanelContainer"]
 layout_mode = 2
+theme_override_constants/separation = 16
 alignment = 1
 
-[node name="SettingsBtn" type="Button" parent="PanelContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/PanelContainer/VBoxContainer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"SimplePanel"
+
+[node name="BackBtn" type="Button" parent="PanelContainer/PanelContainer/VBoxContainer/PanelContainer/HBoxContainer/PanelContainer"]
+layout_mode = 2
+theme_type_variation = &"HeaderButton"
+text = "Back"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/PanelContainer/VBoxContainer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="SettingsBtn" type="Button" parent="PanelContainer/PanelContainer/VBoxContainer/PanelContainer/HBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-theme_type_variation = &"HeaderButton"
 toggle_mode = true
 text = "Settings"
 
-[node name="MatrixBtn" type="Button" parent="PanelContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="MatrixBtn" type="Button" parent="PanelContainer/PanelContainer/VBoxContainer/PanelContainer/HBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-theme_type_variation = &"HeaderButton"
 toggle_mode = true
 text = "Matrix"
 
-[node name="InstructionsBtn" type="Button" parent="PanelContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="InstructionsBtn" type="Button" parent="PanelContainer/PanelContainer/VBoxContainer/PanelContainer/HBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-theme_type_variation = &"HeaderButton"
+theme_type_variation = &"FlatButton"
 toggle_mode = true
 text = "Instructions"
 
-[node name="CreditsBtn" type="Button" parent="PanelContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="CreditsBtn" type="Button" parent="PanelContainer/PanelContainer/VBoxContainer/PanelContainer/HBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-theme_type_variation = &"HeaderButton"
+theme_type_variation = &"FlatButton"
 toggle_mode = true
 text = "Credits
 "
 
-[node name="TabDisplayContainer" type="MarginContainer" parent="PanelContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="TabDisplayContainer" type="MarginContainer" parent="PanelContainer/PanelContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/margin_left = 8
+theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
 
-[node name="SettingsScene" parent="PanelContainer/PanelContainer/MarginContainer/VBoxContainer/TabDisplayContainer" instance=ExtResource("2_8ihor")]
+[node name="SettingsScene" parent="PanelContainer/PanelContainer/VBoxContainer/TabDisplayContainer" instance=ExtResource("2_8ihor")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="MatrixScene" parent="PanelContainer/PanelContainer/MarginContainer/VBoxContainer/TabDisplayContainer" instance=ExtResource("4_jqf0v")]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-
-[node name="InstructionsScene" parent="PanelContainer/PanelContainer/MarginContainer/VBoxContainer/TabDisplayContainer" instance=ExtResource("1_14j5a")]
+[node name="MatrixScene" parent="PanelContainer/PanelContainer/VBoxContainer/TabDisplayContainer" instance=ExtResource("4_jqf0v")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
-[node name="CreditsScene" parent="PanelContainer/PanelContainer/MarginContainer/VBoxContainer/TabDisplayContainer" instance=ExtResource("3_h08ha")]
+[node name="InstructionsScene" parent="PanelContainer/PanelContainer/VBoxContainer/TabDisplayContainer" instance=ExtResource("1_14j5a")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
+
+[node name="CreditsScene" parent="PanelContainer/PanelContainer/VBoxContainer/TabDisplayContainer" instance=ExtResource("3_h08ha")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[connection signal="pressed" from="PanelContainer/PanelContainer/VBoxContainer/PanelContainer/HBoxContainer/PanelContainer/BackBtn" to="." method="_on_back_btn_pressed"]
