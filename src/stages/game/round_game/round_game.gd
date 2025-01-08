@@ -65,7 +65,7 @@ func _ready():
 ## start the round
 func _start_round() -> void:
 	Global.play_music_track("")
-	_time_counter = Global.SETTINGS.round_time
+	_time_counter = SharedData.get_settings().round_time
 	_timer_label.text = str(_time_counter)
 	
 	_unstable_dyads = 1
@@ -100,7 +100,7 @@ func _solve_points(dyad : DyadGame):
 	_round_stats[players[1]].set_score(0)
 	
 	for point in dyad.get_dyad_game_points():
-		var payoffs_array = SharedData.get_payoff_matrix().get_matrix_outcome(point) # get the corresponding payoffs array
+		var payoffs_array = SharedData.get_settings().get_matrix_data().get_matrix_outcome(point) # get the corresponding payoffs array
 		
 		# add to this round's score
 		_round_stats[players[0]].add_score(payoffs_array[0])
@@ -117,7 +117,7 @@ func _add_points_to_player() -> void:
 	var dyad0_score = p0_score + p1_score
 	var dyad1_score = p2_score + p3_score
 	
-	var lose_penalty = Global.SETTINGS.lose_penalty_multiplier
+	var lose_penalty = SharedData.get_settings().lose_penalty_multiplier
 	if dyad0_score != dyad1_score and SharedData.is_4player_mode():
 		if dyad0_score > dyad1_score:
 			# if dyad0 wins, player 2 and 3 receive penalty to their round score
@@ -155,7 +155,7 @@ func _wrapup_round():
 		push_warning("Last played animation '%s' does not correspond to expected 'fade_out'")
 	
 	_round += 1 # increment round counter
-	if _round >= Global.SETTINGS.num_rounds:
+	if _round >= SharedData.get_settings().num_rounds:
 		get_tree().change_scene_to_packed(_end_scene)
 	else:
 		_cleanup_round()
@@ -182,7 +182,7 @@ func _on_seconds_timer_timeout():
 		
 		await get_tree().create_timer(ROUND_END_DELAY).timeout
 		
-		_round_results_screen.set_round(_round, Global.SETTINGS.num_rounds-1)
+		_round_results_screen.set_round(_round, SharedData.get_settings().num_rounds-1)
 		_round_results_screen.show()
 		_round_results_screen.start_point_solving(_round_stats)
 	else: # else, keep going

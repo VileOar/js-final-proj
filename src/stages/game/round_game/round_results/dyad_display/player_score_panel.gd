@@ -43,7 +43,7 @@ func spawn_number(target_node : Node, score_number_scene : PackedScene, added_sc
 
 
 func apply_penalty(target_node : Node, score_number_scene : PackedScene) -> void:
-	var penalty = Global.SETTINGS.lose_penalty_multiplier
+	var penalty = SharedData.get_settings().lose_penalty_multiplier
 	
 	# apply penalty
 	_score_value = int(float(_score_value) * penalty)

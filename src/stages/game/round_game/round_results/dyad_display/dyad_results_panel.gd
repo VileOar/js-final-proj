@@ -38,7 +38,7 @@ func _ready():
 	_p1_panel.set_player(_player1_index)
 	_p2_panel.set_player(_player2_index)
 	
-	_payoff_grid.set_payoffs(SharedData.get_payoff_matrix())
+	_payoff_grid.set_payoffs(SharedData.get_settings().get_matrix_data())
 
 
 ## set the anim speed

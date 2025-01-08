@@ -132,7 +132,7 @@ func _solve_point() -> void:
 	# solve points
 	
 	# get matrix
-	var matrix = SharedData.get_payoff_matrix() as PayoffMatrix
+	var matrix = SharedData.get_settings().get_matrix_data() as PayoffMatrix
 	
 	# wow, this is spaghetti
 	if !_point_stack0.is_empty():

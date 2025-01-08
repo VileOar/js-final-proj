@@ -23,11 +23,11 @@ func _ready() -> void:
 
 ## setup the settings to their currently saved values
 func setup() -> void:
-	_duration_input.get_line_edit().text = str(Global.SETTINGS.round_time)
+	_duration_input.get_line_edit().text = str(SharedData.get_settings().round_time)
 	_duration_input.apply()
-	_rounds_input.get_line_edit().text = str(Global.SETTINGS.num_rounds)
+	_rounds_input.get_line_edit().text = str(SharedData.get_settings().num_rounds)
 	_rounds_input.apply()
-	_penalty_input.get_line_edit().text = str(Global.SETTINGS.lose_penalty_multiplier * 100)
+	_penalty_input.get_line_edit().text = str(SharedData.get_settings().lose_penalty_multiplier * 100)
 	_penalty_input.apply()
 	
 	_apply_btn.disabled = true
@@ -46,15 +46,15 @@ func _on_setting_changed(_value) -> void:
 
 # restore ui values to the default
 func _on_default_btn_pressed() -> void:
-	Global.SETTINGS.reset()
+	SharedData.get_settings().reset()
 	setup()
 
 
 # apply the values in the ui
 func _on_apply_btn_pressed() -> void:
-	Global.SETTINGS.round_time = float(_duration_input.get_line_edit().text)
-	Global.SETTINGS.num_rounds = int(_rounds_input.get_line_edit().text)
-	Global.SETTINGS.round_time = float(_duration_input.get_line_edit().text) / 100.0
+	SharedData.get_settings().round_time = float(_duration_input.get_line_edit().text)
+	SharedData.get_settings().num_rounds = int(_rounds_input.get_line_edit().text)
+	SharedData.get_settings().round_time = float(_duration_input.get_line_edit().text) / 100.0
 	_apply_btn.disabled = true
 
 

@@ -34,22 +34,6 @@ const CORRECT_DELAY = 0.5
 ## longer delay when answers are wrong
 const WRONG_DELAY = 2.0
 
-class GameSettings:
-	## total time for a round
-	var round_time: float
-	## number of rounds in a game
-	var num_rounds: int
-	## round lose penalty multiplier
-	var lose_penalty_multiplier: float
-	
-	func reset() -> GameSettings:
-		round_time = 5.0#30.0
-		num_rounds = 2#5
-		lose_penalty_multiplier = 0.5#0.5
-		return self
-
-var SETTINGS := GameSettings.new().reset()
-
 ## dictionary of music
 var _music_tracks = {
 	"title": preload("res://assets/sfx/music/Vibing_Over_Venus.mp3"),

@@ -33,7 +33,7 @@ var _matrix_data: PayoffMatrix
 
 
 func _ready():
-	_matrix_data = SharedData.get_payoff_matrix() as PayoffMatrix
+	_matrix_data = SharedData.get_settings().get_matrix_data() as PayoffMatrix
 	_set_matrix_ui()
 
 

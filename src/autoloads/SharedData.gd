@@ -9,11 +9,11 @@ const _PLAYERS_PER_DYAD = 2 # obviously...
 # the total scores and statistics of each individual player
 var _player_data: Array
 
-# the payoff matrix values
-var _payoff_matrix: PayoffMatrix
-
 # whether to show instructions screen on start
 var _show_instructions:= true
+
+## the game settings
+var _settings: GameSettings
 
 # TODO: remove
 # 2 or 4 player mode (true for 4, false for 2)
@@ -25,7 +25,9 @@ var _dyad_count = 0 # defaults to 0, so that if, for some reason, the game is st
 
 
 func _ready():
-	_payoff_matrix = PayoffMatrix.new()
+	_settings = GameSettings.new()
+	_settings.reset(true)
+	
 	#_player_data = [
 		#PlayerStats.new(),
 		#PlayerStats.new(),
@@ -35,6 +37,11 @@ func _ready():
 	#reset_player_data()
 	
 	Signals.new_player_answer.connect(_on_new_player_answer)
+
+
+## getter for game settings
+func get_settings() -> GameSettings:
+	return _settings
 
 
 # TODO: remove
@@ -70,11 +77,6 @@ func get_dyad_count() -> int:
 ## shorthand to get player count
 func get_player_count() -> int:
 	return get_dyad_count() * _PLAYERS_PER_DYAD
-
-
-## get the matrix
-func get_payoff_matrix() -> PayoffMatrix:
-	return _payoff_matrix
 
 
 ## manually set player total score
