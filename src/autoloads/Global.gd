@@ -34,6 +34,9 @@ const CORRECT_DELAY = 0.5
 ## longer delay when answers are wrong
 const WRONG_DELAY = 2.0
 
+## path of save file
+const SETTINGS_FILEPATH := "user://settings.ini"
+
 ## dictionary of music
 var _music_tracks = {
 	"title": preload("res://assets/sfx/music/Vibing_Over_Venus.mp3"),

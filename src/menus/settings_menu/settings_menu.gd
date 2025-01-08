@@ -5,6 +5,7 @@ extends Control
 @onready var _duration_input: SpinBox = %DurationInput
 @onready var _rounds_input: SpinBox = %RoundsInput
 @onready var _penalty_input: SpinBox = %PenaltyInput
+@onready var _instructions_input: CheckBox = %InstructionsInput
 
 @onready var _all_descriptions: MarginContainer = %AllDescriptions
 @onready var _duration_desc: Label = %DurationInputDesc
@@ -18,17 +19,24 @@ extends Control
 
 
 func _ready() -> void:
-	setup()
+	_setup_ui()
 
 
-## setup the settings to their currently saved values
-func setup() -> void:
+# save the changes made to file
+func _save_changes() -> void:
+	SharedData.get_settings().save()
+	_apply_btn.disabled = true
+
+
+## _setup_ui the settings to their currently saved values
+func _setup_ui() -> void:
 	_duration_input.get_line_edit().text = str(SharedData.get_settings().round_time)
 	_duration_input.apply()
 	_rounds_input.get_line_edit().text = str(SharedData.get_settings().num_rounds)
 	_rounds_input.apply()
 	_penalty_input.get_line_edit().text = str(SharedData.get_settings().lose_penalty_multiplier * 100)
 	_penalty_input.apply()
+	_instructions_input.set_pressed_no_signal(SharedData.get_settings().show_instructions)
 	
 	_apply_btn.disabled = true
 
@@ -47,20 +55,22 @@ func _on_setting_changed(_value) -> void:
 # restore ui values to the default
 func _on_default_btn_pressed() -> void:
 	SharedData.get_settings().reset()
-	setup()
+	_setup_ui()
+	_save_changes()
 
 
 # apply the values in the ui
 func _on_apply_btn_pressed() -> void:
 	SharedData.get_settings().round_time = float(_duration_input.get_line_edit().text)
 	SharedData.get_settings().num_rounds = int(_rounds_input.get_line_edit().text)
-	SharedData.get_settings().round_time = float(_duration_input.get_line_edit().text) / 100.0
-	_apply_btn.disabled = true
+	SharedData.get_settings().lose_penalty_multiplier = float(_duration_input.get_line_edit().text) / 100.0
+	SharedData.get_settings().show_instructions = _instructions_input.button_pressed
+	_save_changes()
 
 
 # change setting
-func _on_instructions_input_toggled(toggled_on: bool) -> void:
-	SharedData.set_instructions_settings(toggled_on)
+func _on_instructions_input_toggled(_toggled_on: bool) -> void:
+	_on_setting_changed(-1)
 
 
 # change the description based on what setting was hovered

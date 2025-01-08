@@ -9,10 +9,7 @@ const _PLAYERS_PER_DYAD = 2 # obviously...
 # the total scores and statistics of each individual player
 var _player_data: Array
 
-# whether to show instructions screen on start
-var _show_instructions:= true
-
-## the game settings
+# the game settings
 var _settings: GameSettings
 
 # TODO: remove
@@ -26,7 +23,10 @@ var _dyad_count = 0 # defaults to 0, so that if, for some reason, the game is st
 
 func _ready():
 	_settings = GameSettings.new()
-	_settings.reset(true)
+	if FileAccess.file_exists(Global.SETTINGS_FILEPATH):
+		_settings.load()
+	else:
+		_settings.reset(true)
 	
 	#_player_data = [
 		#PlayerStats.new(),
@@ -145,16 +145,6 @@ func get_player_stats(player_id: int) -> PlayerStats:
 	else:
 		push_error("Invalid player_id given. Returning null.")
 		return null
-
-
-## set the instructions settings
-func set_instructions_settings(en: bool) -> void:
-	_show_instructions = en
-
-
-## get the instructions settings
-func get_instructions_settings() -> bool:
-	return _show_instructions
 
 
 # callback to when an answer is created, for statistics

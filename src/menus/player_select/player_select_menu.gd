@@ -99,7 +99,7 @@ func _on_signals_input_player_action(_player: int, event: InputEvent) -> void:
 
 func _on_start_btn_pressed() -> void:
 	SharedData.setup_dyads_playerdata(2 if _mode_4p else 1)
-	if SharedData.get_instructions_settings():
+	if SharedData.get_settings().show_instructions:
 		_instructions_holder.show()
 	else:
 		_go_to_game()

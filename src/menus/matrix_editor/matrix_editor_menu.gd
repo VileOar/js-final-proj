@@ -34,11 +34,16 @@ var _matrix_data: PayoffMatrix
 
 func _ready():
 	_matrix_data = SharedData.get_settings().get_matrix_data() as PayoffMatrix
-	_set_matrix_ui()
+	_setup_ui()
+
+
+func _save_changes() -> void:
+	SharedData.get_settings().save()
+	_apply_btn.disabled = true
 
 
 # set the UI elements to match the matrix data
-func _set_matrix_ui() -> void:
+func _setup_ui() -> void:
 	# they are ordered just like the matrix
 	for widget in _outcome_widgets:
 		var outcome_mask = widget.get_outcome_mask()
@@ -78,14 +83,15 @@ func _on_widget_mouse_entered(outcome_mask: int) -> void:
 # callback to the reset matrix button
 func _on_reset_btn_pressed() -> void:
 	_matrix_data.reset()
-	_set_matrix_ui()
+	_setup_ui()
+	_save_changes()
 
 
 func _on_apply_btn_pressed() -> void:
 	for widget in _outcome_widgets:
 		var outcomes = widget.get_current_values()
 		_matrix_data.set_matrix_outcome(widget.get_outcome_mask(), outcomes[0], outcomes[1])
-	_apply_btn.disabled = true
+	_save_changes()
 
 
 func _on_context_btn_pressed() -> void:
