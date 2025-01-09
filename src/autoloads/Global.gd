@@ -56,8 +56,8 @@ var _player_texture_array : Array = [
 	preload("res://assets/gfx/entities/player3.png"),
 	preload("res://assets/gfx/entities/player4.png")
 ]
-func get_player_texture(player) -> Texture:
-	return _player_texture_array[player]
+func get_player_texture(player: int) -> Texture:
+	return _player_texture_array[player % _player_texture_array.size()]
 
 
 ## play a music track

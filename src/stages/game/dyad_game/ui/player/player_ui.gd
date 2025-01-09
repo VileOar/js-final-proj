@@ -4,6 +4,9 @@
 extends MarginContainer
 class_name PlayerUI
 
+## emitted when the startup sequence is complete
+signal ready_sequence
+
 var _can_sound : bool
 
 ## ref to the player label
@@ -15,7 +18,7 @@ var _can_sound : bool
 
 
 ## set the player identification
-func set_player(player : int):
+func set_player(player: int):
 	_can_sound = player == 0
 	_player_label.text = "Player %s" % [player + 1]
 	_player_sprite.texture = Global.get_player_texture(player)
@@ -24,6 +27,11 @@ func set_player(player : int):
 ## play start animation
 func play_start_anim() -> void:
 	%AnimCop.play("drink_slam")
+	
+	await %AnimCop.animation_finished
+	
+	%AnimCop.play("sit")
+	ready_sequence.emit()
 
 
 ## reveal or hide the answer
@@ -34,11 +42,6 @@ func show_answer(answer : PlayerAnswer):
 ## hide the amswer
 func hide_answer():
 	_answer.hide_answer()
-
-
-func _on_anim_cop_animation_finished(anim_name: StringName) -> void:
-	if anim_name == "drink_slam":
-		%AnimCop.play("sit")
 
 
 func _play_drink_sound() -> void:

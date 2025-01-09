@@ -1,9 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://db78w4tl40jdb"]
+[gd_scene load_steps=9 format=3 uid="uid://db78w4tl40jdb"]
 
 [ext_resource type="Script" path="res://src/stages/game/round_game/round_game.gd" id="1_awtu6"]
 [ext_resource type="PackedScene" uid="uid://csk7v3jwntq18" path="res://src/stages/game/dyad_game/dyad_game.tscn" id="1_co0oy"]
-[ext_resource type="PackedScene" uid="uid://dmfruovnif6mi" path="res://src/stages/end_scene/end_scene.tscn" id="2_kkmps"]
-[ext_resource type="Texture2D" uid="uid://dew2pi3sx8u5p" path="res://assets/gfx/ui/divider.png" id="3_a3ig3"]
+[ext_resource type="PackedScene" uid="uid://dksabjnbstug0" path="res://src/stages/game/round_game/divider_ui.tscn" id="3_d3d65"]
 [ext_resource type="PackedScene" uid="uid://bbe7i8g4nyqp1" path="res://src/stages/game/round_game/round_results/round_results_screen.tscn" id="3_oia04"]
 
 [sub_resource type="Animation" id="Animation_voywd"]
@@ -67,24 +66,31 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_awtu6")
-_end_scene = ExtResource("2_kkmps")
+_dyad_scene = ExtResource("1_co0oy")
+_divider_ui_scene = ExtResource("3_d3d65")
 
 [node name="SecondsTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="Divider" type="TextureRect" parent="."]
+[node name="Dividers" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = 13
-anchor_left = 0.5
-anchor_right = 0.5
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -16.0
-offset_right = 16.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 4
-mouse_filter = 2
-texture = ExtResource("3_a3ig3")
+
+[node name="Control" type="Control" parent="Dividers"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Divider" parent="Dividers" instance=ExtResource("3_d3d65")]
+layout_mode = 2
+
+[node name="Control2" type="Control" parent="Dividers"]
+layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -124,6 +130,7 @@ theme_type_variation = &"ScoreLabel"
 horizontal_alignment = 1
 
 [node name="DyadContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 40

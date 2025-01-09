@@ -9,9 +9,13 @@ class_name DyadGame
 ## signal reporting dyad is ready
 signal stable
 
+# internal signal for when all players are ready
+signal _all_players_ready
+
 ## reference to the state machine
 @onready var _fsm = $StateMachine as DyadStateMachine
-## ref to the ai "folder"
+## ref to the ai "folder"[br]
+## this is a node that holds ai players if necessary
 @onready var _ai = $AI
 
 ## reference to the Prompt Controller
@@ -33,6 +37,9 @@ signal stable
 ## or defect)
 var _game_points : Array = []
 
+# counter for player uis that are in ready position
+var _ready_players := 0
+
 
 func _ready():
 	_fsm.replace_state("StoppedState")
@@ -40,30 +47,51 @@ func _ready():
 
 ## reset this dyad
 func reset_dyad() -> void:
+	_ready_players = 0
 	_reset_dyad_points()
-	for ai in _ai.get_children():
-		ai.queue_free()
+	# TODO: remove?
+	#for ai in _ai.get_children():
+		#ai.queue_free()
 
 
-## start-up sequence, does not actually start the dyad
-func ready_dyad() -> void:
+# ---------------------
+# || --- OPENING --- ||
+# ---------------------
+
+## setup the dyad with the proper data
+func setup_dyad(p1_index, p2_index) -> void:
+	# set the correct player indices and set the graphics correctly
+	_player1_index = p1_index
 	_player_ui_list[0].set_player(_player1_index)
-	_player_ui_list[0].play_start_anim()
+	_player2_index = p2_index
 	_player_ui_list[1].set_player(_player2_index)
-	_player_ui_list[1].play_start_anim()
-	await get_tree().create_timer(7.0).timeout
 	
 	# add ai players if required
 	if !InputManager.is_human_device(InputManager.get_player_device(_player1_index)):
 		var ai = AIPlayer.new() as AIPlayer
 		ai.set_player(_player1_index)
 		_ai.call_deferred("add_child", ai)
-		await ai.ready
 	if !InputManager.is_human_device(InputManager.get_player_device(_player2_index)):
 		var ai = AIPlayer.new() as AIPlayer
 		ai.set_player(_player2_index)
 		_ai.call_deferred("add_child", ai)
-		await ai.ready
+
+
+## startup sequence, does not actually start the dyad
+func ready_dyad() -> void:
+	_ready_players = 0
+	_player_ui_list[0].play_start_anim()
+	_player_ui_list[1].play_start_anim()
+	while _ready_players < 2:
+		await _all_players_ready
+	
+	# wait a second after animations finish
+	await get_tree().create_timer(1.0).timeout
+	
+	# loop await while until all ais are ready
+	for ai in _ai.get_children():
+		while !ai.is_node_ready():
+			await ai.ready
 	
 	stable.emit()
 
@@ -71,17 +99,22 @@ func ready_dyad() -> void:
 ## start the state machine
 func start_dyad() -> void:
 	_fsm.replace_state("PromptState")
-	InputManager.enable(true)
+	# TODO: remove, this should be done in round game
+	#InputManager.enable(true)
 
+
+# ---------------------
+# || --- CLOSURE --- ||
+# ---------------------
 
 ## stop the state machine
 func stop_dyad() -> void:
 	_fsm.replace_state("StoppedState")
-	InputManager.enable(false)
+	#InputManager.enable(false)
 
 
 ## NOTE: called by fsm only[br]
-## notify for a new prompt
+## notify for a new prompt for all ai players
 func notify_new_prompt(prompt : int) -> void:
 	for ai in _ai.get_children():
 		ai.on_new_prompt(prompt)
@@ -139,3 +172,13 @@ func show_answers_ui(show_hide : bool, answers : Array) -> void:
 			_player_ui_list[ix].show_answer(answers[ix])
 		else:
 			_player_ui_list[ix].hide_answer()
+
+
+# ------------------------------
+# || --- SIGNAL CALLBACKS --- ||
+# ------------------------------
+
+func _on_player_ready_sequence() -> void:
+	_ready_players += 1
+	if _ready_players >= 2:
+		_all_players_ready.emit()

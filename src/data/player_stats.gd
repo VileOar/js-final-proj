@@ -28,7 +28,7 @@ func reset() -> void:
 
 ## parse an answer and add its stats[br]
 ## NOTE: this makes no distinction between player indices, as this class is indifferent to that
-func parse_answer(answer : PlayerAnswer):
+func parse_answer(answer: PlayerAnswer):
 	_answer_count += 1
 	if answer.is_correct():
 		_correct_count += 1
