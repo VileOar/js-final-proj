@@ -17,7 +17,7 @@ enum DeviceType {
 var _listening = false
 
 # map of players and input devices: -1 for KBM, 0-7 for gamepads; array indices are the player indices
-var _player_devices = [AI_DEVICE, AI_DEVICE, AI_DEVICE, AI_DEVICE]
+var _player_devices = []
 
 
 ## enable or disable input listening

@@ -5,6 +5,11 @@
 extends Control
 class_name RoundGame
 
+## Emited to publish the round results, before the round is reset.[br]
+## To be caught by the global statistics manager.[br]
+## argument should be an array of <Playerstats>.
+signal round_published(stats_array)
+
 # TODO: remove
 #@export var _end_scene : PackedScene
 # dyad scene to instantiate for each dyad
@@ -57,12 +62,7 @@ var _round = 0
 
 # the round's stats; these are overwritten each round[br]
 # these are COMPLETELY independent from the ones from SharedData and are only useful for the round
-var _round_stats := [
-	PlayerStats.new(),
-	PlayerStats.new(),
-	PlayerStats.new(),
-	PlayerStats.new(),
-]
+var _round_stats := []
 
 
 func _ready():
@@ -70,7 +70,7 @@ func _ready():
 	_num_dyads = SharedData.get_dyad_count()
 	
 	_setup_round()
-	_ready_round()
+	_reset_round()
 	
 	# TODO: correct order of events
 	# - fade out from player select and change to this scene
@@ -95,6 +95,11 @@ func _ready():
 	#if !SharedData.is_4player_mode():
 		#$Divider.hide()
 
+
+func _reset_round() -> void:
+	# TODO: go through all class variables and restore thei initial state; make sure all screen effects are correct
+	await _ready_round()
+	_start_round()
 
 # ---------------------
 # || --- OPENING --- ||
@@ -122,6 +127,11 @@ func _setup_round() -> void:
 		while !dyad_game.is_node_ready():
 			await dyad_game.ready
 		dyad_game.setup_dyad(ix * 2, ix * 2 + 1)
+		
+		# prepare the player stats
+		# add one for each player in the dyad
+		_round_stats.append(PlayerStats.new())
+		_round_stats.append(PlayerStats.new())
 
 
 ## wait for all round preparations to be complete (in-game animations like screen fade)
@@ -193,9 +203,9 @@ func _cleanup_round() -> void:
 # || --- FUNCTIONAL --- ||
 # ------------------------
 
-## func actually add the points to player data[br]
+## func to actually add the points to player data[br]
 ## this is done all at once, not sequentially, despite the interface
-func _solve_points(dyad : DyadGame):
+func _solve_points(dyad: DyadGame):
 	# TODO: refactor
 	var players = dyad.get_dyad_players()
 	_round_stats[players[0]].set_score(0)
@@ -210,32 +220,59 @@ func _solve_points(dyad : DyadGame):
 
 
 ## add points to players, with regard to lose penalty
-func _add_points_to_player() -> void:
-	# TODO: refactor
-	var p0_score = _round_stats[0].get_score()
-	var p1_score = _round_stats[1].get_score()
-	var p2_score = _round_stats[2].get_score()
-	var p3_score = _round_stats[3].get_score()
-	
-	var dyad0_score = p0_score + p1_score
-	var dyad1_score = p2_score + p3_score
-	
+func _manage_round_scores() -> void:
 	var lose_penalty = SharedData.get_settings().lose_penalty_multiplier
-	if dyad0_score != dyad1_score and SharedData.is_4player_mode():
-		if dyad0_score > dyad1_score:
-			# if dyad0 wins, player 2 and 3 receive penalty to their round score
-			p2_score *= lose_penalty
-			p3_score *= lose_penalty
-		else:
-			# else, player 0 and 1 do
-			p0_score *= lose_penalty
-			p1_score *= lose_penalty
 	
-	# TODO: refactor: instead of this, emit a global signal with dict of player: score, caught by shared data
-	SharedData.add_player_score(0, p0_score)
-	SharedData.add_player_score(1, p1_score)
-	SharedData.add_player_score(2, p2_score)
-	SharedData.add_player_score(3, p3_score)
+	# TODO: remove
+	#var p0_score = _round_stats[0].get_score()
+	#var p1_score = _round_stats[1].get_score()
+	#var p2_score = _round_stats[2].get_score()
+	#var p3_score = _round_stats[3].get_score()
+	#
+	#var dyad0_score = p0_score + p1_score
+	#var dyad1_score = p2_score + p3_score
+	#
+	#var lose_penalty = SharedData.get_settings().lose_penalty_multiplier
+	#if dyad0_score != dyad1_score and SharedData.is_4player_mode():
+		#if dyad0_score > dyad1_score:
+			## if dyad0 wins, player 2 and 3 receive penalty to their round score
+			#p2_score *= lose_penalty
+			#p3_score *= lose_penalty
+		#else:
+			## else, player 0 and 1 do
+			#p0_score *= lose_penalty
+			#p1_score *= lose_penalty
+	# the dyads with the highest score
+	var winners = []
+	var high_score = -INF
+	for dyad_game in _dyad_container.get_children():
+		dyad_game = dyad_game as DyadGame
+		var dyad_score = 0
+		# sum all of this dyad's players' scores
+		for px in dyad_game.get_dyad_players():
+			dyad_score += _round_stats[px].get_score()
+		
+		# if the current dyad has an equal or higher socre
+		if winners.is_empty() or dyad_score >= high_score:
+			# update high score and add dyad to winners
+			high_score = dyad_score
+			winners.append(dyad_game)
+	
+	# loop through the dyads again after knowing which ones have won
+	for dyad_game in _dyad_container.get_children():
+		dyad_game = dyad_game as DyadGame
+		
+		# players of dyads that could not equal the high score suffer a penalty
+		var penalty = 1 if winners.has(dyad_game) else lose_penalty
+		for px in dyad_game.get_dyad_players():
+			_round_stats[px].mult_score(penalty)
+	
+	_publish_round_scores()
+
+
+# Method to handle end of round score keeping
+func _publish_round_scores():
+	round_published.emit(_round_stats)
 
 
 # ------------------------------
@@ -254,7 +291,7 @@ func _on_seconds_timer_timeout():
 		# solve points, regardless of UI
 		_solve_points(_dyad0)
 		_solve_points(_dyad1)
-		_add_points_to_player()
+		_manage_round_scores()
 		
 		_round_results_screen.set_point_stacks(_dyad0.get_dyad_game_points(), _dyad1.get_dyad_game_points())
 		

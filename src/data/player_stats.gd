@@ -8,14 +8,14 @@ extends RefCounted
 class_name PlayerStats
 
 ## individual score
-var _score = 0
+var _score: int = 0
 
 ## number of answers
-var _answer_count = 0
+var _answer_count: int = 0
 ## number of correct answers
-var _correct_count = 0
+var _correct_count: int  = 0
 ## number of cooperations
-var _coop_count = 0
+var _coop_count: int = 0
 
 
 ## reset values
@@ -40,7 +40,7 @@ func parse_answer(answer: PlayerAnswer):
 # || --- SETTERS & GETTERS --- ||
 # -------------------------------
 
-func set_score(score : int) -> void:
+func set_score(score: int) -> void:
 	_score = score
 
 
@@ -48,8 +48,12 @@ func get_score() -> int:
 	return _score
 
 
-func add_score(add : int) -> void:
+func add_score(add: int) -> void:
 	_score += add
+
+
+func mult_score(mult: float) -> void:
+	_score = int(roundi(float(_score) * mult))
 
 
 func get_answer_count() -> int:
