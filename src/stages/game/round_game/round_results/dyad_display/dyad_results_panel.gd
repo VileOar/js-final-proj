@@ -34,15 +34,24 @@ signal finished_animation
 var _anim_speed := 1.0
 
 
-func _ready():
-	_p1_panel.set_player(_player1_index)
-	_p2_panel.set_player(_player2_index)
+func _ready() -> void:
+	pass
+	# TODO: remove
+	#_p1_panel.set_player(_player1_index)
+	#_p2_panel.set_player(_player2_index)
+	#
+	#_payoff_grid.set_payoffs(SharedData.get_settings().get_matrix_data())
+
+
+func setup_panel(p1_index: int, p2_index: int, matrix_data: PayoffMatrix) -> void:
+	_p1_panel.set_player(p1_index)
+	_p2_panel.set_player(p2_index)
 	
-	_payoff_grid.set_payoffs(SharedData.get_settings().get_matrix_data())
+	_payoff_grid.set_payoffs(matrix_data)
 
 
 ## set the anim speed
-func set_anim_speed(speed : float):
+func set_anim_speed(speed: float):
 	_anim_speed = speed
 
 
@@ -51,7 +60,7 @@ func set_anim_speed(speed : float):
 # -------------------
 
 ## manually set the scores
-func set_scores(p1_score : int, p2_score : int):
+func set_scores(p1_score: int, p2_score: int):
 	_p1_panel.set_score(p1_score)
 	_p2_panel.set_score(p2_score)
 	

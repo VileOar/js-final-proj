@@ -26,18 +26,19 @@ size_flags_vertical = 3
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/VBoxContainer"]
+[node name="ResultsContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 40
 
-[node name="Dyad0" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer" instance=ExtResource("1_pya0j")]
+[node name="Dyad0" parent="MarginContainer/PanelContainer/VBoxContainer/ResultsContainer" instance=ExtResource("1_pya0j")]
 unique_name_in_owner = true
 layout_mode = 2
 _player1_index = 0
 _player2_index = 1
 
-[node name="Dyad1" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer" instance=ExtResource("1_pya0j")]
+[node name="Dyad1" parent="MarginContainer/PanelContainer/VBoxContainer/ResultsContainer" instance=ExtResource("1_pya0j")]
 unique_name_in_owner = true
 layout_mode = 2
 _player1_index = 2
@@ -52,7 +53,11 @@ size_flags_horizontal = 4
 disabled = true
 text = "Next Round"
 
-[node name="Divider" type="TextureRect" parent="."]
+[node name="DividerContainer" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Divider" type="TextureRect" parent="DividerContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 mouse_filter = 2
@@ -82,7 +87,7 @@ stream = ExtResource("4_7pcap")
 [node name="RemPointAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_3xpl4")
 
-[connection signal="finished_animation" from="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/Dyad0" to="." method="_on_dyad_finished_animation"]
-[connection signal="finished_animation" from="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/Dyad1" to="." method="_on_dyad_finished_animation"]
+[connection signal="finished_animation" from="MarginContainer/PanelContainer/VBoxContainer/ResultsContainer/Dyad0" to="." method="_on_dyad_finished_animation"]
+[connection signal="finished_animation" from="MarginContainer/PanelContainer/VBoxContainer/ResultsContainer/Dyad1" to="." method="_on_dyad_finished_animation"]
 [connection signal="pressed" from="MarginContainer/PanelContainer/VBoxContainer/NextRoundBtn" to="." method="_on_button_pressed"]
 [connection signal="timeout" from="BetweenTimer" to="." method="_solve_point"]

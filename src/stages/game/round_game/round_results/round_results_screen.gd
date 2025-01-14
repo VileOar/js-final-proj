@@ -8,71 +8,113 @@ class_name RoundResultsScreen
 ## emited when the user clicks next round
 signal next_round
 
-## normal counting speed
-const NORMAL_BETWEEN_TIME = 0.3
-## normal anim speed
-const NORMAL_ANIM_SPEED = 1.0
+# dyad scene to instantiate for each dyad
+@export var _results_scene: PackedScene
+# scene to include between dyads if more than one
+@export var _divider_ui_scene: PackedScene
 
-## fast counting speed
-const FAST_BETWEEN_TIME = 0.1
-## fast anim speed
-const FAST_ANIM_SPEED = 2.0
+# normal counting speed
+const _NORMAL_BETWEEN_TIME = 0.3
+# normal anim speed
+const _NORMAL_ANIM_SPEED = 1.0
 
-## threshold of points until fast animation is enabled
-const SPEED_POINT_THRESHOLD = 30
+# fast counting speed
+const _FAST_BETWEEN_TIME = 0.1
+# fast anim speed
+const _FAST_ANIM_SPEED = 2.0
 
-## ref to the first dyad's results, shown in parallel with the other
+# threshold of points until fast animation is enabled
+const _SPEED_POINT_THRESHOLD = 30
+
+# ref to the container of dyad results scenes
+@onready var _results_container: HBoxContainer = %ResultsContainer
+# ref to the container of dividers
+@onready var _divider_container: HBoxContainer = %DividerContainer
+# ref to the first dyad's results, shown in parallel with the other
 @onready var _dyad0_results = %Dyad0 as DyadResultsPanel
-## ref to the second dyad's results
+# ref to the second dyad's results
 @onready var _dyad1_results = %Dyad1 as DyadResultsPanel
-## ref to the button to advance
-@onready var _next_round_btn = %NextRoundBtn as Button
-## label identifying current round
+# ref to the button to advance
+@onready var _next_round_btn: Button = %NextRoundBtn
+# ref to the label identifying current round
 @onready var _round_label: Label = %RoundLabel
 
+# timer between each point
+@onready var _between_timer: Timer = $BetweenTimer
 
-## timer between each point
-@onready var _between_timer = $BetweenTimer as Timer
+# copy of matrix data
+var _MATRIX_DATA: PayoffMatrix
 
-## how many points counted
+# how many points counted
 var _points_solved = 0
-## the point stack for the first dyad
+# the point stack for the first dyad
 var _point_stack0 := []
-## the point stack for the second dyad
+# the point stack for the second dyad
 var _point_stack1 := []
 
-## the stats for this round[br]
-## obtained externally, variable for cache
-var _round_stats : Array
+# the stats for this round[br]
+# obtained externally, variable for cache
+var _round_stats: Array
 
-## counter for finished animations of dyad displays
+# counter for finished animations of dyad displays
 var _dyad_animation_counter = 0
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	if SharedData.is_4player_mode():
-		_dyad1_results.show()
-	else:
-		_dyad1_results.hide()
+	pass
+	#TODO: remove
+	#if SharedData.is_4player_mode():
+		#_dyad1_results.show()
+	#else:
+		#_dyad1_results.hide()
+	#
+	#_points_solved = 0
+	#_point_stack0 = []
+	#_point_stack1 = []
+	#
+	#if !SharedData.is_4player_mode():
+		#$Divider.hide()
+
+
+# similar to the round game, instantiate necessary scenes, according to the number of dyads
+func setup_results(num_dyads: int, matrix_data) -> void:
+	_MATRIX_DATA = matrix_data
 	
-	_points_solved = 0
-	_point_stack0 = []
-	_point_stack1 = []
-	
-	if !SharedData.is_4player_mode():
-		$Divider.hide()
+	# setup results
+	for ix in num_dyads:
+		# only needs to add spacers and dividers if more than one dyad
+		if num_dyads > 1:
+			var spacer = _divider_container.add_spacer(false)
+			spacer.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			if ix < num_dyads - 1: # if not the last dyad, add divider
+				var divider = _divider_ui_scene.instantiate()
+				_divider_container.call_deferred("add_child", divider)
+				while !divider.is_node_ready():
+					await divider.ready
+		
+		# create and dyad games
+		var results_dyad := _results_scene.instantiate() as DyadResultsPanel
+		_results_container.call_deferred("add_child", results_dyad)
+		while !results_dyad.is_node_ready():
+			await results_dyad.ready
+		results_dyad.setup_panel(ix * 2, ix * 2 + 1, _MATRIX_DATA)
 
 
 ## receive data about current round to update displays
 func set_round(current_round: int, last: int) -> void:
-	_round_label.text = "Round %d out of %d End" % [current_round+1, last+1]
+	_round_label.text = "Round %d / %d" % [current_round+1, last+1]
 	_next_round_btn.text = "End Results" if current_round == last else "Next Round"
+
+
+## function to start all stages of the animation of points
+func start_anim() -> void:
+	
 
 
 ## starts solving each point for each player[br]
 ## it receives the point stack via a parameter (it does NOT fetch it anywhere)
-func start_point_solving(round_stats : Array) -> void:
+func start_point_solving(round_stats: Array) -> void:
 	
 	_round_stats = round_stats
 	
@@ -120,34 +162,31 @@ func _solve_point() -> void:
 	# increment counter
 	_points_solved += 1
 	# change speed according to amount solved
-	var timer_time = NORMAL_BETWEEN_TIME
-	if _points_solved > SPEED_POINT_THRESHOLD:
-		timer_time = FAST_BETWEEN_TIME
-		_dyad0_results.set_anim_speed(FAST_ANIM_SPEED)
-		_dyad1_results.set_anim_speed(FAST_ANIM_SPEED)
+	var timer_time = _NORMAL_BETWEEN_TIME
+	if _points_solved > _SPEED_POINT_THRESHOLD:
+		timer_time = _FAST_BETWEEN_TIME
+		_dyad0_results.set_anim_speed(_FAST_ANIM_SPEED)
+		_dyad1_results.set_anim_speed(_FAST_ANIM_SPEED)
 	else:
-		_dyad0_results.set_anim_speed(NORMAL_ANIM_SPEED)
-		_dyad1_results.set_anim_speed(NORMAL_ANIM_SPEED)
+		_dyad0_results.set_anim_speed(_NORMAL_ANIM_SPEED)
+		_dyad1_results.set_anim_speed(_NORMAL_ANIM_SPEED)
 	
 	# solve points
-	
-	# get matrix
-	var matrix = SharedData.get_settings().get_matrix_data() as PayoffMatrix
 	
 	# wow, this is spaghetti
 	if !_point_stack0.is_empty():
 		var point = _point_stack0.pop_back()
-		_solve_dyad_point(point, _dyad0_results, matrix)
+		_solve_dyad_point(point, _dyad0_results, _MATRIX_DATA)
 	# only process the second if four player
 	if !_point_stack1.is_empty() and SharedData.is_4player_mode():
 		var point = _point_stack1.pop_back()
-		_solve_dyad_point(point, _dyad1_results, matrix)
+		_solve_dyad_point(point, _dyad1_results, _MATRIX_DATA)
 	
 	_between_timer.start(timer_time)
 
 
 ## solve particular point of a single dyad
-func _solve_dyad_point(point : int, dyad : DyadResultsPanel, matrix : PayoffMatrix) -> void:
+func _solve_dyad_point(point: int, dyad: DyadResultsPanel, matrix: PayoffMatrix) -> void:
 	## determine who gets what score based on point
 	var payoffs_array = matrix.get_matrix_outcome(point) # get the corresponding payoffs array
 	
@@ -157,10 +196,10 @@ func _solve_dyad_point(point : int, dyad : DyadResultsPanel, matrix : PayoffMatr
 		$AddPointAudio.play()
 	
 	dyad.solve_single_point(
-		point,
-		payoffs_array[0],
-		payoffs_array[1],
-		)
+			point,
+			payoffs_array[0],
+			payoffs_array[1],
+	)
 
 
 # ------------------------------

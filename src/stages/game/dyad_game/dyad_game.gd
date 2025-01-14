@@ -35,13 +35,13 @@ signal _all_players_ready
 ## the stack of points accumulated by the dyad[br]
 ## each point is represented by a 2-bit number, identifying the binary choice of each player (coop
 ## or defect)
-var _game_points : Array = []
+var _game_points: Array = []
 
 # counter for player uis that are in ready position
 var _ready_players := 0
 
 
-func _ready():
+func _ready() -> void:
 	_fsm.replace_state("StoppedState")
 
 
@@ -78,7 +78,7 @@ func setup_dyad(p1_index, p2_index) -> void:
 
 
 ## startup sequence, does not actually start the dyad
-func ready_dyad() -> void:
+func intro_dyad() -> void:
 	_ready_players = 0
 	_player_ui_list[0].play_start_anim()
 	_player_ui_list[1].play_start_anim()
@@ -115,7 +115,7 @@ func stop_dyad() -> void:
 
 ## NOTE: called by fsm only[br]
 ## notify for a new prompt for all ai players
-func notify_new_prompt(prompt : int) -> void:
+func notify_new_prompt(prompt: int) -> void:
 	for ai in _ai.get_children():
 		ai.on_new_prompt(prompt)
 
@@ -142,7 +142,7 @@ func get_dyad_game_points()-> Array:
 
 ## add a new point to the stack[br]
 ## it comes in the form of a 2bit value, as defined in the matrix Outcomes
-func add_point(point_mask : int):
+func add_point(point_mask : int) -> void:
 	if point_mask in Global.Outcomes.values():
 		_game_points.append(point_mask)
 		_point_stack.push_point()
@@ -161,12 +161,12 @@ func _reset_dyad_points() -> void:
 # ----------------------
 
 ## show or hide the prompt UI
-func show_prompt_ui(show_hide : bool, direction : int) -> void:
+func show_prompt_ui(show_hide: bool, direction: int) -> void:
 	_prompt_ui.set_prompt(direction if show_hide else Global.Directions.NONE)
 
 
 ## show or hide player choices in UI
-func show_answers_ui(show_hide : bool, answers : Array) -> void:
+func show_answers_ui(show_hide: bool, answers: Array) -> void:
 	for ix in _player_ui_list.size():
 		if show_hide:
 			_player_ui_list[ix].show_answer(answers[ix])

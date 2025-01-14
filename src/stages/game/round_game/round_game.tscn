@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/stages/game/round_game/round_game.gd" id="1_awtu6"]
 [ext_resource type="PackedScene" uid="uid://csk7v3jwntq18" path="res://src/stages/game/dyad_game/dyad_game.tscn" id="1_co0oy"]
-[ext_resource type="PackedScene" uid="uid://dksabjnbstug0" path="res://src/stages/game/round_game/divider_ui.tscn" id="3_d3d65"]
+[ext_resource type="PackedScene" uid="uid://dksabjnbstug0" path="res://src/stages/game/round_game/ui/divider_ui.tscn" id="3_d3d65"]
 [ext_resource type="PackedScene" uid="uid://bbe7i8g4nyqp1" path="res://src/stages/game/round_game/round_results/round_results_screen.tscn" id="3_oia04"]
 
 [sub_resource type="Animation" id="Animation_voywd"]
@@ -81,17 +81,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Control" type="Control" parent="Dividers"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Divider" parent="Dividers" instance=ExtResource("3_d3d65")]
-layout_mode = 2
-
-[node name="Control2" type="Control" parent="Dividers"]
-layout_mode = 2
-size_flags_horizontal = 3
-
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -153,6 +142,7 @@ visible = false
 layout_mode = 1
 
 [node name="FadeScreen" type="ColorRect" parent="."]
+unique_name_in_owner = true
 visible = false
 z_index = 10
 layout_mode = 1

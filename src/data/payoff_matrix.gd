@@ -21,6 +21,13 @@ func reset() -> void:
 	]
 
 
+## return a copy of this data
+func copy() -> PayoffMatrix:
+	var dup := PayoffMatrix.new()
+	dup._outcomes = _outcomes.duplicate(true)
+	return dup
+
+
 ## set one of the outcomes
 func set_matrix_outcome(outcome_mask: int, p1_payoff: int, p2_payoff: int) -> bool:
 	if outcome_mask in Global.Outcomes.values():
