@@ -188,9 +188,9 @@ size_flags_horizontal = 3
 theme_type_variation = &"HeaderButton"
 text = "Quit"
 
-[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="Version" type="Label" parent="Title/VBoxContainer"]
 layout_mode = 2
-text = "Version 1.1"
+text = "Version 1.2"
 
 [connection signal="pressed" from="Title/VBoxContainer/HBoxContainer/OptionsBtn" to="." method="_on_options_btn_pressed"]
 [connection signal="pressed" from="Title/VBoxContainer/HBoxContainer/StartBtn" to="." method="_on_start_btn_pressed"]
