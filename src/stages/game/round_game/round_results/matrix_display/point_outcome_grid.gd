@@ -14,13 +14,13 @@ class_name PointOutcomeGrid
 
 
 ## set the payoffs
-func set_payoffs(matrix : PayoffMatrix) -> void:
+func set_payoffs(matrix: PayoffMatrix) -> void:
 	for outcome_id in _outcomes.size():
 		var outcome_values = matrix.get_matrix_outcome(outcome_id)
 		_outcomes[outcome_id].set_payoff(outcome_values[0], outcome_values[1])
 
 
 ## trigger the correct animation
-func trigger_outcome_anim(outcome : int, anim_speed : float) -> void:
+func trigger_outcome_anim(outcome: int, anim_speed: float) -> void:
 	if outcome >= 0 and outcome < _outcomes.size():
 		_outcomes[outcome].trigger_animation(outcome, anim_speed)

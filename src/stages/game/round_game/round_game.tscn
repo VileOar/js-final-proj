@@ -162,4 +162,3 @@ libraries = {
 [connection signal="timeout" from="SecondsTimer" to="." method="_on_seconds_timer_timeout"]
 [connection signal="stable" from="MarginContainer/VBoxContainer/DyadContainer/Dyad0" to="." method="_on_dyad_stable"]
 [connection signal="stable" from="MarginContainer/VBoxContainer/DyadContainer/Dyad1" to="." method="_on_dyad_stable"]
-[connection signal="next_round" from="RoundResultsSreen" to="." method="_on_round_results_sreen_next_round"]

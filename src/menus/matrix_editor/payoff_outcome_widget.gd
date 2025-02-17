@@ -1,8 +1,9 @@
-## widget node to handle editing the values of a matrix outcome
-##
-## responds to editing either of the two line edits and sends it to SharedData
-extends MarginContainer
 class_name PayoffOutcomeWidget
+extends MarginContainer
+## Widget node to handle editing the values of a matrix outcome.
+##
+## Responds to editing either of the two line edits and sends it to SharedData.
+## NOTE: This node assumes 2 players per dyad.
 
 ## sent when the values are updated
 signal values_updated(outcome_mask, p1_value, p2_value)
@@ -37,10 +38,14 @@ func get_current_values() -> Array:
 	return [int(_p1_outcome.value), int(_p2_outcome.value)]
 
 
+# DYAD
 ## manually set the outcomes
-func set_outcomes(outcome1: int, outcome2: int) -> void:
-	_p1_outcome.set_value_no_signal(outcome1)
-	_p2_outcome.set_value_no_signal(outcome2)
+func set_outcomes(outcomes: Array[int]) -> void:
+	if outcomes.size() == 2:
+		_p1_outcome.set_value_no_signal(outcomes[0])
+		_p2_outcome.set_value_no_signal(outcomes[1])
+	else:
+		push_error("Expected two players. Aborted.")
 
 
 func _on_value_changed(_value):

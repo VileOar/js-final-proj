@@ -109,7 +109,8 @@ func set_round(current_round: int, last: int) -> void:
 
 ## function to start all stages of the animation of points
 func start_anim() -> void:
-	
+	pass
+	# TODO: complete
 
 
 ## starts solving each point for each player[br]

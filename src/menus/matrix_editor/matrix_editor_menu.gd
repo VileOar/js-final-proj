@@ -1,6 +1,7 @@
 ## menu to edit the payoff matrix
 ##
 ## should allow to edit or reset each individual matrix value
+## NOTE: This node assumes 2 players per dyad.
 extends Control
 class_name MatrixEditorMenu
 
@@ -33,7 +34,7 @@ var _matrix_data: PayoffMatrix
 
 
 func _ready():
-	_matrix_data = SharedData.get_settings().get_matrix_data() as PayoffMatrix
+	_matrix_data = SharedData.get_settings().payoff_matrix
 	_setup_ui()
 
 
@@ -48,7 +49,7 @@ func _setup_ui() -> void:
 	for widget in _outcome_widgets:
 		var outcome_mask = widget.get_outcome_mask()
 		var outcome_values = _matrix_data.get_matrix_outcome(outcome_mask)
-		widget.set_outcomes(outcome_values[0], outcome_values[1])
+		widget.set_outcomes(outcome_values)
 	
 	_apply_btn.disabled = true
 

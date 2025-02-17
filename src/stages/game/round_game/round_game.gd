@@ -82,7 +82,7 @@ func _ready() -> void:
 	_NUM_DYADS = SharedData.get_dyad_count()
 	_LOSE_PENALTY = SharedData.get_settings().lose_penalty_multiplier
 	_ROUND_DUR = SharedData.get_settings().round_time
-	_MATRIX_COPY = SharedData.get_settings().get_matrix_data().copy()
+	_MATRIX_COPY = SharedData.get_settings().payoff_matrix.copy()
 	
 	_round_restarted.connect(_on_round_restarted)
 	
@@ -272,7 +272,7 @@ func _solve_points(dyad: DyadGame):
 	_round_stats[players[1]].set_score(0)
 	
 	for point in dyad.get_dyad_game_points():
-		var payoffs_array = SharedData.get_settings().get_matrix_data().get_matrix_outcome(point) # get the corresponding payoffs array
+		var payoffs_array = _MATRIX_COPY.get_matrix_outcome(point) # get the corresponding payoffs array
 		
 		# add to this round's score
 		_round_stats[players[0]].add_score(payoffs_array[0])
@@ -338,18 +338,18 @@ func _publish_round_scores():
 # || --- SIGNAL CALLBACKS --- ||
 # ------------------------------
 
+# juts the callback for the timer, going one second at a time
 func _on_seconds_timer_timeout():
 	# TODO: refactor
 	_time_counter -= 1
 	_timer_label.text = str(_time_counter)
 	if _time_counter <= 0: # if time reached end
-		_stop_round()
-		_outro_round()
+		_on_round_end()
 		
 		#_dyad0.stop_dyad()
 		#_dyad1.stop_dyad()
 		#
-		## solve points, regardless of UI
+		# solve points, regardless of UI
 		#_solve_points(_dyad0)
 		#_solve_points(_dyad1)
 		#_handle_round_scores()
@@ -363,6 +363,12 @@ func _on_seconds_timer_timeout():
 		#_round_results_screen.start_point_solving(_round_stats)
 	else: # else, keep going
 		_timer.start(1)
+
+
+# internal callback for when the round ends
+func _on_round_end():
+	_stop_round()
+	_outro_round()
 
 
 # for when a dyad reports being ready

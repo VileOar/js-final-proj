@@ -4,7 +4,6 @@
 ## autoload), the payoff matrix and total statistics for each player
 extends Node
 
-const _PLAYERS_PER_DYAD = 2 # obviously...
 
 # the total scores and statistics of each individual player
 var _player_data: Array
@@ -76,7 +75,7 @@ func get_dyad_count() -> int:
 
 ## shorthand to get player count
 func get_player_count() -> int:
-	return get_dyad_count() * _PLAYERS_PER_DYAD
+	return get_dyad_count() * _settings.team_size
 
 
 ## manually set player total score

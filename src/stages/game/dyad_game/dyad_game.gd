@@ -3,6 +3,7 @@
 ## this script is not meant to control the logic of the game (that is for the fsm and states)[br]
 ## this script sets the environment of the game, setting the players in the dyad and serving as 
 ## provider of the interactions with ui and such
+## NOTE: This node assumes 2 players per dyad.
 extends Control
 class_name DyadGame
 
@@ -31,6 +32,9 @@ signal _all_players_ready
 @export var _player1_index := -1
 ## player 2 index of this dyad
 @export var _player2_index := -1
+# TODO: remove above
+## list of player indices in this dyad
+@export var _player_index_list: Array[int] = []
 
 ## the stack of points accumulated by the dyad[br]
 ## each point is represented by a 2-bit number, identifying the binary choice of each player (coop
@@ -59,30 +63,41 @@ func reset_dyad() -> void:
 # ---------------------
 
 ## setup the dyad with the proper data
-func setup_dyad(p1_index, p2_index) -> void:
+func setup_dyad(players_ix_list: Array[int]) -> void:
 	# set the correct player indices and set the graphics correctly
-	_player1_index = p1_index
-	_player_ui_list[0].set_player(_player1_index)
-	_player2_index = p2_index
-	_player_ui_list[1].set_player(_player2_index)
+	# TODO: remove
+	#_player1_index = p1_index
+	#_player_ui_list[0].set_player(_player1_index)
+	#_player2_index = p2_index
+	#_player_ui_list[1].set_player(_player2_index)
+	_player_index_list = players_ix_list
+	for px in _player_index_list:
+		_player_ui_list[px].set_player(px)
+		
+		# add ai players if required
+		if !InputManager.is_human_device(InputManager.get_player_device(px)):
+			var ai = AIPlayer.new() as AIPlayer
+			ai.set_player(px)
+			_ai.call_deferred("add_child", ai)
 	
+	# TODO: remove
 	# add ai players if required
-	if !InputManager.is_human_device(InputManager.get_player_device(_player1_index)):
-		var ai = AIPlayer.new() as AIPlayer
-		ai.set_player(_player1_index)
-		_ai.call_deferred("add_child", ai)
-	if !InputManager.is_human_device(InputManager.get_player_device(_player2_index)):
-		var ai = AIPlayer.new() as AIPlayer
-		ai.set_player(_player2_index)
-		_ai.call_deferred("add_child", ai)
+	#if !InputManager.is_human_device(InputManager.get_player_device(_player1_index)):
+		#var ai = AIPlayer.new() as AIPlayer
+		#ai.set_player(_player1_index)
+		#_ai.call_deferred("add_child", ai)
+	#if !InputManager.is_human_device(InputManager.get_player_device(_player2_index)):
+		#var ai = AIPlayer.new() as AIPlayer
+		#ai.set_player(_player2_index)
+		#_ai.call_deferred("add_child", ai)
 
 
 ## startup sequence, does not actually start the dyad
 func intro_dyad() -> void:
 	_ready_players = 0
-	_player_ui_list[0].play_start_anim()
-	_player_ui_list[1].play_start_anim()
-	while _ready_players < 2:
+	for pui in _player_ui_list:
+		pui.play_start_anim()
+	while _ready_players < _player_index_list.size():
 		await _all_players_ready
 	
 	# wait a second after animations finish
@@ -126,7 +141,7 @@ func notify_new_prompt(prompt: int) -> void:
 
 ## return the players in this dyad
 func get_dyad_players() -> Array:
-	var players = [_player1_index, _player2_index]
+	var players = _player_index_list.duplicate()
 	players.sort()
 	return players
 
@@ -142,12 +157,12 @@ func get_dyad_game_points()-> Array:
 
 ## add a new point to the stack[br]
 ## it comes in the form of a 2bit value, as defined in the matrix Outcomes
-func add_point(point_mask : int) -> void:
+func add_point(point_mask: int) -> void:
 	if point_mask in Global.Outcomes.values():
 		_game_points.append(point_mask)
 		_point_stack.push_point()
 	else:
-		push_error("Tried to add an invalid matrix outcome")
+		push_error("Tried to add an invalid matrix outcome.")
 
 
 ## reset points
@@ -180,5 +195,5 @@ func show_answers_ui(show_hide: bool, answers: Array) -> void:
 
 func _on_player_ready_sequence() -> void:
 	_ready_players += 1
-	if _ready_players >= 2:
+	if _ready_players >= _player_index_list.size():
 		_all_players_ready.emit()

@@ -1,31 +1,46 @@
 class_name GameSettings
 extends Resource
-## Resource for the game's settings
+## Resource for the game's settings.
 ##
 ## This script is the data holder for the game's persistent settings (i.e. the settings that can
 ## persist across sessions and be saved to and loaded from a file.
 
-## total time for a round
+## Total time for a round.
 var round_time: float
 
-## number of rounds in a game
+## Number of rounds in a game.
 var num_rounds: int
 
-## round lose penalty multiplier
+## Round lose penalty multiplier.
 var lose_penalty_multiplier: float
 
-## whether to show instructions screen on start
+## Whether to show instructions screen on start.
 var show_instructions: bool
 
-## the payoff matrix outcome values
+# the payoff matrix outcome values
 var _payoff_matrix: PayoffMatrix
+## Matrix data containing information about decision outcomes
+var payoff_matrix: PayoffMatrix:
+	get:
+		return _payoff_matrix
+	set(_v):
+		push_warning("Forbidden set operation on 'payoff_matrix'. Ignored.")
+
+## Objects accessing the settings should not ever make any assumptions about the size of teams, even
+## if obvious.
+var team_size: int:
+	get:
+		return Global.PLAYERS_PER_TEAM
+	set(_v):
+		push_warning("Forbidden set operation on 'team_size'. Ignored.")
 
 
 func _init() -> void:
+	# TODO: pass argument for number of players
 	_payoff_matrix = PayoffMatrix.new()
 
 
-## return settings to their default values
+## Return settings to their default values.
 func reset(include_matrix: bool = false) -> void:
 	round_time = 5.0#30.0
 	num_rounds = 2#5
@@ -36,12 +51,7 @@ func reset(include_matrix: bool = false) -> void:
 		_payoff_matrix.reset()
 
 
-## getter for matrix data
-func get_matrix_data() -> PayoffMatrix:
-	return _payoff_matrix
-
-
-## save function
+## Settings save function.
 func save() -> void:
 	var config_file := ConfigFile.new()
 	
@@ -52,15 +62,15 @@ func save() -> void:
 	
 	for outcome in Global.Outcomes.values():
 		var values := _payoff_matrix.get_matrix_outcome(outcome)
-		config_file.set_value("matrix", str(outcome)+"1", values[0])
-		config_file.set_value("matrix", str(outcome)+"2", values[1])
+		for ix in values.size():
+			config_file.set_value("matrix", str(outcome)+str(ix+1), values[ix])
 	
 	var error = config_file.save(Global.SETTINGS_FILEPATH)
 	if error:
 		push_error("Error while trying to save data: %s. Aborting." % error)
 
 
-## load function
+## Settings load function.
 func load() -> void:
 	var config_file := ConfigFile.new()
 	var error = config_file.load(Global.SETTINGS_FILEPATH)

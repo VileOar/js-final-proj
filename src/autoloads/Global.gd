@@ -27,12 +27,15 @@ enum Outcomes {
 	DD = 3,
 }
 
+## teams are dyads, meaning 2 players
+const PLAYERS_PER_TEAM := 2
+
 ## max time for the second player to answer in a dyad
-const SECOND_ANSWER_TIMER = 1.5 # in sec
+const SECOND_ANSWER_TIMER := 1.5 # in sec
 ## short delay when both answers right before showing next prompt
-const CORRECT_DELAY = 0.5
+const CORRECT_DELAY := 0.5
 ## longer delay when answers are wrong
-const WRONG_DELAY = 2.0
+const WRONG_DELAY := 2.0
 
 ## path of save file
 const SETTINGS_FILEPATH := "user://settings.ini"
