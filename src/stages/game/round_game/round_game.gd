@@ -160,7 +160,7 @@ func _setup_round() -> void:
 		_dyad_container.call_deferred("add_child", dyad_game)
 		while !dyad_game.is_node_ready():
 			await dyad_game.ready
-		dyad_game.setup_dyad(ix * 2, ix * 2 + 1)
+		#dyad_game.setup_dyad(ix * 2, ix * 2 + 1)
 		
 		# prepare the player stats
 		# add one for each player in the dyad

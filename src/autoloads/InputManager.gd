@@ -43,7 +43,9 @@ func add_player_device(player: int, device : int):
 
 ## get the device for a player
 func get_player_device(player: int):
-	return _player_devices[player]
+	if 0 <= player and player < _player_devices.size():
+		return _player_devices[player]
+	return AI_DEVICE
 
 
 ## return the type of device based on its id
@@ -67,15 +69,18 @@ func device_free(device: int) -> bool:
 		return false
 
 
-func _unhandled_input(event) -> void:
-	if _listening and event.is_action_type() and event.is_pressed():
-		var device = AI_DEVICE
-		if event is InputEventJoypadButton: # if it came from a connected gamepad, it has a device
-			device = (event as InputEventJoypadButton).device
-		else: # otherwise, it's interpreted as the KBM
-			event.device = -1 # cheating a little
-			device = -1
-		Signals.input_player_action.emit(_get_player_by_device(device), event)
+func _input(event) -> void:
+	if event.is_pressed():
+		# send general event when something is pressed (use case ex: for skipping)
+		Signals.general_input.emit(event)
+		if _listening and event.is_action_type():
+			var device = AI_DEVICE
+			if event is InputEventJoypadButton: # if it came from a connected gamepad, it has a device
+				device = (event as InputEventJoypadButton).device
+			else: # otherwise, it's interpreted as the KBM
+				event.device = -1 # cheating a little
+				device = -1
+			Signals.input_player_action.emit(_get_player_by_device(device), event)
 
 
 # check if player is a valid index [br]

@@ -148,5 +148,8 @@ func get_player_stats(player_id: int) -> PlayerStats:
 
 # callback to when an answer is created, for statistics
 func _on_new_player_answer(answer: PlayerAnswer) -> void:
-	var stats = _player_data[answer.player_id()] as PlayerStats
-	stats.parse_answer(answer)
+	if 0 <= answer.player_id() and answer.player_id() < _player_data.size():
+		var stats = _player_data[answer.player_id()] as PlayerStats
+		stats.parse_answer(answer)
+	else:
+		push_error("INTERNAL ERROR: Player id is larger than data array. Operation aborted.")

@@ -4,6 +4,9 @@
 ## it just declares the signals that should be accessible by anyone
 extends Node
 
+@warning_ignore("unused_signal")
+## Signal for general inpu, parsed by the InputManager Node
+signal general_input(input_event)
 
 @warning_ignore("unused_signal")
 ## Signal for when a player action is pressed, sent by the InputManager.

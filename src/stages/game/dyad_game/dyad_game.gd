@@ -47,15 +47,18 @@ var _ready_players := 0
 
 func _ready() -> void:
 	_fsm.replace_state("StoppedState")
+	
+	# TODO: remove
+	setup_dyad([0, 1])
+	intro_dyad()
+	await self.stable
+	start_dyad()
 
 
 ## reset this dyad
 func reset_dyad() -> void:
 	_ready_players = 0
 	_reset_dyad_points()
-	# TODO: remove?
-	#for ai in _ai.get_children():
-		#ai.queue_free()
 
 
 # ---------------------
@@ -64,12 +67,6 @@ func reset_dyad() -> void:
 
 ## setup the dyad with the proper data
 func setup_dyad(players_ix_list: Array[int]) -> void:
-	# set the correct player indices and set the graphics correctly
-	# TODO: remove
-	#_player1_index = p1_index
-	#_player_ui_list[0].set_player(_player1_index)
-	#_player2_index = p2_index
-	#_player_ui_list[1].set_player(_player2_index)
 	_player_index_list = players_ix_list
 	for px in _player_index_list:
 		_player_ui_list[px].set_player(px)
@@ -79,17 +76,6 @@ func setup_dyad(players_ix_list: Array[int]) -> void:
 			var ai = AIPlayer.new() as AIPlayer
 			ai.set_player(px)
 			_ai.call_deferred("add_child", ai)
-	
-	# TODO: remove
-	# add ai players if required
-	#if !InputManager.is_human_device(InputManager.get_player_device(_player1_index)):
-		#var ai = AIPlayer.new() as AIPlayer
-		#ai.set_player(_player1_index)
-		#_ai.call_deferred("add_child", ai)
-	#if !InputManager.is_human_device(InputManager.get_player_device(_player2_index)):
-		#var ai = AIPlayer.new() as AIPlayer
-		#ai.set_player(_player2_index)
-		#_ai.call_deferred("add_child", ai)
 
 
 ## startup sequence, does not actually start the dyad
@@ -114,8 +100,6 @@ func intro_dyad() -> void:
 ## start the state machine
 func start_dyad() -> void:
 	_fsm.replace_state("PromptState")
-	# TODO: remove, this should be done in round game
-	#InputManager.enable(true)
 
 
 # ---------------------
@@ -125,7 +109,6 @@ func start_dyad() -> void:
 ## stop the state machine
 func stop_dyad() -> void:
 	_fsm.replace_state("StoppedState")
-	#InputManager.enable(false)
 
 
 ## NOTE: called by fsm only[br]

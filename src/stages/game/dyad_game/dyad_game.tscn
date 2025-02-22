@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://csk7v3jwntq18"]
+[gd_scene load_steps=14 format=3 uid="uid://csk7v3jwntq18"]
 
 [ext_resource type="Script" path="res://src/stages/game/dyad_game/dyad_game.gd" id="1_rj5ni"]
 [ext_resource type="Script" path="res://src/stages/game/dyad_game/states/dyad_state_machine.gd" id="2_hq41h"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://7c4smtyjcn3m" path="res://src/stages/game/dyad_game/ui/player/player_ui.tscn" id="8_6rlia"]
 [ext_resource type="AudioStream" uid="uid://bqbkaca3vtc3d" path="res://assets/sfx/sounds/answers/alarm_a.wav" id="9_d204i"]
 [ext_resource type="PackedScene" uid="uid://dcgckpqoo0y3m" path="res://src/stages/game/dyad_game/point_stack.tscn" id="10_pi61h"]
+[ext_resource type="Script" path="res://src/stages/game/dyad_game/states/intro_state.gd" id="10_yrwaf"]
 
 [node name="DyadGame" type="Control"]
 layout_mode = 3
@@ -56,6 +57,9 @@ script = ExtResource("6_t7b25")
 [node name="WrongAudio" type="AudioStreamPlayer" parent="StateMachine/WrongState"]
 stream = ExtResource("9_d204i")
 volume_db = -10.0
+
+[node name="IntroState" type="Node" parent="StateMachine"]
+script = ExtResource("10_yrwaf")
 
 [node name="UI" type="MarginContainer" parent="."]
 layout_mode = 1
