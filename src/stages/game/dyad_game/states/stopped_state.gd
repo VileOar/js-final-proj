@@ -5,5 +5,5 @@ extends StackState
 class_name StoppedState
 
 
-func enter():
+func activate():
 	_fsm.stop_everything()

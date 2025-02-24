@@ -34,6 +34,13 @@ func play_start_anim() -> void:
 	ready_sequence.emit()
 
 
+## make sure the anim is in its stop state
+func idle_anim() -> void:
+	%AnimCop.play("sit")
+	$DrinkSound.stop()
+	$SlamSound.stop()
+
+
 ## reveal or hide the answer
 func show_answer(answer : PlayerAnswer):
 	_answer.animate_answer(answer)

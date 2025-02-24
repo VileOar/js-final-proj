@@ -11,32 +11,34 @@ var _player_answers := {}
 ## the current direction in the prompt
 var _prompt = Global.Directions.NONE
 
+var _dyad_fsm: DyadStateMachine
 
-func enter():
-	var fsm = _fsm as DyadStateMachine
-	fsm.stop_everything()
+
+func activate():
+	_dyad_fsm = fsm() as DyadStateMachine
+	_dyad_fsm.stop_everything()
 	Signals.input_player_action.connect(_on_player_input)
-	fsm.connect_disconnect_timer(true, _timeout)
+	_dyad_fsm.connect_disconnect_timer(true, _timeout)
 	
 	# reset player answers
-	fsm.reset_answers_cache()
+	_dyad_fsm.reset_answers_cache()
 	_player_answers.clear()
-	for player in fsm.get_dyad_players():
+	for player in _dyad_fsm.get_dyad_players():
 		_player_answers[player] = null
 	
 	# this state is used to generate a new prompt, so this is done on enter
 	_prompt = randi_range(0, 3) as Global.Directions # generate a new dir as per those defined in Directions
-	fsm.show_prompt_ui(true, _prompt)
-	fsm.new_prompt(_prompt)
+	_dyad_fsm.show_prompt_ui(true, _prompt)
+	_dyad_fsm.new_prompt(_prompt)
 	$PromptAudio.play()
 
 
-func exit():
+func deactivate():
 	Signals.input_player_action.disconnect(_on_player_input)
-	_fsm.start_stop_timer(false)
-	_fsm.connect_disconnect_timer(false, _timeout)
-	_fsm.write_answers(_player_answers.values())
-	_fsm.show_prompt_ui(false, Global.Directions.NONE)
+	_dyad_fsm.start_stop_timer(false)
+	_dyad_fsm.connect_disconnect_timer(false, _timeout)
+	_dyad_fsm.write_answers(_player_answers.values())
+	_dyad_fsm.show_prompt_ui(false, Global.Directions.NONE)
 
 
 ## callback to an input signal from the input manager[br]
@@ -51,7 +53,7 @@ func _on_player_input(player, input_event : InputEvent):
 		# check to see how many answers were registered
 		var answer_count = _count_answers()
 		if answer_count == 1: # if this is the first answer, start the timer
-			_fsm.start_stop_timer(true, Global.SECOND_ANSWER_TIMER)
+			_dyad_fsm.start_stop_timer(true, Global.SECOND_ANSWER_TIMER)
 		elif answer_count == _player_answers.size(): # if this is the last answer, process answers
 			var all_right = true
 			for value in _player_answers.values():
@@ -62,9 +64,9 @@ func _on_player_input(player, input_event : InputEvent):
 					all_right = false
 			
 			if all_right:
-				replace_state("RightState")
+				push_state("RightState")
 			else:
-				replace_state("WrongState")
+				push_state("WrongState")
 
 
 ## check how many answers were registered
@@ -78,7 +80,7 @@ func _count_answers() -> int:
 
 ## callback for when timer runs out
 func _timeout():
-	replace_state("WrongState") # automatically go to wrong state
+	push_state("WrongState") # automatically go to wrong state
 
 
 ## function to produce a player action from an input event

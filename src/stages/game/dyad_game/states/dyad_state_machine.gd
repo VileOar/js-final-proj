@@ -99,7 +99,7 @@ func show_answers_ui(show : bool, answers : Array) -> void:
 
 
 ## shortcut to stop everything
-func stop_everything() -> void:	
+func stop_everything() -> void:
 	start_stop_timer(false) # stop the timer completely
 	show_prompt_ui(false, Global.Directions.NONE)
 	show_answers_ui(false, [])

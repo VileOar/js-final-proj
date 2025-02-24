@@ -10,29 +10,21 @@ class_name DyadGame
 ## signal reporting dyad is ready
 signal stable
 
-# internal signal for when all players are ready
-signal _all_players_ready
-
-## reference to the state machine
+# reference to the state machine
 @onready var _fsm = $StateMachine as DyadStateMachine
-## ref to the ai "folder"[br]
-## this is a node that holds ai players if necessary
+# ref to the ai "folder"[br]
+# this is a node that holds ai players if necessary
 @onready var _ai = $AI
 
-## reference to the Prompt Controller
+# reference to the Prompt Controller
 @onready var _prompt_ui = %PromptUI as PromptUI
-## reference to the Dyad Score Controller
+# reference to the Dyad Score Controller
 @onready var _point_stack: PointStack = %PointStack
-## reference to the list of PlayerUIs
+# reference to the list of PlayerUIs
 @onready var _player_ui_list = %PlayerUIs.get_children()
 
 # --- GAME DATA ---
 
-## player 1 index of this dyad
-@export var _player1_index := -1
-## player 2 index of this dyad
-@export var _player2_index := -1
-# TODO: remove above
 ## list of player indices in this dyad
 @export var _player_index_list: Array[int] = []
 
@@ -46,7 +38,7 @@ var _ready_players := 0
 
 
 func _ready() -> void:
-	_fsm.replace_state("StoppedState")
+	_fsm.replace_state("StoppedState", ["all"]) # pass a non existent state to pop_until to pop all
 	
 	# TODO: remove
 	setup_dyad([0, 1])
@@ -80,26 +72,12 @@ func setup_dyad(players_ix_list: Array[int]) -> void:
 
 ## startup sequence, does not actually start the dyad
 func intro_dyad() -> void:
-	_ready_players = 0
-	for pui in _player_ui_list:
-		pui.play_start_anim()
-	while _ready_players < _player_index_list.size():
-		await _all_players_ready
-	
-	# wait a second after animations finish
-	await get_tree().create_timer(1.0).timeout
-	
-	# loop await while until all ais are ready
-	for ai in _ai.get_children():
-		while !ai.is_node_ready():
-			await ai.ready
-	
-	stable.emit()
+	_fsm.push_state("IntroState")
 
 
 ## start the state machine
 func start_dyad() -> void:
-	_fsm.replace_state("PromptState")
+	_fsm.replace_state("PromptState", ["all"])
 
 
 # ---------------------
@@ -108,7 +86,7 @@ func start_dyad() -> void:
 
 ## stop the state machine
 func stop_dyad() -> void:
-	_fsm.replace_state("StoppedState")
+	_fsm.replace_state("StoppedState", ["all"])
 
 
 ## NOTE: called by fsm only[br]
@@ -176,7 +154,9 @@ func show_answers_ui(show_hide: bool, answers: Array) -> void:
 # || --- SIGNAL CALLBACKS --- ||
 # ------------------------------
 
-func _on_player_ready_sequence() -> void:
-	_ready_players += 1
-	if _ready_players >= _player_index_list.size():
-		_all_players_ready.emit()
+
+func _on_intro_finished(_num_players) -> void:
+	# sanity check that the numbers of players match
+	if _num_players != _player_index_list.size():
+		push_warning("SANITY FAILED: Number of ready player UIs does not match actual number of players.")
+	stable.emit()

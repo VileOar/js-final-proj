@@ -7,20 +7,22 @@ class_name RightState
 ## temp ref to the answers
 var answers = []
 
+var _dyad_fsm: DyadStateMachine
 
-func enter():
-	var fsm = _fsm as DyadStateMachine
-	fsm.start_stop_timer(false)
-	fsm.connect_disconnect_timer(true, _timeout)
+
+func activate():
+	_dyad_fsm = fsm() as DyadStateMachine
+	_dyad_fsm.start_stop_timer(false)
+	_dyad_fsm.connect_disconnect_timer(true, _timeout)
 	
-	fsm.start_stop_timer(true, Global.CORRECT_DELAY)
+	_dyad_fsm.start_stop_timer(true, Global.CORRECT_DELAY)
 	
-	answers = fsm.get_registered_answers()
-	fsm.show_answers_ui(true, answers)
+	answers = _dyad_fsm.get_registered_answers()
+	_dyad_fsm.show_answers_ui(true, answers)
 	$CorrectAudio.play()
 
 
-func exit():
+func deactivate():
 	_fsm.connect_disconnect_timer(false, _timeout)
 	_fsm.add_dyad_point(_parse_point())
 	answers = []
@@ -28,7 +30,7 @@ func exit():
 
 ## callback to timer to advance to prompt state
 func _timeout() -> void:
-	replace_state("PromptState")
+	pop_state(["PromptState"])
 
 
 ## return an n-bit value corresponding to the answers in terms of cooperation, where 0 = coop and

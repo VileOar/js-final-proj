@@ -4,22 +4,24 @@
 extends StackState
 class_name WrongState
 
+var _dyad_fsm: DyadStateMachine
 
-func enter():
-	var fsm = _fsm as DyadStateMachine
-	fsm.start_stop_timer(false)
-	fsm.connect_disconnect_timer(true, _timeout)
+
+func activate():
+	_dyad_fsm = fsm() as DyadStateMachine
+	_dyad_fsm.start_stop_timer(false)
+	_dyad_fsm.connect_disconnect_timer(true, _timeout)
 	
-	fsm.start_stop_timer(true, Global.WRONG_DELAY)
+	_dyad_fsm.start_stop_timer(true, Global.WRONG_DELAY)
 	
-	fsm.show_answers_ui(true, fsm.get_registered_answers())
+	_dyad_fsm.show_answers_ui(true, _dyad_fsm.get_registered_answers())
 	$WrongAudio.play()
 
 
-func exit():
+func deactivate():
 	_fsm.connect_disconnect_timer(false, _timeout)
 
 
 ## callback to timer to advance to prompt state
 func _timeout() -> void:
-	replace_state("PromptState")
+	pop_state(["PromptState"])
