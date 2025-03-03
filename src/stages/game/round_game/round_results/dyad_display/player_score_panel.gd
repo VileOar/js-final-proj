@@ -33,28 +33,32 @@ func add_score(add : int) -> void:
 
 ## spawn a number with the added points[br]
 ## target_node specifies where to add the new number
-func spawn_number(target_node : Node, score_number_scene : PackedScene, added_score : int) -> void:
+func score_effect(target_node: Node, score_number_scene: PackedScene, added_score: int) -> void:
 	# spawn score indicator
-	var score = score_number_scene.instantiate() as ScoreNumber
-	var pos = get_global_rect().get_center()
-	pos.y = get_global_rect().position.y - 128
-	score.start(pos, added_score)
-	target_node.add_child(score)
+	var score = _spawn_number(target_node, score_number_scene)
+	score.start_anim(added_score, ScoreNumber.Mode.NORMAL)
 
 
-func apply_penalty(target_node : Node, score_number_scene : PackedScene) -> void:
+func apply_penalty(target_node: Node, score_number_scene: PackedScene) -> void:
 	var penalty = SharedData.get_settings().lose_penalty_multiplier
 	
 	# apply penalty
 	_score_value = int(float(_score_value) * penalty)
 	# display penalty
+	var score = _spawn_number(target_node, score_number_scene)
+	score.start_anim(-100*(1-penalty), ScoreNumber.Mode.PENALTY)
+	
+	_update_score_ui()
+
+
+func _spawn_number(target_node: Node, score_number_scene: PackedScene) -> ScoreNumber:
 	var score = score_number_scene.instantiate() as ScoreNumber
 	var pos = get_global_rect().get_center()
 	pos.y = get_global_rect().position.y - 128
-	score.start_penalty(pos, penalty)
+	score.global_position = pos
 	target_node.add_child(score)
 	
-	_update_score_ui()
+	return score
 
 
 ## update the ui of scores

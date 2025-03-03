@@ -2,6 +2,12 @@
 extends Node2D
 class_name ScoreNumber
 
+## the mode of animation
+enum Mode {
+	NORMAL,
+	PENALTY,
+}
+
 var _speed = 320 # px/sec
 
 var _penalty = false
@@ -18,17 +24,33 @@ func _physics_process(delta: float) -> void:
 	position.y -= _speed * delta
 
 
-func start(pos : Vector2, value : int) -> void:
-	global_position = pos
-	if value >= 0:
-		$Label.text = "+%s" % [value]
-	else:
-		$Label.text = str(value)
+func start_anim(value: float, mode: Mode) -> void:
+	$Label.text = str(int(value))
+	if value >= 0.0:
+		$Label.text = "+" + $Label.text # if non-negative, add a plus sign
+	
+	match mode:
+		Mode.NORMAL:
+			pass
+		Mode.PENALTY:
+			$Label.text += "%%"
+			($Label as Label).theme_type_variation = "PenaltyLabel"
+			_speed = 180
+			_penalty = true
 
 
-func start_penalty(pos : Vector2, penalty : float) -> void:
-	global_position = pos
-	$Label.text = "-%s%%" % [100*(1-penalty)]
-	($Label as Label).theme_type_variation = "PenaltyLabel"
-	_speed = 180
-	_penalty = true
+# TODO: remove
+#func start(pos : Vector2, value : int) -> void:
+	#global_position = pos
+	#if value >= 0:
+		#$Label.text = "+%s" % [value]
+	#else:
+		#$Label.text = str(value)
+#
+#
+#func start_penalty(pos : Vector2, penalty : float) -> void:
+	#global_position = pos
+	#$Label.text = "-%s%%" % [100*(1-penalty)]
+	#($Label as Label).theme_type_variation = "PenaltyLabel"
+	#_speed = 180
+	#_penalty = true

@@ -78,7 +78,7 @@ func _ready():
 
 
 # similar to the round game, instantiate necessary scenes, according to the number of dyads
-func setup_results(num_dyads: int, matrix_data) -> void:
+func setup_results(num_dyads: int, matrix_data: PayoffMatrix) -> void:
 	_MATRIX_DATA = matrix_data
 	
 	# setup results

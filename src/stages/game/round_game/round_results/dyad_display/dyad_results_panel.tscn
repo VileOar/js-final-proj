@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://doly0aqjw7m6l"]
+[gd_scene load_steps=6 format=3 uid="uid://doly0aqjw7m6l"]
 
 [ext_resource type="Script" path="res://src/stages/game/round_game/round_results/dyad_display/dyad_results_panel.gd" id="1_06j8w"]
 [ext_resource type="PackedScene" uid="uid://hbx38k3wfwha" path="res://src/stages/game/round_game/round_results/dyad_display/score_number.tscn" id="2_jcxgw"]
 [ext_resource type="PackedScene" uid="uid://c8cadvctsyqpa" path="res://src/stages/game/round_game/round_results/matrix_display/point_outcome_grid.tscn" id="2_snf3t"]
-[ext_resource type="PackedScene" uid="uid://oqgqq4mpijmn" path="res://src/stages/game/round_game/round_results/dyad_display/player_score_panel.tscn" id="3_42x6v"]
 [ext_resource type="PackedScene" uid="uid://c46pe3fgg1b0n" path="res://src/stages/game/round_game/round_results/dyad_display/stats_list.tscn" id="5_guypt"]
 [ext_resource type="PackedScene" uid="uid://dcgckpqoo0y3m" path="res://src/stages/game/dyad_game/point_stack.tscn" id="5_jcf2g"]
 
@@ -17,47 +16,82 @@ size_flags_horizontal = 3
 script = ExtResource("1_06j8w")
 _score_number_scene = ExtResource("2_jcxgw")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 2
-theme_override_constants/separation = 24
 
-[node name="StatsDisplay" type="MarginContainer" parent="VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="PlayerDiplay" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/PlayerDiplay"]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="P1Panel2" type="PanelContainer" parent="PanelContainer/VBoxContainer/PlayerDiplay/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"MainPanel"
+
+[node name="PlayerLabel" type="Label" parent="PanelContainer/VBoxContainer/PlayerDiplay/HBoxContainer/P1Panel2"]
+layout_mode = 2
+theme_type_variation = &"MenuTitle"
+theme_override_font_sizes/font_size = 24
+text = "Player 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="P2Panel2" type="PanelContainer" parent="PanelContainer/VBoxContainer/PlayerDiplay/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"MainPanel"
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/PlayerDiplay/HBoxContainer/P2Panel2"]
+layout_mode = 2
+theme_type_variation = &"MenuTitle"
+theme_override_font_sizes/font_size = 24
+text = "Player 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerScores" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="P1Score" type="PanelContainer" parent="PanelContainer/VBoxContainer/PlayerScores"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"SimplePanel"
+
+[node name="PointOutcomeGrid" parent="PanelContainer/VBoxContainer/PlayerScores" instance=ExtResource("2_snf3t")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="P2Score" type="PanelContainer" parent="PanelContainer/VBoxContainer/PlayerScores"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"SimplePanel"
+
+[node name="StatsDisplay" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="StatsList" parent="VBoxContainer/StatsDisplay" instance=ExtResource("5_guypt")]
+[node name="StatsList" parent="PanelContainer/VBoxContainer/StatsDisplay" instance=ExtResource("5_guypt")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Control" type="Control" parent="VBoxContainer/StatsDisplay"]
+[node name="Control" type="Control" parent="PanelContainer/VBoxContainer/StatsDisplay"]
 layout_mode = 2
 
-[node name="PointStack" parent="VBoxContainer/StatsDisplay/Control" instance=ExtResource("5_jcf2g")]
+[node name="PointStack" parent="PanelContainer/VBoxContainer/StatsDisplay/Control" instance=ExtResource("5_jcf2g")]
 unique_name_in_owner = true
 layout_mode = 1
 theme_override_constants/margin_top = 32
 theme_override_constants/margin_bottom = 64
 
-[node name="PointOutcomeGrid" parent="VBoxContainer" instance=ExtResource("2_snf3t")]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 4
-
-[node name="PlayerDiplay" type="MarginContainer" parent="VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 4
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PlayerDiplay"]
-layout_mode = 2
-theme_override_constants/separation = 0
-alignment = 1
-
-[node name="P1Panel" parent="VBoxContainer/PlayerDiplay/HBoxContainer" instance=ExtResource("3_42x6v")]
-unique_name_in_owner = true
-layout_mode = 2
-
-[node name="P2Panel" parent="VBoxContainer/PlayerDiplay/HBoxContainer" instance=ExtResource("3_42x6v")]
-unique_name_in_owner = true
-layout_mode = 2
-
-[connection signal="finished_animation" from="VBoxContainer/StatsDisplay/StatsList" to="." method="_on_stats_list_finished_animation"]
+[connection signal="finished_animation" from="PanelContainer/VBoxContainer/StatsDisplay/StatsList" to="." method="_on_stats_list_finished_animation"]
