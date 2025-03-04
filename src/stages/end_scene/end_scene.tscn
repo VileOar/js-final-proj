@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dmfruovnif6mi"]
 
-[ext_resource type="Script" path="res://src/stages/end_scene/victory_screen.gd" id="1_dcimy"]
+[ext_resource type="Script" uid="uid://bspqc2mj2cug8" path="res://src/stages/end_scene/victory_screen.gd" id="1_dcimy"]
 [ext_resource type="PackedScene" uid="uid://bjy1xnxblu6qu" path="res://src/stages/end_scene/player_score_graph.tscn" id="2_cvrxf"]
 
 [node name="EndScene" type="Node2D"]

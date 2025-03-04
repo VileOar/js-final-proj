@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://be1joxrc38num"]
 
 [ext_resource type="PackedScene" uid="uid://bxsla0a4rcmlb" path="res://src/stages/game/dyad_game/ui/prompt/animated_prompt.tscn" id="1_ak283"]
-[ext_resource type="Script" path="res://src/menus/instructions_scene/instructions_scene.gd" id="1_dshkp"]
+[ext_resource type="Script" uid="uid://bmqc7nxmhp208" path="res://src/menus/instructions_scene/instructions_scene.gd" id="1_dshkp"]
 [ext_resource type="PackedScene" uid="uid://cxeceweo8851j" path="res://src/stages/game/dyad_game/ui/player/animated_answer.tscn" id="2_hci0m"]
 
 [node name="InstructionsScene" type="Control"]

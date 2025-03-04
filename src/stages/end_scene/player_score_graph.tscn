@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bjy1xnxblu6qu"]
 
-[ext_resource type="Script" path="res://src/stages/end_scene/player_score_graph.gd" id="1_6ttnp"]
+[ext_resource type="Script" uid="uid://dpmnadosh314l" path="res://src/stages/end_scene/player_score_graph.gd" id="1_6ttnp"]
 [ext_resource type="AudioStream" uid="uid://cd1hw3hh6cqhv" path="res://assets/sfx/sounds/points/032-Switch01.ogg" id="2_d50mk"]
 
 [node name="PlayerScoreGraph" type="MarginContainer"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://bbe7i8g4nyqp1"]
 
-[ext_resource type="Script" path="res://src/stages/game/round_game/round_results/round_results_screen.gd" id="1_eay3j"]
+[ext_resource type="Script" uid="uid://b4cpsqik6uqkk" path="res://src/stages/game/round_game/round_results/round_results_screen.gd" id="1_eay3j"]
 [ext_resource type="PackedScene" uid="uid://doly0aqjw7m6l" path="res://src/stages/game/round_game/round_results/dyad_display/dyad_results_panel.tscn" id="1_pya0j"]
 [ext_resource type="Texture2D" uid="uid://dew2pi3sx8u5p" path="res://assets/gfx/ui/divider.png" id="3_4mhr0"]
 [ext_resource type="AudioStream" uid="uid://cd1hw3hh6cqhv" path="res://assets/sfx/sounds/points/032-Switch01.ogg" id="4_7pcap"]

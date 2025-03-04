@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://doly0aqjw7m6l"]
 
-[ext_resource type="Script" path="res://src/stages/game/round_game/round_results/dyad_display/dyad_results_panel.gd" id="1_06j8w"]
+[ext_resource type="Script" uid="uid://crepvgft5w7kv" path="res://src/stages/game/round_game/round_results/dyad_display/dyad_results_panel.gd" id="1_06j8w"]
 [ext_resource type="PackedScene" uid="uid://hbx38k3wfwha" path="res://src/stages/game/round_game/round_results/dyad_display/score_number.tscn" id="2_jcxgw"]
 [ext_resource type="PackedScene" uid="uid://c8cadvctsyqpa" path="res://src/stages/game/round_game/round_results/matrix_display/point_outcome_grid.tscn" id="2_snf3t"]
 [ext_resource type="PackedScene" uid="uid://c46pe3fgg1b0n" path="res://src/stages/game/round_game/round_results/dyad_display/stats_list.tscn" id="5_guypt"]

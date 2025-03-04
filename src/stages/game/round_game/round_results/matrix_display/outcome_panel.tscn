@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://ddcekyyc5qtsm"]
 
-[ext_resource type="Script" path="res://src/stages/game/round_game/round_results/matrix_display/outcome_panel.gd" id="1_2baj4"]
+[ext_resource type="Script" uid="uid://jo8atufjjuqg" path="res://src/stages/game/round_game/round_results/matrix_display/outcome_panel.gd" id="1_2baj4"]
 [ext_resource type="Texture2D" uid="uid://670ks7dxtt38" path="res://assets/gfx/ui/matrix_panel.png" id="2_h27ma"]
 
 [sub_resource type="Animation" id="Animation_apscr"]
@@ -116,10 +116,10 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_nw5ce"]
 _data = {
-"RESET": SubResource("Animation_apscr"),
-"coop": SubResource("Animation_41kot"),
-"defect": SubResource("Animation_v5x7x"),
-"mutual": SubResource("Animation_skee3")
+&"RESET": SubResource("Animation_apscr"),
+&"coop": SubResource("Animation_41kot"),
+&"defect": SubResource("Animation_v5x7x"),
+&"mutual": SubResource("Animation_skee3")
 }
 
 [node name="OutcomePanel" type="Control"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=3 uid="uid://7c4smtyjcn3m"]
 
-[ext_resource type="Script" path="res://src/stages/game/dyad_game/ui/player/player_ui.gd" id="1_00vx3"]
+[ext_resource type="Script" uid="uid://bsem5idjweei8" path="res://src/stages/game/dyad_game/ui/player/player_ui.gd" id="1_00vx3"]
 [ext_resource type="Texture2D" uid="uid://cv2vkapkd35gr" path="res://assets/gfx/entities/player1.png" id="2_myfut"]
 [ext_resource type="PackedScene" uid="uid://cxeceweo8851j" path="res://src/stages/game/dyad_game/ui/player/animated_answer.tscn" id="2_ufdwb"]
 [ext_resource type="Texture2D" uid="uid://dkb5gktxterij" path="res://assets/gfx/entities/room.png" id="3_6mppa"]
@@ -42,8 +42,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_epdog"]
 _data = {
-"RESET": SubResource("Animation_ydp3x"),
-"default": SubResource("Animation_5ht5u")
+&"RESET": SubResource("Animation_ydp3x"),
+&"default": SubResource("Animation_5ht5u")
 }
 
 [sub_resource type="Animation" id="Animation_wsml6"]
@@ -119,9 +119,9 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xty81"]
 _data = {
-"RESET": SubResource("Animation_wsml6"),
-"drink_slam": SubResource("Animation_c4gd4"),
-"sit": SubResource("Animation_0r7p7")
+&"RESET": SubResource("Animation_wsml6"),
+&"drink_slam": SubResource("Animation_c4gd4"),
+&"sit": SubResource("Animation_0r7p7")
 }
 
 [node name="PlayerUI" type="MarginContainer"]

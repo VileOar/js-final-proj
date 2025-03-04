@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c46pe3fgg1b0n"]
 
-[ext_resource type="Script" path="res://src/stages/game/round_game/round_results/dyad_display/stats_list.gd" id="1_hxru7"]
+[ext_resource type="Script" uid="uid://da1hh7atlxvk1" path="res://src/stages/game/round_game/round_results/dyad_display/stats_list.gd" id="1_hxru7"]
 [ext_resource type="FontFile" uid="uid://dcb5yob1d6vl4" path="res://assets/fonts/Super_Mario_Bros_2.ttf" id="2_17eiq"]
 
 [node name="StatsList" type="MarginContainer"]

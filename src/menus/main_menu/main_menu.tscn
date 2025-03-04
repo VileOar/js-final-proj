@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://cr1i4ulnsdsu2"]
 
 [ext_resource type="FontFile" uid="uid://dcb5yob1d6vl4" path="res://assets/fonts/Super_Mario_Bros_2.ttf" id="1_lrugt"]
-[ext_resource type="Script" path="res://src/menus/main_menu/main_menu.gd" id="1_ukv5m"]
+[ext_resource type="Script" uid="uid://cq5tsxl1yihia" path="res://src/menus/main_menu/main_menu.gd" id="1_ukv5m"]
 [ext_resource type="Texture2D" uid="uid://dkb5gktxterij" path="res://assets/gfx/entities/room.png" id="2_symma"]
 [ext_resource type="Texture2D" uid="uid://cosb6rt24bnms" path="res://assets/gfx/entities/cop.png" id="3_q3fcx"]
 
