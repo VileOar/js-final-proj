@@ -56,7 +56,7 @@ func _on_general_input(_event):
 	if is_active():
 		_skip()
 	else:
-		print_debug("what")
+		pass#print_debug("what")
 
 
 func _on_player_ready_sequence() -> void:

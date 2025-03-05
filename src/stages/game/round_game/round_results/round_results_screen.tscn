@@ -1,10 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://bbe7i8g4nyqp1"]
+[gd_scene load_steps=9 format=3 uid="uid://bbe7i8g4nyqp1"]
 
 [ext_resource type="Script" uid="uid://b4cpsqik6uqkk" path="res://src/stages/game/round_game/round_results/round_results_screen.gd" id="1_eay3j"]
 [ext_resource type="PackedScene" uid="uid://doly0aqjw7m6l" path="res://src/stages/game/round_game/round_results/dyad_display/dyad_results_panel.tscn" id="1_pya0j"]
+[ext_resource type="Script" uid="uid://boodp1vjipx0r" path="res://src/stages/game/round_game/round_results/menu_states/results_state_machine.gd" id="2_ecgv8"]
 [ext_resource type="Texture2D" uid="uid://dew2pi3sx8u5p" path="res://assets/gfx/ui/divider.png" id="3_4mhr0"]
+[ext_resource type="Script" uid="uid://dcyfmwbkdpuku" path="res://src/stages/game/round_game/round_results/menu_states/solve_points_state.gd" id="3_vyoqy"]
 [ext_resource type="AudioStream" uid="uid://cd1hw3hh6cqhv" path="res://assets/sfx/sounds/points/032-Switch01.ogg" id="4_7pcap"]
 [ext_resource type="AudioStream" uid="uid://bh1xo30mk81qq" path="res://assets/sfx/sounds/points/Knock.ogg" id="5_3xpl4"]
+[ext_resource type="Script" uid="uid://gugtdt8yvrti" path="res://src/stages/game/round_game/round_results/menu_states/animate_stats_state.gd" id="6_gbm10"]
 
 [node name="RoundResultsSreen" type="MarginContainer"]
 anchors_preset = 15
@@ -14,6 +17,28 @@ offset_top = -38.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_eay3j")
+
+[node name="ResultsStateMachine" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_ecgv8")
+metadata/_custom_type_script = "uid://dwko1yq04j63v"
+
+[node name="SolvePointsState" type="Node" parent="ResultsStateMachine"]
+script = ExtResource("3_vyoqy")
+metadata/_custom_type_script = "uid://dcyfmwbkdpuku"
+
+[node name="AddPointAudio" type="AudioStreamPlayer" parent="ResultsStateMachine/SolvePointsState"]
+stream = ExtResource("4_7pcap")
+
+[node name="RemPointAudio" type="AudioStreamPlayer" parent="ResultsStateMachine/SolvePointsState"]
+stream = ExtResource("5_3xpl4")
+
+[node name="BetweenTimer" type="Timer" parent="ResultsStateMachine/SolvePointsState"]
+one_shot = true
+
+[node name="AnimateStatsState" type="Node" parent="ResultsStateMachine"]
+script = ExtResource("6_gbm10")
+metadata/_custom_type_script = "uid://gugtdt8yvrti"
 
 [node name="Panel" type="ColorRect" parent="."]
 layout_mode = 2
@@ -33,16 +58,10 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="Dyad0" parent="MarginContainer/VBoxContainer/ResultsContainer" instance=ExtResource("1_pya0j")]
-unique_name_in_owner = true
 layout_mode = 2
-_player1_index = 0
-_player2_index = 1
 
 [node name="Dyad1" parent="MarginContainer/VBoxContainer/ResultsContainer" instance=ExtResource("1_pya0j")]
-unique_name_in_owner = true
 layout_mode = 2
-_player1_index = 2
-_player2_index = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -94,16 +113,7 @@ text = "Round End"
 horizontal_alignment = 1
 vertical_alignment = 2
 
-[node name="BetweenTimer" type="Timer" parent="."]
-one_shot = true
-
-[node name="AddPointAudio" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_7pcap")
-
-[node name="RemPointAudio" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_3xpl4")
-
+[connection signal="timeout" from="ResultsStateMachine/SolvePointsState/BetweenTimer" to="ResultsStateMachine/SolvePointsState" method="_on_between_timer_timeout"]
 [connection signal="finished_animation" from="MarginContainer/VBoxContainer/ResultsContainer/Dyad0" to="." method="_on_dyad_finished_animation"]
 [connection signal="finished_animation" from="MarginContainer/VBoxContainer/ResultsContainer/Dyad1" to="." method="_on_dyad_finished_animation"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/NextRoundBtn" to="." method="_on_button_pressed"]
-[connection signal="timeout" from="BetweenTimer" to="." method="_solve_point"]

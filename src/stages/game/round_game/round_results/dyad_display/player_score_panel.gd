@@ -5,58 +5,50 @@
 extends MarginContainer
 class_name PlayerScorePanel
 
-## the player label
-@onready var _label = %PlayerLabel
-## their score label
+# the score label
 @onready var _score = %PlayerScore
+# ref to the node where score numbers should spawn
+@onready var _number_pivot: Node2D = %ScoreNumberPivot
 
 ## keep the score as an int
 var _score_value := 0
 
 
-## set the player id and populate the rest of the UI from it
-func set_player(player_id : int) -> void:
-	_label.text = "Player %s" % [player_id + 1]
-
-
 ## set the score and populate UI
-func set_score(score : int) -> void:
+func set_score(score: int) -> void:
 	_score_value = score
 	_update_score_ui()
 
 
 ## add to score
-func add_score(add : int) -> void:
+func add_score(add: int) -> void:
 	_score_value += add
+	_update_score_ui()
+
+
+## multiply to score
+func mul_score(mul: float) -> void:
+	_score_value = (float(_score_value) * mul)
 	_update_score_ui()
 
 
 ## spawn a number with the added points[br]
 ## target_node specifies where to add the new number
-func score_effect(target_node: Node, score_number_scene: PackedScene, added_score: int) -> void:
+func score_effect(score_number_scene: PackedScene, added_score: int) -> void:
 	# spawn score indicator
-	var score = _spawn_number(target_node, score_number_scene)
+	var score = _spawn_number(score_number_scene)
 	score.start_anim(added_score, ScoreNumber.Mode.NORMAL)
 
 
-func apply_penalty(target_node: Node, score_number_scene: PackedScene) -> void:
-	var penalty = SharedData.get_settings().lose_penalty_multiplier
-	
-	# apply penalty
-	_score_value = int(float(_score_value) * penalty)
+func penalty_effect(score_number_scene: PackedScene, penalty_multiplier: float) -> void:
 	# display penalty
-	var score = _spawn_number(target_node, score_number_scene)
-	score.start_anim(-100*(1-penalty), ScoreNumber.Mode.PENALTY)
-	
-	_update_score_ui()
+	var score = _spawn_number(score_number_scene)
+	score.start_anim(-100*(1-penalty_multiplier), ScoreNumber.Mode.PENALTY)
 
 
-func _spawn_number(target_node: Node, score_number_scene: PackedScene) -> ScoreNumber:
+func _spawn_number(score_number_scene: PackedScene) -> ScoreNumber:
 	var score = score_number_scene.instantiate() as ScoreNumber
-	var pos = get_global_rect().get_center()
-	pos.y = get_global_rect().position.y - 128
-	score.global_position = pos
-	target_node.add_child(score)
+	_number_pivot.add_child(score)
 	
 	return score
 

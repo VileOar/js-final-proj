@@ -23,3 +23,7 @@ func trigger_animation(payoff_outcome : int, speed : float = 1.0):
 			anim.play("mutual", -1, speed)
 		_:
 			assert(false, "invalid outcome given")
+
+
+func stop_animation():
+	%AnimationPlayer.stop()

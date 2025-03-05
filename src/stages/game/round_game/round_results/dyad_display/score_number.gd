@@ -33,24 +33,7 @@ func start_anim(value: float, mode: Mode) -> void:
 		Mode.NORMAL:
 			pass
 		Mode.PENALTY:
-			$Label.text += "%%"
+			$Label.text += "%"
 			($Label as Label).theme_type_variation = "PenaltyLabel"
 			_speed = 180
 			_penalty = true
-
-
-# TODO: remove
-#func start(pos : Vector2, value : int) -> void:
-	#global_position = pos
-	#if value >= 0:
-		#$Label.text = "+%s" % [value]
-	#else:
-		#$Label.text = str(value)
-#
-#
-#func start_penalty(pos : Vector2, penalty : float) -> void:
-	#global_position = pos
-	#$Label.text = "-%s%%" % [100*(1-penalty)]
-	#($Label as Label).theme_type_variation = "PenaltyLabel"
-	#_speed = 180
-	#_penalty = true

@@ -1,44 +1,32 @@
-[gd_scene load_steps=2 format=3 uid="uid://oqgqq4mpijmn"]
+[gd_scene load_steps=2 format=3 uid="uid://rc61or3bklrk"]
 
 [ext_resource type="Script" uid="uid://bsg6y4hc785mf" path="res://src/stages/game/round_game/round_results/dyad_display/player_score_panel.gd" id="1_qwim8"]
 
 [node name="PlayerScorePanel" type="MarginContainer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_left = 384.0
+offset_top = 280.0
+offset_right = 493.0
+offset_bottom = 317.0
 size_flags_horizontal = 3
-size_flags_vertical = 3
 script = ExtResource("1_qwim8")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 2
-alignment = 2
+size_flags_horizontal = 3
+theme_type_variation = &"SimplePanel"
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
-layout_mode = 2
-theme_type_variation = &"MainPanel"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer"]
-layout_mode = 2
-
-[node name="PlayerLabel" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer"]
+[node name="PlayerScore" type="Label" parent="PanelContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_type_variation = &"MenuTitle"
-theme_override_font_sizes/font_size = 20
-text = "Player 1"
+theme_type_variation = &"HeaderMedium"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PlayerScore" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Control" parent="PanelContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 8
+size_flags_vertical = 4
+
+[node name="ScoreNumberPivot" type="Node2D" parent="PanelContainer/Control"]
+unique_name_in_owner = true
+position = Vector2(0, -32)

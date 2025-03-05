@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://doly0aqjw7m6l"]
+[gd_scene load_steps=7 format=3 uid="uid://doly0aqjw7m6l"]
 
 [ext_resource type="Script" uid="uid://crepvgft5w7kv" path="res://src/stages/game/round_game/round_results/dyad_display/dyad_results_panel.gd" id="1_06j8w"]
 [ext_resource type="PackedScene" uid="uid://hbx38k3wfwha" path="res://src/stages/game/round_game/round_results/dyad_display/score_number.tscn" id="2_jcxgw"]
 [ext_resource type="PackedScene" uid="uid://c8cadvctsyqpa" path="res://src/stages/game/round_game/round_results/matrix_display/point_outcome_grid.tscn" id="2_snf3t"]
+[ext_resource type="PackedScene" uid="uid://rc61or3bklrk" path="res://src/stages/game/round_game/round_results/dyad_display/player_score_panel.tscn" id="3_qshsc"]
 [ext_resource type="PackedScene" uid="uid://c46pe3fgg1b0n" path="res://src/stages/game/round_game/round_results/dyad_display/stats_list.tscn" id="5_guypt"]
 [ext_resource type="PackedScene" uid="uid://dcgckpqoo0y3m" path="res://src/stages/game/dyad_game/point_stack.tscn" id="5_jcf2g"]
 
@@ -27,55 +28,51 @@ theme_override_constants/separation = 12
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/PlayerDiplay"]
+[node name="PlayerLabels" type="HBoxContainer" parent="PanelContainer/VBoxContainer/PlayerDiplay"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="P1Panel2" type="PanelContainer" parent="PanelContainer/VBoxContainer/PlayerDiplay/HBoxContainer"]
+[node name="P1Panel" type="PanelContainer" parent="PanelContainer/VBoxContainer/PlayerDiplay/PlayerLabels"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"MainPanel"
 
-[node name="PlayerLabel" type="Label" parent="PanelContainer/VBoxContainer/PlayerDiplay/HBoxContainer/P1Panel2"]
+[node name="P1Label" type="Label" parent="PanelContainer/VBoxContainer/PlayerDiplay/PlayerLabels/P1Panel"]
 layout_mode = 2
-theme_type_variation = &"MenuTitle"
-theme_override_font_sizes/font_size = 24
+theme_type_variation = &"BigText"
 text = "Player 1"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="P2Panel2" type="PanelContainer" parent="PanelContainer/VBoxContainer/PlayerDiplay/HBoxContainer"]
+[node name="P2Panel" type="PanelContainer" parent="PanelContainer/VBoxContainer/PlayerDiplay/PlayerLabels"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"MainPanel"
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/PlayerDiplay/HBoxContainer/P2Panel2"]
+[node name="P2Label" type="Label" parent="PanelContainer/VBoxContainer/PlayerDiplay/PlayerLabels/P2Panel"]
 layout_mode = 2
-theme_type_variation = &"MenuTitle"
-theme_override_font_sizes/font_size = 24
+theme_type_variation = &"BigText"
 text = "Player 1"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="PlayerScores" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 alignment = 1
 
-[node name="P1Score" type="PanelContainer" parent="PanelContainer/VBoxContainer/PlayerScores"]
+[node name="P1Score" parent="PanelContainer/VBoxContainer/PlayerScores" instance=ExtResource("3_qshsc")]
 layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"SimplePanel"
 
 [node name="PointOutcomeGrid" parent="PanelContainer/VBoxContainer/PlayerScores" instance=ExtResource("2_snf3t")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="P2Score" type="PanelContainer" parent="PanelContainer/VBoxContainer/PlayerScores"]
+[node name="P2Score" parent="PanelContainer/VBoxContainer/PlayerScores" instance=ExtResource("3_qshsc")]
 layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"SimplePanel"
 
 [node name="StatsDisplay" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2

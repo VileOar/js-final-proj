@@ -24,3 +24,8 @@ func set_payoffs(matrix: PayoffMatrix) -> void:
 func trigger_outcome_anim(outcome: int, anim_speed: float) -> void:
 	if outcome >= 0 and outcome < _outcomes.size():
 		_outcomes[outcome].trigger_animation(outcome, anim_speed)
+
+
+func stop_outcome_anim():
+	for outcome in _outcomes:
+		outcome.stop_animation()

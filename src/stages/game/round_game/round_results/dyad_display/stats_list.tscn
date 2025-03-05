@@ -1,7 +1,141 @@
-[gd_scene load_steps=3 format=3 uid="uid://c46pe3fgg1b0n"]
+[gd_scene load_steps=6 format=3 uid="uid://c46pe3fgg1b0n"]
 
 [ext_resource type="Script" uid="uid://da1hh7atlxvk1" path="res://src/stages/game/round_game/round_results/dyad_display/stats_list.gd" id="1_hxru7"]
 [ext_resource type="FontFile" uid="uid://dcb5yob1d6vl4" path="res://assets/fonts/Super_Mario_Bros_2.ttf" id="2_17eiq"]
+
+[sub_resource type="Animation" id="Animation_pqu2x"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PanelContainer/MarginContainer/StatsList/ScoreRow:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PanelContainer/MarginContainer/StatsList/WinLoseLabel:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PanelContainer/MarginContainer/StatsList/StatValues/Answered:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PanelContainer/MarginContainer/StatsList/StatValues/Correct:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PanelContainer/MarginContainer/StatsList/StatValues/Coop:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_lnm37"]
+resource_name = "display_stats"
+length = 2.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PanelContainer/MarginContainer/StatsList/ScoreRow:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PanelContainer/MarginContainer/StatsList/StatValues/Answered:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PanelContainer/MarginContainer/StatsList/StatValues/Correct:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PanelContainer/MarginContainer/StatsList/StatValues/Coop:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PanelContainer/MarginContainer/StatsList/WinLoseLabel:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(2.5),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pqu2x"]
+_data = {
+&"RESET": SubResource("Animation_pqu2x"),
+&"display_stats": SubResource("Animation_lnm37")
+}
 
 [node name="StatsList" type="MarginContainer"]
 script = ExtResource("1_hxru7")
@@ -24,6 +158,7 @@ theme_override_constants/separation = 32
 
 [node name="ScoreRow" type="VBoxContainer" parent="PanelContainer/MarginContainer/StatsList"]
 unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/separation = 32
@@ -48,84 +183,115 @@ vertical_alignment = 1
 
 [node name="WinLoseLabel" type="Label" parent="PanelContainer/MarginContainer/StatsList"]
 unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_17eiq")
 theme_override_font_sizes/font_size = 32
 horizontal_alignment = 1
 
-[node name="StatValues" type="GridContainer" parent="PanelContainer/MarginContainer/StatsList"]
+[node name="StatValues" type="VBoxContainer" parent="PanelContainer/MarginContainer/StatsList"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 4
-theme_override_constants/h_separation = 64
-theme_override_constants/v_separation = 24
-columns = 3
+theme_override_constants/separation = 24
 
-[node name="AnsweredStat0" type="Label" parent="PanelContainer/MarginContainer/StatsList/StatValues"]
+[node name="Answered" type="HBoxContainer" parent="PanelContainer/MarginContainer/StatsList/StatValues"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 64
+alignment = 1
+
+[node name="AnsweredStat0" type="Label" parent="PanelContainer/MarginContainer/StatsList/StatValues/Answered"]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 8
 theme_override_font_sizes/font_size = 12
+text = "1"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="AnsweredLabel" type="Label" parent="PanelContainer/MarginContainer/StatsList/StatValues"]
+[node name="AnsweredLabel" type="Label" parent="PanelContainer/MarginContainer/StatsList/StatValues/Answered"]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 12
 text = "Questions Answered"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="AnsweredStat1" type="Label" parent="PanelContainer/MarginContainer/StatsList/StatValues"]
+[node name="AnsweredStat1" type="Label" parent="PanelContainer/MarginContainer/StatsList/StatValues/Answered"]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 12
+text = "1"
 vertical_alignment = 1
 
-[node name="CorrectStat0" type="Label" parent="PanelContainer/MarginContainer/StatsList/StatValues"]
+[node name="Correct" type="HBoxContainer" parent="PanelContainer/MarginContainer/StatsList/StatValues"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 64
+alignment = 1
+
+[node name="CorrectStat0" type="Label" parent="PanelContainer/MarginContainer/StatsList/StatValues/Correct"]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 8
 theme_override_font_sizes/font_size = 12
+text = "1"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="CorrectLabel" type="Label" parent="PanelContainer/MarginContainer/StatsList/StatValues"]
+[node name="CorrectLabel" type="Label" parent="PanelContainer/MarginContainer/StatsList/StatValues/Correct"]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 12
 text = "Correct Answers"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CorrectStat1" type="Label" parent="PanelContainer/MarginContainer/StatsList/StatValues"]
+[node name="CorrectStat1" type="Label" parent="PanelContainer/MarginContainer/StatsList/StatValues/Correct"]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 12
+text = "1"
 vertical_alignment = 1
 
-[node name="CoopStat0" type="Label" parent="PanelContainer/MarginContainer/StatsList/StatValues"]
+[node name="Coop" type="HBoxContainer" parent="PanelContainer/MarginContainer/StatsList/StatValues"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 64
+alignment = 1
+
+[node name="CoopStat0" type="Label" parent="PanelContainer/MarginContainer/StatsList/StatValues/Coop"]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 8
 theme_override_font_sizes/font_size = 12
+text = "1"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="CoopLabel" type="Label" parent="PanelContainer/MarginContainer/StatsList/StatValues"]
+[node name="CoopLabel" type="Label" parent="PanelContainer/MarginContainer/StatsList/StatValues/Coop"]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 12
 text = "Times Cooperated"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CoopStat1" type="Label" parent="PanelContainer/MarginContainer/StatsList/StatValues"]
+[node name="CoopStat1" type="Label" parent="PanelContainer/MarginContainer/StatsList/StatValues/Coop"]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 12
+text = "1"
 vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_pqu2x")
+}

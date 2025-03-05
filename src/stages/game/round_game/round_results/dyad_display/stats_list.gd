@@ -1,4 +1,5 @@
 ## only to display and animate stats
+## NOTE: This node assumes 2 players per dyad.
 extends MarginContainer
 class_name StatsList
 
@@ -16,24 +17,30 @@ const LOSE_COLOUR = "66ffe3"
 @onready var _correct_stat1: Label = %CorrectStat1
 @onready var _coop_stat1: Label = %CoopStat1
 
-@onready var _score_row: HBoxContainer = %ScoreRow
+@onready var _score_row: VBoxContainer = %ScoreRow
 @onready var _score_stat: Label = %ScoreStat
 
 @onready var _win_lose_label: Label = %WinLoseLabel
 
+@onready var _animation_player: AnimationPlayer = $AnimationPlayer
+
 
 ## reset everything
 func reset() -> void:
+	# TODO: remove
 	# hide everything
-	for child in _stat_values.get_children():
-		child.modulate.a = 0.0
-	_score_row.modulate.a = 0.0
-	_win_lose_label.text = ""
+	#for child in _stat_values.get_children():
+		#child.modulate.a = 0.0
+	#_score_row.modulate.a = 0.0
+	#_win_lose_label.text = ""
+	_animation_player.play("RESET")
 
 
-## set the stats for this player, in this round[br]
-## animation to show them with delays
-func animate_stats(stats0: PlayerStats, stats1: PlayerStats, score: int) -> void:
+## sets the stats from the received variable.[br]
+## assumes that the stats are ordered correctly
+func set_stats(stats: Array[PlayerStats], score: int) -> void:
+	var stats0 = stats[0]
+	var stats1 = stats[1]
 	_answered_stat0.text = str(stats0.get_answer_count())
 	_answered_stat1.text = str(stats1.get_answer_count())
 	_correct_stat0.text = "%s (%d%%)" % [stats0.get_correct_count(), stats0.get_correct_ratio()]
@@ -41,21 +48,27 @@ func animate_stats(stats0: PlayerStats, stats1: PlayerStats, score: int) -> void
 	_coop_stat0.text = "%s (%d%%)" % [stats0.get_coop_count(), stats0.get_coop_ratio()]
 	_coop_stat1.text = "%s (%d%%)" % [stats1.get_coop_count(), stats1.get_coop_ratio()]
 	_score_stat.text = str(score)
-	
+
+
+## set the stats for this player, in this round[br]
+## animation to show them with delays
+func animate_stats() -> void:
 	# the index of the first element of the row in StatValues node
-	var stat_row = 0
-	while stat_row < _stat_values.get_child_count():
-		await get_tree().create_timer(0.4).timeout
-		_stat_values.get_child(stat_row).modulate.a = 1.0
-		_stat_values.get_child(stat_row + 1).modulate.a = 1.0 # the second one is the value label
-		_stat_values.get_child(stat_row + 2).modulate.a = 1.0
-		
-		stat_row += 3
-	
-	await get_tree().create_timer(0.6).timeout
-	_score_row.modulate.a = 1.0
-	
-	finished_animation.emit()
+	# TODO: remove
+	#var stat_row = 0
+	#while stat_row < _stat_values.get_child_count():
+		#await get_tree().create_timer(0.4).timeout
+		#_stat_values.get_child(stat_row).modulate.a = 1.0
+		#_stat_values.get_child(stat_row + 1).modulate.a = 1.0 # the second one is the value label
+		#_stat_values.get_child(stat_row + 2).modulate.a = 1.0
+		#
+		#stat_row += 3
+	#
+	#await get_tree().create_timer(0.6).timeout
+	#_score_row.modulate.a = 1.0
+	#
+	#finished_animation.emit()
+	_animation_player.play("display_stats")
 
 
 func set_win_lose(win_lose: bool) -> void:
@@ -65,3 +78,8 @@ func set_win_lose(win_lose: bool) -> void:
 	else:
 		_win_lose_label.text = "LOSE"
 		_win_lose_label.add_theme_color_override("font_color", Color(LOSE_COLOUR))
+
+
+func skip_animation() -> void:
+	_animation_player.play("display_stats")
+	_animation_player.seek(_animation_player.current_animation_length, true)
