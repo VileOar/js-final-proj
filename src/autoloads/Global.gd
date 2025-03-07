@@ -77,9 +77,10 @@ func play_music_track(track_name: String) -> void:
 
 ## convert a tuple of player ids into a team identifier
 func get_dyad_id(player_ixs: Array[int]) -> String:
+	player_ixs.sort()
 	var key = ""
 	for i in player_ixs.size():
-		key += player_ixs[i]
+		key += str(player_ixs[i])
 		if i < player_ixs.size(): # if not the last, also add a separator
 			key += "-"
 	

@@ -77,7 +77,8 @@ func connect_disconnect_timer(try_connect : bool, callback : Callable) -> int:
 		if try_connect:
 			return _timer.connect("timeout", callback)
 		else:
-			_timer.disconnect("timeout", callback)
+			if _timer.timeout.is_connected(callback):
+				_timer.disconnect("timeout", callback)
 			return OK
 	else:
 		push_error("Timer reference is null")

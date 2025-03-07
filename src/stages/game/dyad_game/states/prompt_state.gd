@@ -34,7 +34,8 @@ func activate():
 
 
 func deactivate():
-	Signals.input_player_action.disconnect(_on_player_input)
+	if Signals.input_player_action.is_connected(_on_player_input):
+		Signals.input_player_action.disconnect(_on_player_input)
 	_dyad_fsm.start_stop_timer(false)
 	_dyad_fsm.connect_disconnect_timer(false, _timeout)
 	_dyad_fsm.write_answers(_player_answers.values())

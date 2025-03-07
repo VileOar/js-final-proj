@@ -9,7 +9,8 @@ const WIN_COlOUR = "ffe478"
 const LOSE_COLOUR = "66ffe3"
 
 # refs to stat labels
-@onready var _stat_values: GridContainer = %StatValues
+# TODO: remove unused
+#@onready var _stat_values: VBoxContainer = %StatValues
 @onready var _answered_stat0: Label = %AnsweredStat0
 @onready var _correct_stat0: Label = %CorrectStat0
 @onready var _coop_stat0: Label = %CoopStat0
@@ -17,7 +18,7 @@ const LOSE_COLOUR = "66ffe3"
 @onready var _correct_stat1: Label = %CorrectStat1
 @onready var _coop_stat1: Label = %CoopStat1
 
-@onready var _score_row: VBoxContainer = %ScoreRow
+#@onready var _score_row: VBoxContainer = %ScoreRow
 @onready var _score_stat: Label = %ScoreStat
 
 @onready var _win_lose_label: Label = %WinLoseLabel
@@ -83,3 +84,8 @@ func set_win_lose(win_lose: bool) -> void:
 func skip_animation() -> void:
 	_animation_player.play("display_stats")
 	_animation_player.seek(_animation_player.current_animation_length, true)
+
+
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "display_stats":
+		finished_animation.emit()

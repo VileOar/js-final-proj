@@ -67,8 +67,6 @@ func _on_player_ready_sequence() -> void:
 
 
 func _final_setup() -> void:
-	# wait a second after animations finish
-	await get_tree().create_timer(1.0).timeout
 	
 	# if this is not active after waiting ignore the rest
 	if is_active():

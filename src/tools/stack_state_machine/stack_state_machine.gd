@@ -84,7 +84,7 @@ func get_state_node(state: String) -> StackState:
 
 ## Whether the state exists
 func has_state_node(state: String) -> bool:
-	return _states_holder.has_node(state) != null
+	return _states_holder.has_node(state)
 
 
 # --------------------------------
@@ -144,7 +144,7 @@ func _pop_state(pop_until: Array[String] = []):
 			):
 				# if pop_until was not empty, but stack is, it means no desired state was reached
 				# so, they either don't exist or something went wrong
-				if !pop_until.is_empty() and _state_stack.is_empty():
+				if !pop_until.is_empty() and _state_stack.is_empty() and pop_until != [""]:
 					push_warning("No state among %s was found. State stack was fully emptied." % str(pop_until))
 				
 				# one of the end conditions was reached

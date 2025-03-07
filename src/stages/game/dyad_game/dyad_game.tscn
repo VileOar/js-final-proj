@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://csk7v3jwntq18"]
+[gd_scene load_steps=15 format=3 uid="uid://csk7v3jwntq18"]
 
 [ext_resource type="Script" uid="uid://cprrftddc3knm" path="res://src/stages/game/dyad_game/dyad_game.gd" id="1_rj5ni"]
 [ext_resource type="Script" uid="uid://0vfw4plnyses" path="res://src/stages/game/dyad_game/states/dyad_state_machine.gd" id="2_hq41h"]
 [ext_resource type="Script" uid="uid://ckhbswedt461b" path="res://src/stages/game/dyad_game/states/stopped_state.gd" id="3_q8i4y"]
+[ext_resource type="Script" uid="uid://uj868xskqfan" path="res://src/stages/game/round_game/round_results/menu_states/idle_state.gd" id="3_tm1vi"]
 [ext_resource type="Script" uid="uid://benogbelkl4y1" path="res://src/stages/game/dyad_game/states/prompt_state.gd" id="4_23ul0"]
 [ext_resource type="AudioStream" uid="uid://73366si228xt" path="res://assets/sfx/sounds/answers/talk2.wav" id="5_aky61"]
 [ext_resource type="Script" uid="uid://cfs7sw1cji53a" path="res://src/stages/game/dyad_game/states/right_state.gd" id="5_u1kn3"]
@@ -34,6 +35,10 @@ unique_name_in_owner = true
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("_timer")]
 script = ExtResource("2_hq41h")
 _timer = NodePath("../Timer")
+
+[node name="IdleResultsState" type="Node" parent="StateMachine"]
+script = ExtResource("3_tm1vi")
+metadata/_custom_type_script = "uid://uj868xskqfan"
 
 [node name="StoppedState" type="Node" parent="StateMachine"]
 script = ExtResource("3_q8i4y")

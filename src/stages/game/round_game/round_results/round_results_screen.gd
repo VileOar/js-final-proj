@@ -22,6 +22,10 @@ signal next_round
 @onready var _round_label: Label = %RoundLabel
 
 
+func _ready() -> void:
+	_results_fsm.replace_state("IdleResultsState", [""])
+
+
 # similar to the round game, instantiate necessary scenes, according to the number of dyads
 func setup_results(dyads: Array[Array], matrix_data: PayoffMatrix, penalty_multiplier: float) -> void:
 	_results_fsm.MATRIX_DATA = matrix_data
@@ -34,7 +38,9 @@ func setup_results(dyads: Array[Array], matrix_data: PayoffMatrix, penalty_multi
 		_results_container.call_deferred("add_child", results_dyad)
 		while !results_dyad.is_node_ready():
 			await results_dyad.ready
-		results_dyad.setup_panel(dyad, matrix_data)
+		var cast_dyad: Array[int] = []
+		cast_dyad.assign(dyad)
+		results_dyad.setup_panel(cast_dyad, matrix_data)
 		# connect necessary signals
 		results_dyad.finished_animation.connect(_results_fsm.get_state_node("AnimateStatsState").on_anim_finished)
 		
@@ -86,7 +92,9 @@ func set_round_pointstacks(point_stacks: Dictionary[String, Array]) -> void:
 	
 	for dyad in _results_container.get_children():
 		var key = Global.get_dyad_id(dyad.get_assigned_players())
-		dyad.set_point_stack(point_stacks[key]) # only the size is necessary
+		var cast_stack: Array[int] = []
+		cast_stack.assign(point_stacks[key])
+		dyad.set_point_stack(cast_stack) # only the size is necessary
 
 
 ## ready and stable to progress to next round

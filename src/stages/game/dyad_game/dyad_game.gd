@@ -38,13 +38,13 @@ var _ready_players := 0
 
 
 func _ready() -> void:
-	_fsm.replace_state("StoppedState", ["all"]) # pass a non existent state to pop_until to pop all
+	_fsm.replace_state("StoppedState", [""]) # pass a non existent state to pop_until to pop all
 	
 	# TODO: remove
-	setup_dyad([0, 1])
-	intro_dyad()
-	await self.stable
-	start_dyad()
+	#setup_dyad([0, 1])
+	#intro_dyad()
+	#await self.stable
+	#start_dyad()
 
 
 ## reset this dyad
@@ -60,8 +60,9 @@ func reset_dyad() -> void:
 ## setup the dyad with the proper data
 func setup_dyad(players_ix_list: Array[int]) -> void:
 	_player_index_list = players_ix_list
-	for px in _player_index_list:
-		_player_ui_list[px].set_player(px)
+	for i in _player_index_list.size():
+		var px = _player_index_list[i]
+		_player_ui_list[i].set_player(px)
 		
 		# add ai players if required
 		if !InputManager.is_human_device(InputManager.get_player_device(px)):
@@ -77,7 +78,7 @@ func intro_dyad() -> void:
 
 ## start the state machine
 func start_dyad() -> void:
-	_fsm.replace_state("PromptState", ["all"])
+	_fsm.replace_state("PromptState", [""])
 
 
 # ---------------------
@@ -86,7 +87,7 @@ func start_dyad() -> void:
 
 ## stop the state machine
 func stop_dyad() -> void:
-	_fsm.replace_state("StoppedState", ["all"])
+	_fsm.replace_state("StoppedState", [""])
 
 
 ## NOTE: called by fsm only[br]
@@ -159,4 +160,8 @@ func _on_intro_finished(_num_players) -> void:
 	# sanity check that the numbers of players match
 	if _num_players != _player_index_list.size():
 		push_warning("SANITY FAILED: Number of ready player UIs does not match actual number of players.")
+	
+	# wait a second after animations finish
+	await get_tree().create_timer(1.0).timeout
+	
 	stable.emit()

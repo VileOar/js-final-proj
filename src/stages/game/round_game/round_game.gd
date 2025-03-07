@@ -25,10 +25,11 @@ const _ROUND_END_DELAY = 3.0
 # ref to the animation player for screen effects
 @onready var _anim = $AnimationPlayer
 
+# TODO: remove
 # ref to the first dyad
-@onready var _dyad0 = %Dyad0 as DyadGame
+#@onready var _dyad0 = %Dyad0 as DyadGame
 # ref to the second dyad
-@onready var _dyad1 = %Dyad1 as DyadGame
+#@onready var _dyad1 = %Dyad1 as DyadGame
 
 # container for the dividers
 @onready var _dividers: HBoxContainer = %Dividers
@@ -76,6 +77,10 @@ var _round_counter = 0
 # these are COMPLETELY independent from the ones from SharedData and are only useful for the round
 var _round_stats := []
 
+# the teams of players[br]
+# each value of this array is an array with player indices of that team
+var _teams: Array[Array]
+
 
 func _ready() -> void:
 	_NUM_ROUNDS = SharedData.get_settings().num_rounds
@@ -87,6 +92,11 @@ func _ready() -> void:
 	_round_restarted.connect(_on_round_restarted)
 	
 	Signals.new_player_answer.connect(_on_new_player_answer)
+	
+	# setup teams
+	# this can possibly be changed if the teams are received from some other source
+	for ix in _NUM_DYADS:
+		_teams.append([ix * 2, ix * 2 + 1])
 	
 	_setup_round()
 	_reset_round()
@@ -143,13 +153,17 @@ func _reset_round() -> void:
 
 # create dyads and setup ui as necessary
 func _setup_round() -> void:
+	var _more_than_one = _teams.size() > 1
+	
 	# setup dyads
-	for ix in _NUM_DYADS:
+	for ix in _teams.size():
+		var is_last_team = ix >= _teams.size() - 1
+		
 		# only needs to add spacers and dividers if more than one dyad
-		if _NUM_DYADS > 1:
+		if _more_than_one:
 			var spacer = _dividers.add_spacer(false)
 			spacer.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			if ix < _NUM_DYADS - 1: # if not the last dyad, add divider
+			if is_last_team: # if not the last dyad, add divider
 				var divider = _divider_ui_scene.instantiate()
 				_dividers.call_deferred("add_child", divider)
 				while !divider.is_node_ready():
@@ -158,14 +172,20 @@ func _setup_round() -> void:
 		# create and dyad games
 		var dyad_game := _dyad_scene.instantiate() as DyadGame
 		_dyad_container.call_deferred("add_child", dyad_game)
+		dyad_game.stable.connect(_on_dyad_stable)
 		while !dyad_game.is_node_ready():
 			await dyad_game.ready
-		#dyad_game.setup_dyad(ix * 2, ix * 2 + 1)
+		var dyad_pxs: Array[int] = []
+		dyad_pxs.assign(_teams[ix])
+		dyad_game.setup_dyad(dyad_pxs)
 		
-		# prepare the player stats
-		# add one for each player in the dyad
-		_round_stats.append(PlayerStats.new())
-		_round_stats.append(PlayerStats.new())
+		for px in _teams[ix]:
+			# prepare the player stats
+			# add one for each player in the dyad
+			_round_stats.append(PlayerStats.new())
+	
+	# setup the results screen
+	_round_results_screen.setup_results(_teams, _MATRIX_COPY, _LOSE_PENALTY)
 
 
 ## wait for all round preparations to be complete (in-game animations like screen fade)
@@ -201,7 +221,7 @@ func _start_round() -> void:
 	_timer.start(1)
 	_time_counter = _ROUND_DUR
 	_timer_label.modulate.a = 1.0
-	_timer_label.text = str(_time_counter)
+	_timer_label.text = "%d" % _time_counter
 	
 	# enable input
 	InputManager.enable(true)
@@ -226,16 +246,23 @@ func _stop_round() -> void:
 func _outro_round() -> void:
 	# handle the points of the round, regardless of UI
 	_handle_round_scores()
+	
+	# build the dictionary of pointstacks
+	var dyad_stacks_dict: Dictionary[String, Array] = {}
+	for dyad in _dyad_container.get_children():
+		var key = Global.get_dyad_id(dyad.get_dyad_players())
+		dyad_stacks_dict[key] = dyad.get_dyad_game_points()
+	
 	# setup round results screen
-	_round_results_screen.set_point_stacks(_dyad0.get_dyad_game_points(), _dyad1.get_dyad_game_points())
+	_round_results_screen.set_round_pointstacks(dyad_stacks_dict)
 	
 	# wait a bit before advancing
 	await get_tree().create_timer(_ROUND_END_DELAY).timeout
 	
 	# setup the rounds and kickoff results screen
-	_round_results_screen.set_round(_round_counter, _NUM_ROUNDS - 1)
+	_round_results_screen.set_round_index(_round_counter, _NUM_ROUNDS - 1)
 	_round_results_screen.show()
-	_round_results_screen.start_point_solving(_round_stats)
+	#_round_results_screen.start_point_solving(_round_stats)
 	
 	# NOTE: _next_round is called after the results screen button is pressed
 
@@ -342,7 +369,7 @@ func _publish_round_scores():
 func _on_seconds_timer_timeout():
 	# TODO: refactor
 	_time_counter -= 1
-	_timer_label.text = str(_time_counter)
+	_timer_label.text = "%d" % _time_counter
 	if _time_counter <= 0: # if time reached end
 		_on_round_end()
 		

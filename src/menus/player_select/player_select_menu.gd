@@ -57,7 +57,8 @@ func _notification(what):
 
 # method to actually go to game scene
 func _go_to_game() -> void:
-	print_debug("Unimplemented")
+	SceneSwitcher.switch_topscene_id("game_scene")
+	#print_debug("Unimplemented")
 
 
 # ------------------------------

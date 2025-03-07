@@ -28,7 +28,7 @@ func add_score(add: int) -> void:
 
 ## multiply to score
 func mul_score(mul: float) -> void:
-	_score_value = (float(_score_value) * mul)
+	_score_value = int(float(_score_value) * mul)
 	_update_score_ui()
 
 
