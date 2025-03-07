@@ -11,10 +11,6 @@ var _player_data: Array
 # the game settings
 var _settings: GameSettings
 
-# TODO: remove
-# 2 or 4 player mode (true for 4, false for 2)
-#var _4player = true
-
 # defines the number of dyads in the game (should only be changed in the player select screen
 var _dyad_count = 0 # defaults to 0, so that if, for some reason, the game is started and the dyads
 					# have not been set, they will not even be created
@@ -41,18 +37,6 @@ func _ready():
 ## getter for game settings
 func get_settings() -> GameSettings:
 	return _settings
-
-
-# TODO: remove
-## set the player mode
-#func set_player_mode(four_or_two_player : bool) -> void:
-	#_4player = four_or_two_player
-
-
-# TODO: remove
-## get the player mode
-#func is_4player_mode() -> bool:
-	#return _4player
 
 
 ## setup dyads and player data

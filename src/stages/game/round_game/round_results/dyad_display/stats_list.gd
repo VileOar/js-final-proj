@@ -9,8 +9,6 @@ const WIN_COlOUR = "ffe478"
 const LOSE_COLOUR = "66ffe3"
 
 # refs to stat labels
-# TODO: remove unused
-#@onready var _stat_values: VBoxContainer = %StatValues
 @onready var _answered_stat0: Label = %AnsweredStat0
 @onready var _correct_stat0: Label = %CorrectStat0
 @onready var _coop_stat0: Label = %CoopStat0
@@ -18,7 +16,6 @@ const LOSE_COLOUR = "66ffe3"
 @onready var _correct_stat1: Label = %CorrectStat1
 @onready var _coop_stat1: Label = %CoopStat1
 
-#@onready var _score_row: VBoxContainer = %ScoreRow
 @onready var _score_stat: Label = %ScoreStat
 
 @onready var _win_lose_label: Label = %WinLoseLabel
@@ -28,12 +25,6 @@ const LOSE_COLOUR = "66ffe3"
 
 ## reset everything
 func reset() -> void:
-	# TODO: remove
-	# hide everything
-	#for child in _stat_values.get_children():
-		#child.modulate.a = 0.0
-	#_score_row.modulate.a = 0.0
-	#_win_lose_label.text = ""
 	_animation_player.play("RESET")
 
 
@@ -54,21 +45,6 @@ func set_stats(stats: Array[PlayerStats], score: int) -> void:
 ## set the stats for this player, in this round[br]
 ## animation to show them with delays
 func animate_stats() -> void:
-	# the index of the first element of the row in StatValues node
-	# TODO: remove
-	#var stat_row = 0
-	#while stat_row < _stat_values.get_child_count():
-		#await get_tree().create_timer(0.4).timeout
-		#_stat_values.get_child(stat_row).modulate.a = 1.0
-		#_stat_values.get_child(stat_row + 1).modulate.a = 1.0 # the second one is the value label
-		#_stat_values.get_child(stat_row + 2).modulate.a = 1.0
-		#
-		#stat_row += 3
-	#
-	#await get_tree().create_timer(0.6).timeout
-	#_score_row.modulate.a = 1.0
-	#
-	#finished_animation.emit()
 	_animation_player.play("display_stats")
 
 

@@ -39,12 +39,6 @@ var _ready_players := 0
 
 func _ready() -> void:
 	_fsm.replace_state("StoppedState", [""]) # pass a non existent state to pop_until to pop all
-	
-	# TODO: remove
-	#setup_dyad([0, 1])
-	#intro_dyad()
-	#await self.stable
-	#start_dyad()
 
 
 ## reset this dyad

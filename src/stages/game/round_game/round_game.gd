@@ -92,29 +92,6 @@ func _ready() -> void:
 	
 	_setup_round()
 	_reset_round()
-	
-	# TODO: correct order of events
-	# - fade out from player select and change to this scene
-	# - setup round
-	#	- setup dyads
-	# - ready round
-	#	- fade in
-	#	- ready dyads (wait for the stable of all dyads)
-	# - start round
-	#	- start dyads
-	
-	# TODO: remove
-	#if SharedData.is_4player_mode():
-		#_dyad1.show()
-	#else:
-		#_dyad1.hide()
-	#
-	#_setup_round()
-	#
-	#Signals.new_player_answer.connect(_on_new_player_answer)
-	#
-	#if !SharedData.is_4player_mode():
-		#$Divider.hide()
 
 
 func _reset_round() -> void:
@@ -288,17 +265,17 @@ func _next_round():
 ## func to actually add the points to player data[br]
 ## this is done all at once, not sequentially, despite the interface
 func _solve_points(dyad: DyadGame):
-	# TODO: refactor
 	var players = dyad.get_dyad_players()
-	_round_stats[players[0]].set_score(0)
-	_round_stats[players[1]].set_score(0)
+	for px in players:
+		_round_stats[px].set_score(0)
 	
 	for point in dyad.get_dyad_game_points():
 		var payoffs_array = _MATRIX_COPY.get_matrix_outcome(point) # get the corresponding payoffs array
 		
 		# add to this round's score
-		_round_stats[players[0]].add_score(payoffs_array[0])
-		_round_stats[players[1]].add_score(payoffs_array[1])
+		for i in players.size():
+			# use the indices to match the sizes
+			_round_stats[players[i]].add_score(payoffs_array[i])
 
 
 ## add points to players, with regard to lose penalty
