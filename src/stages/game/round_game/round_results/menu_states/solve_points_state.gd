@@ -23,8 +23,8 @@ var _points_solved := 0
 # time delay between each point
 var _timer_time: float
 
-# counter for how many dyads finished their stacks
-var _stacks_finished_counter = 0
+# whether listening for skip
+var _listen_skip = true
 
 
 func _ready() -> void:
@@ -32,14 +32,15 @@ func _ready() -> void:
 
 
 func _on_general_input(_event):
-	if is_active():
+	if is_active() and _listen_skip:
+		_listen_skip = false
 		for dyad in fsm().dyad_panels:
 			dyad.skip_point_solving()
-		end_point_solving()
+		_end_point_solving()
 
 
 func activate() -> void:
-	_stacks_finished_counter = 0
+	_listen_skip = true
 	
 	_between_timer.start(_NORMAL_BETWEEN_TIME)
 
@@ -67,7 +68,7 @@ func _solve_point() -> void:
 	
 	# if all stacks were empty, finish
 	if all_empty:
-		on_point_stack_empty()
+		_on_point_stack_empty()
 	else:
 		_between_timer.start(_timer_time)
 
@@ -83,14 +84,20 @@ func _solve_dyad_point(dyad: DyadResultsPanel) -> void:
 		$AddPointAudio.play()
 
 
-func on_point_stack_empty():
+func _on_point_stack_empty():
 	if is_active():
-		_stacks_finished_counter += 1
-		if _stacks_finished_counter >= fsm().dyad_panels.size(): # if all dyads finished their pointstacks
-			end_point_solving()
+		_end_point_solving()
 
 
-func end_point_solving():
+func _end_point_solving():
+	_listen_skip = false
+	for dyad in fsm().dyad_panels:
+		dyad = dyad as DyadResultsPanel
+		var pxs = dyad.get_assigned_players()
+		var true_scores: Array[int] = []
+		var tmp = pxs.map(func(px): return fsm().round_stats[px].get_score())
+		true_scores.assign(tmp)
+		dyad.set_scores(true_scores)
 	print_debug("finished_pointstack")
 
 

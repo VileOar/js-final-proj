@@ -26,4 +26,4 @@ func trigger_animation(payoff_outcome : int, speed : float = 1.0):
 
 
 func stop_animation():
-	%AnimationPlayer.stop()
+	%AnimationPlayer.play("RESET")

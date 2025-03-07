@@ -17,6 +17,8 @@ signal intro_end(num_players)
 # counter for player uis that are in ready position
 var _ready_players := 0
 
+var _listen_skip = true
+
 
 func _ready() -> void:
 	for pui in _player_uis.get_children():
@@ -26,6 +28,7 @@ func _ready() -> void:
 
 
 func activate():
+	_listen_skip = true
 	_ready_players = 0
 	for pui in _player_uis.get_children():
 		pui = pui as PlayerUI
@@ -53,7 +56,8 @@ func _skip() -> void:
 
 
 func _on_general_input(_event):
-	if is_active():
+	if is_active() and _listen_skip:
+		_listen_skip = false
 		_skip()
 	else:
 		pass#print_debug("what")
@@ -67,6 +71,7 @@ func _on_player_ready_sequence() -> void:
 
 
 func _final_setup() -> void:
+	_listen_skip = false
 	
 	# if this is not active after waiting ignore the rest
 	if is_active():

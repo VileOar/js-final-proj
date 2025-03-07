@@ -75,7 +75,7 @@ var _round_counter = 0
 
 # the round's stats; these are overwritten each round[br]
 # these are COMPLETELY independent from the ones from SharedData and are only useful for the round
-var _round_stats := []
+var _round_stats: Dictionary[int, PlayerStats] = {}
 
 # the teams of players[br]
 # each value of this array is an array with player indices of that team
@@ -141,7 +141,7 @@ func _reset_round() -> void:
 		dyad_game.reset_dyad()
 	
 	# reset round stats
-	for stats in _round_stats:
+	for stats in _round_stats.values():
 		stats.reset()
 	
 	await _intro_round()
@@ -163,7 +163,7 @@ func _setup_round() -> void:
 		if _more_than_one:
 			var spacer = _dividers.add_spacer(false)
 			spacer.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			if is_last_team: # if not the last dyad, add divider
+			if !is_last_team: # if not the last dyad, add divider
 				var divider = _divider_ui_scene.instantiate()
 				_dividers.call_deferred("add_child", divider)
 				while !divider.is_node_ready():
@@ -182,7 +182,7 @@ func _setup_round() -> void:
 		for px in _teams[ix]:
 			# prepare the player stats
 			# add one for each player in the dyad
-			_round_stats.append(PlayerStats.new())
+			_round_stats[px] = PlayerStats.new()
 	
 	# setup the results screen
 	_round_results_screen.setup_results(_teams, _MATRIX_COPY, _LOSE_PENALTY)
@@ -261,7 +261,9 @@ func _outro_round() -> void:
 	
 	# setup the rounds and kickoff results screen
 	_round_results_screen.set_round_index(_round_counter, _NUM_ROUNDS - 1)
+	_round_results_screen.set_round_data(_round_stats.duplicate())
 	_round_results_screen.show()
+	_round_results_screen.start_results()
 	#_round_results_screen.start_point_solving(_round_stats)
 	
 	# NOTE: _next_round is called after the results screen button is pressed
@@ -358,6 +360,7 @@ func _handle_round_scores() -> void:
 
 # Method to handle end of round score keeping
 func _publish_round_scores():
+	# TODO: connect to SharedData
 	Signals.round_published.emit(_round_stats)
 
 

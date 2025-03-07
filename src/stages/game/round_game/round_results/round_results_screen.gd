@@ -47,6 +47,11 @@ func setup_results(dyads: Array[Array], matrix_data: PayoffMatrix, penalty_multi
 		_results_fsm.dyad_panels.push_back(results_dyad)
 
 
+## kick off the results animation
+func start_results() -> void:
+	_results_fsm.replace_state("SolvePointsState", [""])
+
+
 ## setup data about current round to update displays
 func set_round_index(current_round: int, last: int) -> void:
 	_round_label.text = "Round %d / %d" % [current_round+1, last+1]
@@ -62,18 +67,18 @@ func set_round_data(round_stats: Dictionary[int, PlayerStats]):
 	for dyad in _results_container.get_children():
 		dyad = dyad as DyadResultsPanel
 		var px_lst = dyad.get_assigned_players() # get the player indices assigned to this panel
-		var scores = []
+		var scores: Dictionary[int, PlayerStats] = {}
 		for px in px_lst:
 			# filter to get only the playerstats assigned to this panel
-			scores.push_back(round_stats[px])
+			scores[px] = round_stats[px]
 		
-		var zeros = []
+		var zeros: Array[int] = []
 		zeros.resize(dyad.get_assigned_players().size())
 		zeros.fill(0)
 		dyad.set_scores(zeros) # reset to zero
 		
 		# sum all scores of this dyad to get the team score
-		var team_score = scores.reduce(func(accum, s): return accum + s.get_score(), 0)
+		var team_score = scores.values().reduce(func(accum, s): return accum + s.get_score(), 0)
 		dyad.set_win_lose(false)
 		dyad.set_stats(scores, team_score)
 		

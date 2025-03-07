@@ -75,8 +75,7 @@ func set_scores(score_list: Array[int]):
 	_stats_list.reset()
 
 
-func set_stats(player_stats: Dictionary[int, PlayerStats], team_score: int, win: bool):
-	_win = win
+func set_stats(player_stats: Dictionary[int, PlayerStats], team_score: int):
 	player_stats.sort()
 	_stats_list.set_stats(player_stats.values(), team_score)
 
