@@ -4,10 +4,10 @@
 [ext_resource type="PackedScene" uid="uid://doly0aqjw7m6l" path="res://src/stages/game/round_game/round_results/dyad_display/dyad_results_panel.tscn" id="1_pya0j"]
 [ext_resource type="Script" uid="uid://boodp1vjipx0r" path="res://src/stages/game/round_game/round_results/menu_states/results_state_machine.gd" id="2_ecgv8"]
 [ext_resource type="Script" uid="uid://uj868xskqfan" path="res://src/stages/game/round_game/round_results/menu_states/idle_state.gd" id="3_4ap3b"]
-[ext_resource type="Texture2D" uid="uid://dew2pi3sx8u5p" path="res://assets/gfx/ui/divider.png" id="3_4mhr0"]
 [ext_resource type="Script" uid="uid://dcyfmwbkdpuku" path="res://src/stages/game/round_game/round_results/menu_states/solve_points_state.gd" id="3_vyoqy"]
 [ext_resource type="AudioStream" uid="uid://cd1hw3hh6cqhv" path="res://assets/sfx/sounds/points/032-Switch01.ogg" id="4_7pcap"]
 [ext_resource type="AudioStream" uid="uid://bh1xo30mk81qq" path="res://assets/sfx/sounds/points/Knock.ogg" id="5_3xpl4"]
+[ext_resource type="Script" uid="uid://cyrqsxnkblace" path="res://src/stages/game/round_game/round_results/menu_states/finished_state.gd" id="5_lhffw"]
 [ext_resource type="Script" uid="uid://gugtdt8yvrti" path="res://src/stages/game/round_game/round_results/menu_states/animate_stats_state.gd" id="6_gbm10"]
 
 [node name="RoundResultsSreen" type="MarginContainer"]
@@ -28,6 +28,10 @@ metadata/_custom_type_script = "uid://dwko1yq04j63v"
 [node name="IdleResultsState" type="Node" parent="ResultsStateMachine"]
 script = ExtResource("3_4ap3b")
 metadata/_custom_type_script = "uid://uj868xskqfan"
+
+[node name="FinishedResultsState" type="Node" parent="ResultsStateMachine"]
+script = ExtResource("5_lhffw")
+metadata/_custom_type_script = "uid://cyrqsxnkblace"
 
 [node name="SolvePointsState" type="Node" parent="ResultsStateMachine"]
 script = ExtResource("3_vyoqy")
@@ -69,34 +73,19 @@ theme_override_constants/separation = 32
 alignment = 1
 
 [node name="ExitGameBtn" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(320, 0)
 layout_mode = 2
+disabled = true
 text = "Exit to Title"
 
 [node name="NextRoundBtn" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
-z_index = 1
 custom_minimum_size = Vector2(320, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 disabled = true
 text = "Next Round"
-
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
-visible = false
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="DividerContainer" type="HBoxContainer" parent="."]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-
-[node name="Divider" type="TextureRect" parent="DividerContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-mouse_filter = 2
-texture = ExtResource("3_4mhr0")
 
 [node name="PanelContainer2" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(0, 88)
@@ -113,5 +102,51 @@ text = "Round End"
 horizontal_alignment = 1
 vertical_alignment = 2
 
+[node name="ConfirmContainer" type="MarginContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="Panel" type="ColorRect" parent="ConfirmContainer"]
+layout_mode = 2
+color = Color(0.152941, 0.152941, 0.211765, 0.470588)
+
+[node name="PanelContainer" type="PanelContainer" parent="ConfirmContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ConfirmContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="Label" type="Label" parent="ConfirmContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Exit to title screen?
+(This game will be lost)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ConfirmContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="YesBtn" type="Button" parent="ConfirmContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"HeaderButton"
+text = "YES"
+
+[node name="NoBtn" type="Button" parent="ConfirmContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"HeaderButton"
+text = "No"
+
 [connection signal="timeout" from="ResultsStateMachine/SolvePointsState/BetweenTimer" to="ResultsStateMachine/SolvePointsState" method="_on_between_timer_timeout"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/NextRoundBtn" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/ExitGameBtn" to="." method="_on_exit_game_btn_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/NextRoundBtn" to="." method="_on_next_round_btn_pressed"]
+[connection signal="pressed" from="ConfirmContainer/PanelContainer/VBoxContainer/HBoxContainer/YesBtn" to="." method="_on_yes_btn_pressed"]
+[connection signal="pressed" from="ConfirmContainer/PanelContainer/VBoxContainer/HBoxContainer/NoBtn" to="." method="_on_no_btn_pressed"]

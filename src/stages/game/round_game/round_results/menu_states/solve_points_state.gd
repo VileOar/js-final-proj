@@ -98,6 +98,7 @@ func _end_point_solving():
 		var tmp = pxs.map(func(px): return fsm().round_stats[px].get_score())
 		true_scores.assign(tmp)
 		dyad.set_scores(true_scores)
+	replace_state("AnimateStatsState")
 	print_debug("finished_pointstack")
 
 

@@ -91,8 +91,7 @@ func animate_stats() -> void:
 
 
 func _on_stats_list_finished_animation() -> void:
-	print_debug("stats anim finished")
-	#finished_animation.emit()
+	finished_animation.emit()
 
 
 # -------------------------

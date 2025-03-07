@@ -3,4 +3,4 @@ extends StackState
 
 
 func activate():
-	(fsm() as ResultsStateMachine).next_round_btn.disabled = true
+	(fsm() as ResultsStateMachine).toggle_buttons(false)

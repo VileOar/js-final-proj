@@ -8,6 +8,9 @@ class_name RoundResultsScreen
 ## emited when the user clicks next round
 signal next_round
 
+## emitted when user click exit game
+signal exit_game
+
 # dyad scene to instantiate for each dyad
 @export var _results_scene: PackedScene
 
@@ -20,6 +23,8 @@ signal next_round
 @onready var _next_round_btn: Button = %NextRoundBtn
 # ref to the label identifying current round
 @onready var _round_label: Label = %RoundLabel
+# ref to the container with the exit button confirm dialog
+@onready var _confirm_container: MarginContainer = %ConfirmContainer
 
 
 func _ready() -> void:
@@ -102,14 +107,21 @@ func set_round_pointstacks(point_stacks: Dictionary[String, Array]) -> void:
 		dyad.set_point_stack(cast_stack) # only the size is necessary
 
 
-## ready and stable to progress to next round
-func _set_advanceable(en := true) -> void:
-	_next_round_btn.disabled = !en
-
-
 # ------------------------------
 # || --- SIGNAL CALLBACKS --- ||
 # ------------------------------
 
-func _on_button_pressed():
+func _on_next_round_btn_pressed():
 	next_round.emit()
+
+
+func _on_exit_game_btn_pressed() -> void:
+	_confirm_container.show()
+
+
+func _on_yes_btn_pressed() -> void:
+	exit_game.emit()
+
+
+func _on_no_btn_pressed() -> void:
+	_confirm_container.hide()

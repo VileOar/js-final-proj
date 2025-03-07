@@ -10,8 +10,6 @@ signal _all_dyads_stable
 # internal signal to go to next round
 signal _round_restarted
 
-# TODO: remove
-#@export var _end_scene : PackedScene
 # dyad scene to instantiate for each dyad
 @export var _dyad_scene: PackedScene
 # scene to include between dyads if more than one
@@ -24,12 +22,6 @@ const _ROUND_END_DELAY = 3.0
 @onready var _timer = $SecondsTimer
 # ref to the animation player for screen effects
 @onready var _anim = $AnimationPlayer
-
-# TODO: remove
-# ref to the first dyad
-#@onready var _dyad0 = %Dyad0 as DyadGame
-# ref to the second dyad
-#@onready var _dyad1 = %Dyad1 as DyadGame
 
 # container for the dividers
 @onready var _dividers: HBoxContainer = %Dividers
@@ -280,7 +272,8 @@ func _next_round():
 	# decide if next round or end of game
 	_round_counter += 1 # increment round counter
 	if _round_counter >= _NUM_ROUNDS: # if reached the end of last round
-		SceneSwitcher.switch_topscene_id("end_scene")
+		#SceneSwitcher.switch_topscene_id("end_scene")
+		print_debug("Unimplemented")
 	else: # if not
 		# restart round
 		# NOTE: this is through a signal, as opposed to calling reset function to avoid going deeper
@@ -310,26 +303,6 @@ func _solve_points(dyad: DyadGame):
 
 ## add points to players, with regard to lose penalty
 func _handle_round_scores() -> void:
-	
-	# TODO: remove
-	#var p0_score = _round_stats[0].get_score()
-	#var p1_score = _round_stats[1].get_score()
-	#var p2_score = _round_stats[2].get_score()
-	#var p3_score = _round_stats[3].get_score()
-	#
-	#var dyad0_score = p0_score + p1_score
-	#var dyad1_score = p2_score + p3_score
-	#
-	#var lose_penalty = SharedData.get_settings().lose_penalty_multiplier
-	#if dyad0_score != dyad1_score and SharedData.is_4player_mode():
-		#if dyad0_score > dyad1_score:
-			## if dyad0 wins, player 2 and 3 receive penalty to their round score
-			#p2_score *= lose_penalty
-			#p3_score *= lose_penalty
-		#else:
-			## else, player 0 and 1 do
-			#p0_score *= lose_penalty
-			#p1_score *= lose_penalty
 	# the dyads with the highest score
 	var winners = []
 	var high_score = -INF
@@ -370,27 +343,10 @@ func _publish_round_scores():
 
 # juts the callback for the timer, going one second at a time
 func _on_seconds_timer_timeout():
-	# TODO: refactor
 	_time_counter -= 1
 	_timer_label.text = "%d" % _time_counter
 	if _time_counter <= 0: # if time reached end
 		_on_round_end()
-		
-		#_dyad0.stop_dyad()
-		#_dyad1.stop_dyad()
-		#
-		# solve points, regardless of UI
-		#_solve_points(_dyad0)
-		#_solve_points(_dyad1)
-		#_handle_round_scores()
-		#
-		#_round_results_screen.set_point_stacks(_dyad0.get_dyad_game_points(), _dyad1.get_dyad_game_points())
-		#
-		#await get_tree().create_timer(_ROUND_END_DELAY).timeout
-		#
-		#_round_results_screen.set_round(_round_counter, SharedData.get_settings().num_rounds-1)
-		#_round_results_screen.show()
-		#_round_results_screen.start_point_solving(_round_stats)
 	else: # else, keep going
 		_timer.start(1)
 
@@ -409,12 +365,6 @@ func _on_dyad_stable():
 		_all_dyads_stable.emit()
 
 
-# callback for when round results screen 'next round' button is pressed
-func _on_round_results_sreen_next_round():
-	# TODO: refactor
-	_next_round()
-
-
 # callback to when an answer is created, for statistics
 func _on_new_player_answer(answer: PlayerAnswer) -> void:
 	var stats = _round_stats[answer.player_id()] as PlayerStats
@@ -424,3 +374,12 @@ func _on_new_player_answer(answer: PlayerAnswer) -> void:
 # callback for the internal new round signal
 func _on_round_restarted() -> void:
 	_reset_round()
+
+
+func _on_round_results_sreen_exit_game() -> void:
+	SceneSwitcher.switch_topscene_id("title_screen")
+
+
+# callback for when round results screen 'next round' button is pressed
+func _on_round_results_sreen_next_round():
+	_next_round()

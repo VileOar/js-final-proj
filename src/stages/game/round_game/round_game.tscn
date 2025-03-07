@@ -148,3 +148,5 @@ libraries = {
 }
 
 [connection signal="timeout" from="SecondsTimer" to="." method="_on_seconds_timer_timeout"]
+[connection signal="exit_game" from="RoundResultsSreen" to="." method="_on_round_results_sreen_exit_game"]
+[connection signal="next_round" from="RoundResultsSreen" to="." method="_on_round_results_sreen_next_round"]
