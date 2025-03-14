@@ -59,8 +59,6 @@ func _on_general_input(_event):
 	if is_active() and _listen_skip:
 		_listen_skip = false
 		_skip()
-	else:
-		pass#print_debug("what")
 
 
 func _on_player_ready_sequence() -> void:

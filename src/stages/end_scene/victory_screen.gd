@@ -1,7 +1,7 @@
 ## the screen that shows who won
 ##
 ## should also animate the points for each player
-extends Control
+extends PanelContainer
 class_name VictoryScreen
 
 # ui refs
@@ -31,12 +31,13 @@ var second = -1
 func _ready() -> void:
 	Global.play_music_track("")
 	
-	_player_stats = [
-		SharedData.get_player_stats(0),
-		SharedData.get_player_stats(1),
-		SharedData.get_player_stats(2),
-		SharedData.get_player_stats(3),
-	]
+	# TODO: remove
+	#_player_stats = [
+		#SharedData.get_player_stats(0),
+		#SharedData.get_player_stats(1),
+		#SharedData.get_player_stats(2),
+		#SharedData.get_player_stats(3),
+	#]
 	
 	# sort indices by score
 	player_ids.sort_custom(func(a, b): return _player_stats[a].get_score() > _player_stats[b].get_score())
@@ -48,7 +49,7 @@ func _ready() -> void:
 		var child = _score_graphs[i]
 		child.setup(i, _player_stats[i].get_score(), _player_stats[first].get_score())
 		child.show_winner(false)
-		(child as PlayerScoreGraph).finished_animation.connect(_on_score_animation_finished)
+		(child as PlayerEndScore).finished_animation.connect(_on_score_animation_finished)
 	
 	
 	await  get_tree().create_timer(0.5).timeout

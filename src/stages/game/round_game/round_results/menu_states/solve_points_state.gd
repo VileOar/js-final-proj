@@ -99,7 +99,6 @@ func _end_point_solving():
 		true_scores.assign(tmp)
 		dyad.set_scores(true_scores)
 	replace_state("AnimateStatsState")
-	print_debug("finished_pointstack")
 
 
 func _on_between_timer_timeout() -> void:

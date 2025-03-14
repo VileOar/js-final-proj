@@ -27,6 +27,13 @@ enum Outcomes {
 	DD = 3,
 }
 
+## the type of victory in the end
+enum WinType {
+	PLAYER, # a player won but not their teammates
+	TEAM, # all players in a dyad won
+	PERFECT, # all players in a dyad won with the same score
+}
+
 ## teams are dyads, meaning 2 players
 const PLAYERS_PER_TEAM := 2
 

@@ -19,11 +19,11 @@ var _coop_count: int = 0
 
 
 ## reset values
-func reset() -> void:
-	_score = 0
-	_answer_count = 0
-	_correct_count = 0
-	_coop_count = 0
+func reset(score: int = 0, answer_count: int = 0, correct_count: int = 0, coop_count: int = 0) -> void:
+	_score = score
+	_answer_count = answer_count
+	_correct_count = correct_count
+	_coop_count = coop_count
 
 
 ## parse an answer and add its stats[br]
@@ -34,6 +34,13 @@ func parse_answer(answer: PlayerAnswer):
 		_correct_count += 1
 	if answer.cooperated():
 		_coop_count += 1
+
+
+## return a copy of this object
+func duplicate() -> PlayerStats:
+	var dup = PlayerStats.new()
+	dup.reset(_score, _answer_count, _correct_count, _coop_count)
+	return dup
 
 
 # -------------------------------

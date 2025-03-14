@@ -1,0 +1,67 @@
+[gd_scene load_steps=3 format=3 uid="uid://drxyix8goev7d"]
+
+[ext_resource type="Script" uid="uid://dviwgm4yfn2bc" path="res://src/stages/end_scene/dyad_end_score.gd" id="1_lu3ga"]
+[ext_resource type="PackedScene" uid="uid://bjy1xnxblu6qu" path="res://src/stages/end_scene/player_end_score.tscn" id="2_3xqba"]
+
+[node name="DyadEndScore" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+script = ExtResource("1_lu3ga")
+_player_score_packed = ExtResource("2_3xqba")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="OuterPanel" type="ColorRect" parent="MarginContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+color = Color(1, 0.894118, 0.470588, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="InnerPanel" type="ColorRect" parent="MarginContainer/MarginContainer"]
+layout_mode = 2
+color = Color(0.196078, 0.160784, 0.278431, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="PlayerScores" type="HBoxContainer" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="PlayerScoreGraph" parent="VBoxContainer/PlayerScores" instance=ExtResource("2_3xqba")]
+layout_mode = 2
+
+[node name="PlayerScoreGraph2" parent="VBoxContainer/PlayerScores" instance=ExtResource("2_3xqba")]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_bottom = 64
+
+[node name="TeamScoreLabel" type="Label" parent="VBoxContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"MenuTitle"
+text = "Team"
+horizontal_alignment = 1
+vertical_alignment = 1

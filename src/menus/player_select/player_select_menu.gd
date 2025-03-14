@@ -58,7 +58,6 @@ func _notification(what):
 # method to actually go to game scene
 func _go_to_game() -> void:
 	SceneSwitcher.switch_topscene_id("game_scene")
-	#print_debug("Unimplemented")
 
 
 # ------------------------------
@@ -99,7 +98,7 @@ func _on_signals_input_player_action(_player: int, event: InputEvent) -> void:
 
 
 func _on_start_btn_pressed() -> void:
-	SharedData.setup_dyads_playerdata(2 if _mode_4p else 1)
+	SharedData.setup_dyads_playerdata(4 if _mode_4p else 2)
 	if SharedData.get_settings().show_instructions:
 		_instructions_holder.show()
 	else:

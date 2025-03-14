@@ -85,10 +85,7 @@ func _ready() -> void:
 	
 	Signals.new_player_answer.connect(_on_new_player_answer)
 	
-	# setup teams
-	# this can possibly be changed if the teams are received from some other source
-	for ix in _NUM_DYADS:
-		_teams.append([ix * 2, ix * 2 + 1])
+	_teams = SharedData.get_dyads()
 	
 	_setup_round()
 	_reset_round()
@@ -249,7 +246,6 @@ func _next_round():
 	# decide if next round or end of game
 	_round_counter += 1 # increment round counter
 	if _round_counter >= _NUM_ROUNDS: # if reached the end of last round
-		#SceneSwitcher.switch_topscene_id("end_scene")
 		print_debug("Unimplemented")
 	else: # if not
 		# restart round
@@ -310,7 +306,6 @@ func _handle_round_scores() -> void:
 
 # Method to handle end of round score keeping
 func _publish_round_scores():
-	# TODO: connect to SharedData
 	Signals.round_published.emit(_round_stats)
 
 
