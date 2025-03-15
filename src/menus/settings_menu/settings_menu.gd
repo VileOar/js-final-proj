@@ -22,7 +22,7 @@ var _settings: GameSettings
 
 
 func _ready() -> void:
-	_settings = _settings
+	_settings = SharedData.get_settings()
 	_setup_ui()
 
 

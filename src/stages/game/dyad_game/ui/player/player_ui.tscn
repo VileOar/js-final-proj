@@ -188,14 +188,14 @@ region_rect = Rect2(0, 128, 128, 128)
 
 [node name="AnimPlayer" type="AnimationPlayer" parent="VBoxContainer/Graphics/Control/Node2D"]
 libraries = {
-"": SubResource("AnimationLibrary_epdog")
+&"": SubResource("AnimationLibrary_epdog")
 }
 autoplay = "default"
 
 [node name="AnimCop" type="AnimationPlayer" parent="VBoxContainer/Graphics/Control/Node2D"]
 unique_name_in_owner = true
 libraries = {
-"": SubResource("AnimationLibrary_xty81")
+&"": SubResource("AnimationLibrary_xty81")
 }
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
@@ -205,7 +205,7 @@ theme_type_variation = &"MainPanel"
 [node name="Identifier" type="Label" parent="VBoxContainer/PanelContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_type_variation = &"HeaderLarge"
+theme_type_variation = &"BigText"
 horizontal_alignment = 1
 vertical_alignment = 1
 

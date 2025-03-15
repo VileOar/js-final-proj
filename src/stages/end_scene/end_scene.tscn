@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://dmfruovnif6mi"]
+[gd_scene load_steps=5 format=3 uid="uid://dmfruovnif6mi"]
 
+[ext_resource type="Script" uid="uid://dhxc6thbrkuac" path="res://src/stages/end_scene/end_scene.gd" id="1_22ooy"]
 [ext_resource type="Script" uid="uid://bspqc2mj2cug8" path="res://src/stages/end_scene/victory_screen.gd" id="1_dcimy"]
 [ext_resource type="PackedScene" uid="uid://drxyix8goev7d" path="res://src/stages/end_scene/dyad_end_score.tscn" id="2_6fak7"]
 [ext_resource type="AudioStream" uid="uid://cd1hw3hh6cqhv" path="res://assets/sfx/sounds/points/032-Switch01.ogg" id="3_w0pc6"]
@@ -11,6 +12,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_22ooy")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -20,52 +22,118 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VictoryScreen" type="PanelContainer" parent="VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VictoryScreen" type="PanelContainer" parent="VBoxContainer/MarginContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("1_dcimy")
+_dyad_score_packed = ExtResource("2_6fak7")
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/VictoryScreen"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/MarginContainer/VictoryScreen"]
 layout_mode = 2
 theme_type_variation = &"SimplePanel"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/VictoryScreen/PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer/VictoryScreen/PanelContainer"]
 layout_mode = 2
 
-[node name="VictoryType" type="Label" parent="VBoxContainer/VictoryScreen/PanelContainer/VBoxContainer"]
+[node name="VictoryType" type="Label" parent="VBoxContainer/MarginContainer/VictoryScreen/PanelContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"EndLabel"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/VictoryScreen/PanelContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MarginContainer/VictoryScreen/PanelContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="DyadScores" type="HBoxContainer" parent="VBoxContainer/VictoryScreen/PanelContainer/VBoxContainer/MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/MarginContainer/VictoryScreen/PanelContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+vertical_scroll_mode = 0
+
+[node name="DyadScores" type="HBoxContainer" parent="VBoxContainer/MarginContainer/VictoryScreen/PanelContainer/VBoxContainer/MarginContainer/ScrollContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_constants/separation = 0
 
-[node name="DyadEndScore" parent="VBoxContainer/VictoryScreen/PanelContainer/VBoxContainer/MarginContainer/DyadScores" instance=ExtResource("2_6fak7")]
-layout_mode = 2
-
-[node name="DyadEndScore2" parent="VBoxContainer/VictoryScreen/PanelContainer/VBoxContainer/MarginContainer/DyadScores" instance=ExtResource("2_6fak7")]
-layout_mode = 2
-
-[node name="PlayerWin" type="Label" parent="VBoxContainer/VictoryScreen/PanelContainer/VBoxContainer"]
+[node name="PlayerWin" type="Label" parent="VBoxContainer/MarginContainer/VictoryScreen/PanelContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"EndLabel"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="AnimToggle" type="Timer" parent="VBoxContainer/VictoryScreen"]
+[node name="PointAnimTimer" type="Timer" parent="VBoxContainer/MarginContainer/VictoryScreen"]
+wait_time = 0.1
+
+[node name="AnimToggle" type="Timer" parent="VBoxContainer/MarginContainer/VictoryScreen"]
 autostart = true
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="VBoxContainer/VictoryScreen"]
+[node name="PointSound" type="AudioStreamPlayer" parent="VBoxContainer/MarginContainer/VictoryScreen"]
 stream = ExtResource("3_w0pc6")
+
+[node name="StatsScreen" type="PanelContainer" parent="VBoxContainer/MarginContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/MarginContainer/StatsScreen"]
+layout_mode = 2
+theme_type_variation = &"SimplePanel"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer/StatsScreen/PanelContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MarginContainer/StatsScreen/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/StatsScreen/PanelContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_type_variation = &"MenuTitle"
+text = "Game Stats"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer/StatsScreen/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PlayerList" type="ScrollContainer" parent="VBoxContainer/MarginContainer/StatsScreen/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="PlayerContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer/StatsScreen/PanelContainer/VBoxContainer/HBoxContainer/PlayerList"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="GraphViewer" type="MarginContainer" parent="VBoxContainer/MarginContainer/StatsScreen/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="ModeSelector" type="VBoxContainer" parent="VBoxContainer/MarginContainer/StatsScreen/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="BtnAnswered" type="Button" parent="VBoxContainer/MarginContainer/StatsScreen/PanelContainer/VBoxContainer/HBoxContainer/ModeSelector"]
+layout_mode = 2
+theme_type_variation = &"HeaderButton"
+text = "Answers Given"
+
+[node name="BtnCorrect" type="Button" parent="VBoxContainer/MarginContainer/StatsScreen/PanelContainer/VBoxContainer/HBoxContainer/ModeSelector"]
+layout_mode = 2
+theme_type_variation = &"HeaderButton"
+text = "Correct Answers"
+
+[node name="BtnCoop" type="Button" parent="VBoxContainer/MarginContainer/StatsScreen/PanelContainer/VBoxContainer/HBoxContainer/ModeSelector"]
+layout_mode = 2
+theme_type_variation = &"HeaderButton"
+text = "Times Cooperated"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -85,3 +153,9 @@ size_flags_horizontal = 3
 theme_type_variation = &"HeaderButton"
 disabled = true
 text = "Toggle Stats"
+
+[connection signal="anim_done" from="VBoxContainer/MarginContainer/VictoryScreen" to="." method="_on_victory_screen_anim_done"]
+[connection signal="timeout" from="VBoxContainer/MarginContainer/VictoryScreen/PointAnimTimer" to="VBoxContainer/MarginContainer/VictoryScreen" method="_on_point_anim_timer_timeout"]
+[connection signal="timeout" from="VBoxContainer/MarginContainer/VictoryScreen/AnimToggle" to="VBoxContainer/MarginContainer/VictoryScreen" method="_on_anim_toggle_timeout"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/ExitBtn" to="." method="_on_exit_btn_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/StatsBtn" to="." method="_on_stats_btn_pressed"]

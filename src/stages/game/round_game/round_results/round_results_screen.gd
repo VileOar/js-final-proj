@@ -84,15 +84,20 @@ func set_round_data(round_stats: Dictionary[int, PlayerStats]):
 		
 		# sum all scores of this dyad to get the team score
 		var team_score = scores.values().reduce(func(accum, s): return accum + s.get_score(), 0)
-		dyad.set_win_lose(false)
+		dyad.set_win_lose(true) # default to win
 		dyad.set_stats(scores, team_score)
 		
 		# determine the winner
-		if top_dyad == null or team_score > top_score:
+		if top_dyad == null:
 			top_dyad = dyad
 			top_score = team_score
-	
-	top_dyad.set_win_lose(true)
+		elif team_score > top_score:
+			# dyads only lose if another has a higher (not just equal) score then them
+			top_dyad.set_win_lose(false) # make the previous top dyad lose
+			top_dyad = dyad
+			top_score = team_score
+		elif team_score < top_score:
+			dyad.set_win_lose(false)
 
 
 ## set the point stacks[br]

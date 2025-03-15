@@ -47,12 +47,6 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 0
 
-[node name="PlayerScoreGraph" parent="VBoxContainer/PlayerScores" instance=ExtResource("2_3xqba")]
-layout_mode = 2
-
-[node name="PlayerScoreGraph2" parent="VBoxContainer/PlayerScores" instance=ExtResource("2_3xqba")]
-layout_mode = 2
-
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_top = 32
@@ -62,6 +56,6 @@ theme_override_constants/margin_bottom = 64
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"MenuTitle"
-text = "Team"
+text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1

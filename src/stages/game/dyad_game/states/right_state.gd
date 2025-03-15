@@ -47,6 +47,7 @@ func _parse_point() -> int:
 			# sanity check
 			assert(false, "Fatal Error: two answers cannot belong to the same player. This bug should never happen.")
 		var bit = 0 if answers[ix].cooperated() else 1
+		
 		point_bitmask |= bit << ix
 	
 	return point_bitmask

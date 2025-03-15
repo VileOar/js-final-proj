@@ -4,7 +4,7 @@
 extends Resource
 class_name PayoffMatrix
 
-var _outcomes = []
+var _outcomes: Array[Array] = []
 
 
 func _init():
@@ -15,8 +15,8 @@ func _init():
 func reset() -> void:
 	_outcomes = [
 		[2,2],
-		[-2,4],
-		[4,-2],
+		[6,-2],
+		[-2,6],
 		[0,0]
 	]
 
@@ -38,8 +38,10 @@ func set_matrix_outcome(outcome_mask: int, p1_payoff: int, p2_payoff: int) -> bo
 
 
 ## get one of the outcomes
-func get_matrix_outcome(outcome_mask: int) -> Array:
+func get_matrix_outcome(outcome_mask: int) -> Array[int]:
 	if outcome_mask in Global.Outcomes.values():
-		return _outcomes[outcome_mask]
+		var ret: Array[int] = []
+		ret.assign(_outcomes[outcome_mask])
+		return ret
 	assert(false, "Tried to get an invalid matrix outcome")
 	return []

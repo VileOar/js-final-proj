@@ -2,8 +2,6 @@
 extends MarginContainer
 class_name PlayerEndScore
 
-signal finished_animation
-
 const INCREMENT_INTERVAL = 0.1
 const NORMAL_COLOUR = "ff9166"
 const FLASH_COLOUR = "ffe478"
@@ -29,7 +27,7 @@ func show_winner(show_hide: bool = false) -> void:
 
 
 ## set flash colour
-func set_flash(flash: bool, col: Color) -> void:
+func set_flash(col: Color) -> void:
 	_outer_panel.color = col
 
 

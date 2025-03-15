@@ -246,7 +246,7 @@ func _next_round():
 	# decide if next round or end of game
 	_round_counter += 1 # increment round counter
 	if _round_counter >= _NUM_ROUNDS: # if reached the end of last round
-		print_debug("Unimplemented")
+		SceneSwitcher.switch_topscene_id("end_scene")
 	else: # if not
 		# restart round
 		# NOTE: this is through a signal, as opposed to calling reset function to avoid going deeper
@@ -270,6 +270,7 @@ func _solve_points(dyad: DyadGame):
 		
 		# add to this round's score
 		for i in players.size():
+			
 			# use the indices to match the sizes
 			_round_stats[players[i]].add_score(payoffs_array[i])
 
@@ -288,6 +289,10 @@ func _handle_round_scores() -> void:
 		
 		# if the current dyad has an equal or higher socre
 		if winners.is_empty() or dyad_score >= high_score:
+			# if the highscore was actually beaten (not just matched), clear the winners first
+			if dyad_score > high_score:
+				winners.clear()
+			
 			# update high score and add dyad to winners
 			high_score = dyad_score
 			winners.append(dyad_game)

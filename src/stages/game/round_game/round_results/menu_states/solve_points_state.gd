@@ -43,6 +43,8 @@ func activate() -> void:
 	_listen_skip = true
 	
 	_between_timer.start(_NORMAL_BETWEEN_TIME)
+	
+	(fsm() as ResultsStateMachine).toggle_buttons(false)
 
 
 ## solve a point for each dyads
