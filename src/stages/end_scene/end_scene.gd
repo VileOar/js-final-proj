@@ -3,7 +3,7 @@ class_name EndScene
 
 
 @onready var _victory_screen: VictoryScreen = %VictoryScreen
-@onready var _stats_screen: PanelContainer = %StatsScreen
+@onready var _stats_screen: StatsScreen = %StatsScreen
 
 @onready var _exit_btn: Button = %ExitBtn
 @onready var _stats_btn: Button = %StatsBtn
@@ -23,6 +23,7 @@ func _ready() -> void:
 	
 	await _victory_screen.setup(teams, final_scores)
 	_victory_screen.start_animation()
+	_stats_screen.setup(rounds_stats)
 
 
 func _on_victory_screen_anim_done() -> void:

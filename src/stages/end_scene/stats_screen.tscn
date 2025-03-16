@@ -1,13 +1,24 @@
-[gd_scene load_steps=4 format=3 uid="uid://csbjegmf6luka"]
+[gd_scene load_steps=6 format=3 uid="uid://csbjegmf6luka"]
 
 [ext_resource type="Script" uid="uid://b5v3v03tivcyf" path="res://src/stages/end_scene/stats_screen.gd" id="1_xbs6t"]
 [ext_resource type="Script" uid="uid://d8b1v6b52yk8" path="res://src/stages/end_scene/plot_viewer.gd" id="2_rq87b"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_ysy2o"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rq87b"]
+bg_color = Color(0.152941, 0.152941, 0.211765, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_22ooy"]
 bg_color = Color(0.152941, 0.152941, 0.211765, 1)
 
 [node name="StatsScreen" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_xbs6t")
+_category_btngroup = SubResource("ButtonGroup_ysy2o")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 2
@@ -36,17 +47,32 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 32
 
-[node name="PlayerList" type="ScrollContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_rq87b")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_right = 32
+
+[node name="PlayerList" type="ScrollContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/PanelContainer/MarginContainer"]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 horizontal_scroll_mode = 0
 
-[node name="PlayerContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/PlayerList"]
+[node name="PlayerContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/PanelContainer/MarginContainer/PlayerList"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
 
 [node name="GraphViewer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 32
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 8
 
 [node name="PanelContainer" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/GraphViewer"]
 layout_mode = 2
@@ -57,11 +83,11 @@ layout_mode = 2
 theme_override_constants/margin_left = 32
 theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 32
-theme_override_constants/margin_bottom = 32
+theme_override_constants/margin_bottom = 16
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/GraphViewer/PanelContainer/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 16
+theme_override_constants/separation = 32
 
 [node name="PlotViewer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/GraphViewer/PanelContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
@@ -85,15 +111,22 @@ alignment = 1
 
 [node name="BtnAnswered" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/ModeSelector"]
 layout_mode = 2
-theme_type_variation = &"HeaderButton"
+theme_type_variation = &"FlatButton"
+toggle_mode = true
+button_pressed = true
+button_group = SubResource("ButtonGroup_ysy2o")
 text = "Answers Given"
 
 [node name="BtnCorrect" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/ModeSelector"]
 layout_mode = 2
-theme_type_variation = &"HeaderButton"
+theme_type_variation = &"FlatButton"
+toggle_mode = true
+button_group = SubResource("ButtonGroup_ysy2o")
 text = "Correct Answers"
 
 [node name="BtnCoop" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/ModeSelector"]
 layout_mode = 2
-theme_type_variation = &"HeaderButton"
+theme_type_variation = &"FlatButton"
+toggle_mode = true
+button_group = SubResource("ButtonGroup_ysy2o")
 text = "Times Cooperated"

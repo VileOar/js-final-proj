@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://dmfruovnif6mi"]
+[gd_scene load_steps=7 format=3 uid="uid://dmfruovnif6mi"]
 
 [ext_resource type="Script" uid="uid://dhxc6thbrkuac" path="res://src/stages/end_scene/end_scene.gd" id="1_22ooy"]
 [ext_resource type="Script" uid="uid://bspqc2mj2cug8" path="res://src/stages/end_scene/victory_screen.gd" id="1_dcimy"]
 [ext_resource type="PackedScene" uid="uid://drxyix8goev7d" path="res://src/stages/end_scene/dyad_end_score.tscn" id="2_6fak7"]
 [ext_resource type="AudioStream" uid="uid://cd1hw3hh6cqhv" path="res://assets/sfx/sounds/points/032-Switch01.ogg" id="3_w0pc6"]
 [ext_resource type="PackedScene" uid="uid://csbjegmf6luka" path="res://src/stages/end_scene/stats_screen.tscn" id="5_6pxmg"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_6pxmg"]
 
 [node name="EndScene" type="Control"]
 layout_mode = 3
@@ -29,7 +31,6 @@ size_flags_vertical = 3
 
 [node name="VictoryScreen" type="PanelContainer" parent="VBoxContainer/MarginContainer"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("1_dcimy")
@@ -82,7 +83,9 @@ stream = ExtResource("3_w0pc6")
 
 [node name="StatsScreen" parent="VBoxContainer/MarginContainer" instance=ExtResource("5_6pxmg")]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
+_category_btngroup = SubResource("ButtonGroup_6pxmg")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
