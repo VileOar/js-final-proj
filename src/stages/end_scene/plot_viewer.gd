@@ -25,7 +25,7 @@ var _selected_category: String = ""
 var _selected_plotids: Array[int] = []
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	queue_redraw()
 
 
@@ -66,7 +66,7 @@ func _draw() -> void:
 	draw_line(Vector2(0, zero_y * rect.size.y), Vector2(rect.size.x, zero_y * rect.size.y), DEFAULT_COLOR, 2)
 	draw_string(
 			_font,
-			Vector2(-_string_width - 4, zero_y * rect.size.y),
+			Vector2(-_string_width - 4.0, zero_y * rect.size.y),
 			"0",
 			HORIZONTAL_ALIGNMENT_RIGHT,
 			_string_width,
@@ -77,7 +77,7 @@ func _draw() -> void:
 	draw_line(Vector2(0, rect.size.y), Vector2(0, 0), DEFAULT_COLOR, 2)
 	draw_string(
 			_font,
-			Vector2(-_string_width - 4, 0.0),
+			Vector2(-_string_width - 4.0, 0.0),
 			str(int(_max_y)),
 			HORIZONTAL_ALIGNMENT_RIGHT,
 			_string_width,
@@ -108,7 +108,7 @@ func _draw() -> void:
 				# TBD
 				#draw_string(
 						#_font,
-						#Vector2(xx - _string_width/2, yy-16),
+						#Vector2(xx - _string_width/2.0, yy-16.0),
 						#str(y_array[i]),
 						#HORIZONTAL_ALIGNMENT_CENTER,
 						#_string_width,
@@ -120,7 +120,7 @@ func _draw() -> void:
 				draw_line(Vector2(xx, zero_y*rect.size.y-4), Vector2(xx, zero_y*rect.size.y+4), DEFAULT_COLOR)
 				draw_string(
 						_font,
-						Vector2(xx - _string_width/2, rect.size.y+16),
+						Vector2(xx - _string_width/2.0, rect.size.y+16.0),
 						str(i+1),
 						HORIZONTAL_ALIGNMENT_CENTER,
 						_string_width,

@@ -3,10 +3,10 @@ class_name StatsScreen
 
 
 const PLAYER_COLOURS: Array[Color] = [
-	Color.RED,
-	Color.BLUE,
-	Color.GREEN,
-	Color.YELLOW,
+	Color("eb564b"),
+	Color("4da6ff"),
+	Color("8fde5d"),
+	Color("ffe478"),
 ]
 
 # set via the editor
@@ -36,10 +36,10 @@ func setup(rounds_stats: Array[Dictionary]) -> void:
 	
 	_selected_players = []
 	
-	for round in rounds_stats:
-		_selected_players = round.keys()
-		for px in round.keys():
-			var pstats: PlayerStats = round[px]
+	for roud_data in rounds_stats:
+		_selected_players = roud_data.keys()
+		for px in roud_data.keys():
+			var pstats: PlayerStats = roud_data[px]
 			
 			var ans := float(pstats.get_answer_count())
 			var cor := float(pstats.get_correct_count())
@@ -56,14 +56,15 @@ func setup(rounds_stats: Array[Dictionary]) -> void:
 			cop_plot.append(cop)
 	
 	for px in _selected_players:
-		var pl_btn = CheckButton.new()
+		var pl_btn = Button.new()
+		pl_btn.theme_type_variation = "PlayerCheckButton"
+		pl_btn.modulate = PLAYER_COLOURS[px % PLAYER_COLOURS.size()]
 		pl_btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		pl_btn.text = "Player" + str(px + 1)
 		pl_btn.toggle_mode = true
 		pl_btn.set_pressed_no_signal(true)
 		pl_btn.toggled.connect(_on_player_btn_pressed.bind(px))
 		_player_container.add_child.call_deferred(pl_btn)
-		# TODO: when i have a new style for player checkbuttons (one that is white only), add the modulate
 	
 	_plot_viewer.set_metadata(max_x, min_y, max_y)
 	for ctg in plots.keys():

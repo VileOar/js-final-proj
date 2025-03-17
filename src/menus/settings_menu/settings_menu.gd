@@ -5,7 +5,7 @@ extends Control
 @onready var _duration_input: SpinBox = %DurationInput
 @onready var _rounds_input: SpinBox = %RoundsInput
 @onready var _penalty_input: SpinBox = %PenaltyInput
-@onready var _instructions_input: CheckBox = %InstructionsInput
+@onready var _instructions_input: TextureButton = %InstructionsInput
 
 @onready var _all_descriptions: MarginContainer = %AllDescriptions
 @onready var _duration_desc: Label = %DurationInputDesc

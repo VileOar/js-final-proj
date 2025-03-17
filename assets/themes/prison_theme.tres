@@ -1,9 +1,10 @@
-[gd_resource type="Theme" load_steps=23 format=3 uid="uid://b40mnags6aw0n"]
+[gd_resource type="Theme" load_steps=29 format=3 uid="uid://b40mnags6aw0n"]
 
 [ext_resource type="Texture2D" uid="uid://db3a6ybxv5cw6" path="res://assets/gfx/ui/panels.png" id="1_4wc6t"]
 [ext_resource type="FontFile" uid="uid://dcb5yob1d6vl4" path="res://assets/fonts/Super_Mario_Bros_2.ttf" id="2_l4dmt"]
 [ext_resource type="Texture2D" uid="uid://670ks7dxtt38" path="res://assets/gfx/ui/matrix_panel.png" id="3_tvn3c"]
 [ext_resource type="Texture2D" uid="uid://ot78sitb4yxw" path="res://assets/gfx/ui/spinbox.png" id="4_wjn4m"]
+[ext_resource type="Texture2D" uid="uid://die67qf1i4j70" path="res://assets/gfx/ui/more_buttons.png" id="5_77rrr"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2rfd1"]
 texture = ExtResource("1_4wc6t")
@@ -104,6 +105,46 @@ texture_margin_right = 32.0
 texture_margin_bottom = 32.0
 region_rect = Rect2(0, 0, 80, 80)
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lgi2r"]
+texture = ExtResource("5_77rrr")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+region_rect = Rect2(240, 0, 80, 80)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ugvh5"]
+texture = ExtResource("5_77rrr")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+region_rect = Rect2(80, 0, 80, 80)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8ic7x"]
+texture = ExtResource("5_77rrr")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+region_rect = Rect2(160, 0, 80, 80)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3h1x3"]
+texture = ExtResource("5_77rrr")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+region_rect = Rect2(0, 0, 80, 80)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_30t7p"]
+texture = ExtResource("5_77rrr")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+region_rect = Rect2(160, 0, 80, 80)
+
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3v1q5"]
 texture = ExtResource("1_4wc6t")
 texture_margin_left = 8.0
@@ -171,6 +212,17 @@ PenaltyLabel/base_type = &"Label"
 PenaltyLabel/colors/font_color = Color(1, 0.419608, 0.592157, 1)
 PenaltyLabel/font_sizes/font_size = 32
 PenaltyLabel/fonts/font = ExtResource("2_l4dmt")
+PlayerCheckButton/base_type = &"Button"
+PlayerCheckButton/colors/font_color = Color(1, 1, 1, 1)
+PlayerCheckButton/colors/font_disabled_color = Color(0, 0, 0, 1)
+PlayerCheckButton/colors/font_hover_pressed_color = Color(0.152941, 0.152941, 0.211765, 1)
+PlayerCheckButton/colors/font_pressed_color = Color(0.152941, 0.152941, 0.211765, 1)
+PlayerCheckButton/font_sizes/font_size = 24
+PlayerCheckButton/styles/disabled = SubResource("StyleBoxTexture_lgi2r")
+PlayerCheckButton/styles/hover = SubResource("StyleBoxTexture_ugvh5")
+PlayerCheckButton/styles/hover_pressed = SubResource("StyleBoxTexture_8ic7x")
+PlayerCheckButton/styles/normal = SubResource("StyleBoxTexture_3h1x3")
+PlayerCheckButton/styles/pressed = SubResource("StyleBoxTexture_30t7p")
 ScoreLabel/base_type = &"Label"
 ScoreLabel/colors/font_color = Color(1, 0.894118, 0.470588, 1)
 ScoreLabel/font_sizes/font_size = 24

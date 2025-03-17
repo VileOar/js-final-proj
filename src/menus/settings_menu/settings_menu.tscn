@@ -1,6 +1,23 @@
-[gd_scene load_steps=2 format=3 uid="uid://ctiqjh7xp62sf"]
+[gd_scene load_steps=7 format=3 uid="uid://ctiqjh7xp62sf"]
 
 [ext_resource type="Script" uid="uid://dfyhx2u7ox1y3" path="res://src/menus/settings_menu/settings_menu.gd" id="1_jeur5"]
+[ext_resource type="Texture2D" uid="uid://die67qf1i4j70" path="res://assets/gfx/ui/more_buttons.png" id="2_ijyop"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2gwvr"]
+atlas = ExtResource("2_ijyop")
+region = Rect2(16, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ijyop"]
+atlas = ExtResource("2_ijyop")
+region = Rect2(176, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_komav"]
+atlas = ExtResource("2_ijyop")
+region = Rect2(96, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uowt8"]
+atlas = ExtResource("2_ijyop")
+region = Rect2(256, 96, 48, 48)
 
 [node name="SettingsMenu" type="Control"]
 layout_mode = 3
@@ -91,10 +108,15 @@ size_flags_horizontal = 3
 size_flags_vertical = 6
 text = "Show Instructions Screen"
 
-[node name="InstructionsInput" type="CheckBox" parent="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
+[node name="InstructionsInput" type="TextureButton" parent="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-button_pressed = true
+toggle_mode = true
+texture_normal = SubResource("AtlasTexture_2gwvr")
+texture_pressed = SubResource("AtlasTexture_ijyop")
+texture_hover = SubResource("AtlasTexture_komav")
+texture_disabled = SubResource("AtlasTexture_uowt8")
+stretch_mode = 3
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
