@@ -99,5 +99,8 @@ func _ready():
 	_audio_player.volume_db = 0.0
 	add_child(_audio_player)
 	
+	for sfx in _music_tracks.values():
+		sfx.loop = true
+	
 	randomize() # randomise the global-scope random functions
 	rng.randomize() # randomise the RNG instance
