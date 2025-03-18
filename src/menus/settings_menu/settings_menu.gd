@@ -67,7 +67,7 @@ func _on_default_btn_pressed() -> void:
 func _on_apply_btn_pressed() -> void:
 	_settings.round_time = float(_duration_input.get_line_edit().text)
 	_settings.num_rounds = int(_rounds_input.get_line_edit().text)
-	_settings.lose_penalty_multiplier = float(_duration_input.get_line_edit().text) / 100.0
+	_settings.lose_penalty_multiplier = float(_penalty_input.get_line_edit().text) / 100.0
 	_settings.show_instructions = _instructions_input.button_pressed
 	_save_changes()
 

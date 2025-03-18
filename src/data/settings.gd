@@ -42,9 +42,9 @@ func _init() -> void:
 
 ## Return settings to their default values.
 func reset(include_matrix: bool = false) -> void:
-	round_time = 5.0#30.0
-	num_rounds = 2#5
-	lose_penalty_multiplier = 0.5#0.5
+	round_time = 30.0
+	num_rounds = 5
+	lose_penalty_multiplier = 0.5
 	show_instructions = true
 	
 	if include_matrix:
